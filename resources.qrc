@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/plugins/OGR2Layers" >
+    <file>ogr2layersicon.png</file>
+    <file>icongui.png</file>
+  </qresource>
+</RCC>
