@@ -32,7 +32,7 @@ def createQuery(layer,typeQuery):
 	html_query.extend(htmlTable(fieldsLayer,layer))
     else:
 	html_query.extend(htmlTableCluster(fieldsLayer,layer))
-    html_query.append('popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(1000,500),table'+layer.name()+', null, true, onPopupClose'+layer.name()+'); feature.popup = popup; map.addPopup(popup);}\n\t')
+    html_query.append('popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(1000,500),tabella'+layer.name()+', null, true, onPopupClose'+layer.name()+'); feature.popup = popup; map.addPopup(popup);}\n\t')
     html_query.append('function onFeatureUnselect'+layer.name()+'(feature) {map.removePopup(feature.popup); feature.popup.destroy(); feature.popup = null;}\n\t//STOP QUERY '+layer.name()+'\n\t');
     return html_query
 
@@ -46,21 +46,21 @@ def fieldsName(layer):
     return nameFields
 
 def htmlTable(fields,layer):
-    html=['table'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table>']
+    html=['tabella'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table>']
     for field in fields:
 	html.append('<tr><td><b>'+field+':</b></td><td><i>"+feature.attributes.'+field+'+"</i></td></tr>')
     html.append('</table></body></html>"; ')
     return html
 
 def htmlTableCluster(fields,layer):
-    html=['table'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table><tr bgcolor=\'#c5e2ca\'>']
+    html=['tabella'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table><tr bgcolor=\'#c5e2ca\'>']
     for field in fields:
 	html.append('<td>'+field+'</td>')
     html.append('</tr>";')
-    html.append('for (var i=0; i < feature.cluster.length; ++i){table'+layer.name()+'+="<tr>')
+    html.append('for (var i=0; i < feature.cluster.length; ++i){tabella+="<tr>')
     for field in fields:
 	html.append('<td>"+feature.cluster[i].attributes.'+field+'+"</td>')
-    html.append('</tr>"}table'+layer.name()+'+="</table></body></html>"; ')
+    html.append('</tr>"}tabella'+layer.name()+'+="</table></body></html>"; ')
     return html
     
 def addselectsControls(layers):

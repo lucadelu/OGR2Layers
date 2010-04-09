@@ -342,9 +342,9 @@ class OGR2Layers:
 	    mapTitle = self.dlg.ui.mapTitle.text()
 	    html.append('<h1>'+ mapTitle +'</h1>\n')
 	    if self.dlg.ui.query.isChecked() or self.dlg.ui.query_2.isChecked():
-		html.append('<input type="radio" name="select" value="-1" id="noQuery" onclick="toggleControl(this);" checked="checked" /> <label for="noQuery">No layer</label> ')
+		html.append('<input type="radio" name="select" value="0" id="noQuery" onclick="toggleControl(this);" checked="checked" /> <label for="noQuery">No layer</label> ')
 		if len(self.layers) != 0:
-		    id_layer=0
+		    id_layer=1
 		    for layer in self.layers:	    
 			html.append('<input type="radio" name="select" value="'+str(id_layer)+'" id="'+layer.name()+'Query" onclick="toggleControl(this);" /> <label for="'+layer.name()+'Query">Query '+layer.name()+'</label> ')
 			id_layer=id_layer+1
