@@ -262,9 +262,14 @@ class OGR2Layers:
 			    html.extend(query_OGR2Layers.createQuery(layer,0))
 			    
 			elif self.dlg.ui.query_2.isChecked():
-			    html.append('var strategy = new OpenLayers.Strategy.Cluster();')
-			    html.append(''+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style, strategies: [strategy]});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    html.extend(query_OGR2Layers.createQuery(layer,1))
+			    if layer.renderer().classificationAttributes()==0:
+				html.append('var strategy = new OpenLayers.Strategy.Cluster();')
+				html.append(''+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style, strategies: [strategy]});\n\tmap.addLayer('+layer.name()+')\n\t')
+				html.extend(query_OGR2Layers.createQuery(layer,1))
+			    else:
+				QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, ("Unique value classification doesn't work with Cluster Strategy\n"), QMessageBox.Ok, QMessageBox.Ok)
+				return 0
+
 			else:
 			    html.append(''+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style});\n\tmap.addLayer('+layer.name()+')\n\t')
 
@@ -353,6 +358,8 @@ class OGR2Layers:
 	    file = open(htmlfileName, "w")
 	    file.writelines(html)
 	    file.close()
+	    lastTab= self.dlg.ui.tabWidget.count()-1
+	    self.dlg.ui.tabWidget.setCurrentIndex(lastTab)
 	    ##change ok button in close button and show a messages
 	    self.dlg.ui.buttonBox.setStandardButtons(QDialogButtonBox.Close)			
 	    QMessageBox.information(self.dlg,"Information",str("The OpenLayers Map has been created! Click \"Close\" for exit from the plugin") )

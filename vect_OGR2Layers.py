@@ -72,7 +72,7 @@ def createOGR(layer,ui,mydir,iface):
 	    layerString.append("""<b>%s</b> was reprojected correctly with the following string<br /> <small><code>%s</code></small><br /><br />""" % (myname, myogr2ogr))
 	    ui.textBrowser.setHtml(layerString)
 	    #set the last tab for show the string
-	    ui.tabWidget.setCurrentIndex(lastTab)
+	    #ui.tabWidget.setCurrentIndex(lastTab)
 	    return 1
 	else:
 	    #message for unknown spatial reference system

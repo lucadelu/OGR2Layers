@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Sat Mar 27 14:57:11 2010
+# Created: Sat Apr 10 00:50:35 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_AboutDialog(object):
     def setupUi(self, AboutDialog):
         AboutDialog.setObjectName("AboutDialog")
-        AboutDialog.resize(512, 328)
+        AboutDialog.resize(514, 370)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -57,6 +57,11 @@ class Ui_AboutDialog(object):
         self.autors_name.setObjectName("autors_name")
         self.horizontalLayout_2.addWidget(self.autors_name)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+        self.textBrowser = QtGui.QTextBrowser(AboutDialog)
+        self.textBrowser.setMaximumSize(QtCore.QSize(16777215, 60))
+        self.textBrowser.setLineWidth(0)
+        self.textBrowser.setObjectName("textBrowser")
+        self.verticalLayout.addWidget(self.textBrowser)
         self.horizontalLayout_3.addLayout(self.verticalLayout)
         self.line = QtGui.QFrame(AboutDialog)
         self.line.setFrameShape(QtGui.QFrame.VLine)
@@ -115,6 +120,12 @@ class Ui_AboutDialog(object):
 "Michael Douchin, \n"
 "Mathias Walker, \n"
 "Luca Delucchi", None, QtGui.QApplication.UnicodeUTF8))
+        self.textBrowser.setHtml(QtGui.QApplication.translate("AboutDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">More info</p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://wiki.github.com/lucadelu/OGR2Layers/</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.label_help.setText(QtGui.QApplication.translate("AboutDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -124,7 +135,7 @@ class Ui_AboutDialog(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">OGR2Layer create a html page with OpenLayers library to show on the web your vector data loaded on QGIS. You can choose a background layer, some controls and you can render data using QGIS symbology.</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">OGR2Layer create a html page with OpenLayers library to show on the web your vector data loaded on QGIS. You can choose a background layer, some controls, you can render data using QGIS symbology and you can add query on your layer.</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">First you must </span><span style=\" font-size:10pt; font-weight:600;\">add the definition for the projection of Spherical Mercator to your proj.4 data directories</span><span style=\" font-size:10pt;\"> (on linux /usr/share/proj/epsg), this is necessary for usign OpenStreetMap background; you must add only the line:</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
@@ -134,6 +145,7 @@ class Ui_AboutDialog(object):
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">For use the \"</span><span style=\" font-size:10pt; font-style:italic;\">QGIS Render</span><span style=\" font-size:10pt;\">\" in the \"</span><span style=\" font-size:10pt; font-style:italic;\">Render option</span><span style=\" font-size:10pt;\">\" remember  that work only \"</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">\" and \"</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">\" symbology</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">In the \"</span><span style=\" font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-size:10pt;\">\" the option \"</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">\" use OpenLayers Strategy Cluster, this solution allow to cluster more features and query the group, it\'s useful for points specially when they are very neighbouring. </span><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: remember \"</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">\" doesn\'t work with \"</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">\" symbology</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">In the \"</span><span style=\" font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-size:10pt;\">\" the option \"</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">\" use OpenLayers Strategy Cluster, this solution allow to cluster more features and query the group, it\'s useful for points specially when they are very neighbouring. </span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: remember \"</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">\" doesn\'t work with \"</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">\" symbology</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc
