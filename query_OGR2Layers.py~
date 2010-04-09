@@ -32,7 +32,7 @@ def createQuery(layer,typeQuery):
 	html_query.extend(htmlTable(fieldsLayer,layer))
     else:
 	html_query.extend(htmlTableCluster(fieldsLayer,layer))
-    html_query.append('popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(1000,500),tabella'+layer.name()+', null, true, onPopupClose'+layer.name()+'); feature.popup = popup; map.addPopup(popup);}\n\t')
+    html_query.append('popup = new OpenLayers.Popup.FramedCloud("chicken", feature.geometry.getBounds().getCenterLonLat(), new OpenLayers.Size(1000,500),tabella'+layer.name()+', null, true, onPopupClose); feature.popup = popup; map.addPopup(popup);}\n\t')
     html_query.append('function onFeatureUnselect'+layer.name()+'(feature) {map.removePopup(feature.popup); feature.popup.destroy(); feature.popup = null;}\n\t//STOP QUERY '+layer.name()+'\n\t')
     return html_query
 

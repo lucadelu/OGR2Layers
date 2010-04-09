@@ -57,10 +57,10 @@ def createOGR(layer,ui,mydir,iface):
 	#use ogr2ogr to create kml file
 	    if (str(myprovidername)=="postgres"): #postgresql
 		mypglayerinfo = mysource.split('table')[0]
-		myogr2ogr = 'ogr2ogr -a_srs EpsgCrsId:'+str(myepsg)+' -t_srs \''+str(mywkt4326)+'\' -overwrite -f "GML" "'+str(mydestpath)+'" PG:"' + str(mypglayerinfo) + '" layer ' + str(myname) + ' 2>&1 > $HOME/.ogr2layers/ogr2layers.log'
+		myogr2ogr = 'ogr2ogr -a_srs EpsgCrsId:'+str(myepsg)+' -t_srs \''+str(mywkt4326)+'\' -overwrite -f "GML" "'+str(mydestpath)+'" PG:"' + str(mypglayerinfo) + '" layer ' + str(myname) + ' 2>&1> $HOME/.ogr2layers/ogr2layers.log'
 		res=os.popen(myogr2ogr).readlines()
 	    elif (str(myprovidername)=="ogr"): #ogr
-		myogr2ogr = 'ogr2ogr -a_srs "' + str(myproj4) + '" -t_srs \''+str(mywkt4326)+'\' -overwrite -f "GML" "' + str(mydestpath) + '" "'+ str(mysource) +'" 2>&1 > $HOME/.ogr2layers/ogr2layers.log'
+		myogr2ogr = 'ogr2ogr -a_srs "' + str(myproj4) + '" -t_srs \''+str(mywkt4326)+'\' -overwrite -f "GML" "' + str(mydestpath) + '" "'+ str(mysource) +'" 2>&1> $HOME/.ogr2layers/ogr2layers.log'
 		res=os.popen(myogr2ogr).readlines()
 	    #elif (str(myprovidername)==""): #grass
 

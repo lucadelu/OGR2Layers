@@ -292,7 +292,7 @@ class OGR2Layers:
 	    layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
 	    
 	    if (layerSwitcherActive) == 0:
-		html.append('var ls= new OpenLayers.Control.LayerSwitcher(); \n\tmap.addControl(ls); \n\tls.maximizeControl(); \n\t')
+		html.append('var ls= new OpenLayers.Control.LayerSwitcher(); \nmap.addControl(ls); \n\tls.maximizeControl(); \n\t')
 		    
 	    elif (layerSwitcherActive) == 1:
 		html.append('\n\t')
@@ -328,7 +328,7 @@ class OGR2Layers:
 		html.append('map.addControl(new OpenLayers.Control.OverviewMap());\n\t')
 	    ##--panZoomBar
 	    if  self.dlg.ui.zoomBar.isChecked():
-		html.append('map.addControl(new OpenLayers.Control.PanZoomBar());\n')
+		html.append('map.addControl(new OpenLayers.Control.PanZoomBar());\n\t')
 
 	    html.append('};\n')
 	    html.append('</script>\n</head>\n')

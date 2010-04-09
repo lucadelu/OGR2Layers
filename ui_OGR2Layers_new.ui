@@ -447,54 +447,12 @@
         </property>
        </widget>
       </widget>
-      <widget class="QGroupBox" name="groupBox_2">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>150</y>
+         <y>160</y>
          <width>471</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Query option</string>
-       </property>
-       <widget class="QRadioButton" name="query">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>132</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>query one feature</string>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="query_2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>20</y>
-          <width>275</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>query more features (OL cluster strategy)</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>207</y>
-         <width>239</width>
          <height>31</height>
         </rect>
        </property>
@@ -559,13 +517,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="helpButton">
-       <property name="text">
-        <string>Help</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -574,7 +525,14 @@
         </sizepolicy>
        </property>
        <property name="standardButtons">
-        <set>QDialogButtonBox::Ok</set>
+        <set>QDialogButtonBox::Close|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="helpButton">
+       <property name="text">
+        <string>About - Help</string>
        </property>
       </widget>
      </item>
@@ -585,5 +543,22 @@
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>OGR2Layers</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>444</x>
+     <y>387</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>267</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

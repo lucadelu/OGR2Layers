@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Sat Mar 27 12:00:21 2010
+# Created: Sat Apr  3 11:36:12 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -182,22 +182,23 @@ class Ui_OGR2Layers(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
         self.horizontalLayout_2.addWidget(self.progressBar)
-        self.helpButton = QtGui.QPushButton(OGR2Layers)
-        self.helpButton.setObjectName("helpButton")
-        self.horizontalLayout_2.addWidget(self.helpButton)
         self.buttonBox = QtGui.QDialogButtonBox(OGR2Layers)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close|QtGui.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.horizontalLayout_2.addWidget(self.buttonBox)
+        self.helpButton = QtGui.QPushButton(OGR2Layers)
+        self.helpButton.setObjectName("helpButton")
+        self.horizontalLayout_2.addWidget(self.helpButton)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(OGR2Layers)
         self.tabWidget.setCurrentIndex(0)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), OGR2Layers.reject)
         QtCore.QMetaObject.connectSlotsByName(OGR2Layers)
 
     def retranslateUi(self, OGR2Layers):
@@ -242,6 +243,6 @@ class Ui_OGR2Layers(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtGui.QApplication.translate("OGR2Layers", "Optional", None, QtGui.QApplication.UnicodeUTF8))
         self.label_13.setText(QtGui.QApplication.translate("OGR2Layers", "Proiection trasformation information", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtGui.QApplication.translate("OGR2Layers", "Output", None, QtGui.QApplication.UnicodeUTF8))
-        self.helpButton.setText(QtGui.QApplication.translate("OGR2Layers", "Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.helpButton.setText(QtGui.QApplication.translate("OGR2Layers", "About - Help", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc
