@@ -42,7 +42,7 @@ class OGR2Layers:
     def initGui(self):
 	self.action = QAction(QIcon(":/plugins/OGR2Layers/ogr2layersicon.png"), "OGR2Layers", self.iface.mainWindow())
 	self.action.setWhatsThis("Configuration for OGR2Layers plugin")
-	QObject.connect(self.action, SIGNAL("activated()"), self.run)
+	QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 	self.iface.addToolBarIcon(self.action)
 	self.iface.addPluginToMenu("&OGR2Layers Plugin...", self.action)
 	#os.mkdir('$HOME/.ogr2layers')
