@@ -1,4 +1,3 @@
-# -*- coding: latin1 -*-
 #############################################
 #	OGR2Layers Plugin (c)  for Quantum GIS					#
 #	(c) Copyright Nicolas BOZON - 2008					#
@@ -82,6 +81,7 @@ def createOGR(layer,ui,mydir,iface):
 	#message for not supportaded vector
 	QMessageBox.information(iface.mainWindow(),"Information",str("Only PostGIS, and OGR data provider layers are supported, GRASS and Spatialite layers are coming") )
 	return 0
+
 ##FUNCTION FOR WFS LAYER still does not work
 def writeWFS(layer,projection,style=True):
     source = layer.source()
