@@ -36,6 +36,7 @@ import resources_rc
 import style_OGR2Layers
 import vect_OGR2Layers
 import query_OGR2Layers
+import ogr2ogr
 import __init__
 
 class OGR2Layers:
@@ -359,10 +360,10 @@ class OGR2Layers:
 	    #Layer Switcher active or not
 	    layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
 	    
-	    if (layerSwitcherActive) == 0:
+	    if layerSwitcherActive == 0:
 		html.append('var ls= new OpenLayers.Control.LayerSwitcher(); \n\tmap.addControl(ls); \n\tls.maximizeControl(); \n\t')
 		    
-	    elif (layerSwitcherActive) == 1:
+	    elif layerSwitcherActive == 1:
 		html.append('\n\t')
 
 	    # Lucadelu: add optional controls

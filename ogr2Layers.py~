@@ -36,6 +36,7 @@ import resources_rc
 import style_OGR2Layers
 import vect_OGR2Layers
 import query_OGR2Layers
+import ogr2ogr
 import __init__
 
 class OGR2Layers:
@@ -146,7 +147,7 @@ class OGR2Layers:
 	#set the dialog of about/help
 	self.aboutDlg=OGR2LayersAboutDialog()
 	#set the regular expression for found the version
-	regexVers = QRegExp('Version ([\d]+\.[\d]+.[\d]+)')
+	regexVers = QRegExp('Version ([\d]+\.[\d]+)')
 	if regexVers.indexIn(source) > -1:
 	    #set the version number
 	    version=regexVers.cap(1)

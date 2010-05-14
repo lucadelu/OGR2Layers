@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Sat Apr  3 11:36:12 2010
+# Created: Fri May 14 16:43:58 2010
 #      by: PyQt4 UI code generator 4.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,9 +54,16 @@ class Ui_OGR2Layers(object):
         self.LayerList = QtGui.QListWidget(self.tab)
         self.LayerList.setObjectName("LayerList")
         self.verticalLayout_3.addWidget(self.LayerList)
+        self.horizontalLayout_4 = QtGui.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.label_4 = QtGui.QLabel(self.tab)
         self.label_4.setObjectName("label_4")
-        self.verticalLayout_3.addWidget(self.label_4)
+        self.horizontalLayout_4.addWidget(self.label_4)
+        self.label_14 = QtGui.QLabel(self.tab)
+        self.label_14.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.label_14.setObjectName("label_14")
+        self.horizontalLayout_4.addWidget(self.label_14)
+        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.kmldirpath = QtGui.QLineEdit(self.tab)
@@ -65,6 +72,14 @@ class Ui_OGR2Layers(object):
         self.browseButton = QtGui.QPushButton(self.tab)
         self.browseButton.setObjectName("browseButton")
         self.horizontalLayout_3.addWidget(self.browseButton)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem)
+        self.outputFormCombo = QtGui.QComboBox(self.tab)
+        self.outputFormCombo.setObjectName("outputFormCombo")
+        self.outputFormCombo.addItem("")
+        self.outputFormCombo.addItem("")
+        self.outputFormCombo.addItem("")
+        self.horizontalLayout_3.addWidget(self.outputFormCombo)
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtGui.QWidget()
@@ -207,8 +222,12 @@ class Ui_OGR2Layers(object):
         self.label_5.setText(QtGui.QApplication.translate("OGR2Layers", "This plugin will export active OGR layers to an OpenLayers HTML Map", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("OGR2Layers", "Be careful, the heavier OGR Layers are, the slower the OL Map will be !", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("OGR2Layers", "OGR Active Layers :", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("OGR2Layers", "Output directory :", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("OGR2Layers", "Output directory", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_14.setText(QtGui.QApplication.translate("OGR2Layers", "Output format", None, QtGui.QApplication.UnicodeUTF8))
         self.browseButton.setText(QtGui.QApplication.translate("OGR2Layers", "Browse", None, QtGui.QApplication.UnicodeUTF8))
+        self.outputFormCombo.setItemText(0, QtGui.QApplication.translate("OGR2Layers", "GeoJSON", None, QtGui.QApplication.UnicodeUTF8))
+        self.outputFormCombo.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "GML", None, QtGui.QApplication.UnicodeUTF8))
+        self.outputFormCombo.setItemText(2, QtGui.QApplication.translate("OGR2Layers", "KML", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("OGR2Layers", "QGIS", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("OGR2Layers", "Map Title :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("OGR2Layers", "Map Size :", None, QtGui.QApplication.UnicodeUTF8))

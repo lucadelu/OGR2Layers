@@ -94,7 +94,7 @@ def createOGR(layer,ui,mydir,iface):
 		return 0
 	    #take the string of textBrowser and add new layer and ogr2ogr string
 	    layerString=ui.textBrowser.toHtml()
-	    layerString.append("""<b>%s</b> was reprojected correctly<br />""" % (myname))
+	    layerString.append("""<b>%s</b> was reprojected correctly with the following string<br /> <small><code>%s</code></small><br /><br />""" % (myname, myogr2ogr))
 	    ui.textBrowser.setHtml(layerString)
 	    #set the last tab for show the string
 	    #ui.tabWidget.setCurrentIndex(lastTab)
