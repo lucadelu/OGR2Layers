@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Fri May 14 16:43:58 2010
-#      by: PyQt4 UI code generator 4.6
+# Created: Mon Jul  5 17:27:18 2010
+#      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,12 +12,13 @@ from PyQt4 import QtCore, QtGui
 class Ui_OGR2Layers(object):
     def setupUi(self, OGR2Layers):
         OGR2Layers.setObjectName("OGR2Layers")
-        OGR2Layers.resize(535, 411)
+        OGR2Layers.resize(561, 435)
         self.verticalLayout_2 = QtGui.QVBoxLayout(OGR2Layers)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_2 = QtGui.QLabel(OGR2Layers)
+        self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap(":/plugins/OGR2Layers/icongui.png"))
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
@@ -76,7 +77,6 @@ class Ui_OGR2Layers(object):
         self.horizontalLayout_3.addItem(spacerItem)
         self.outputFormCombo = QtGui.QComboBox(self.tab)
         self.outputFormCombo.setObjectName("outputFormCombo")
-        self.outputFormCombo.addItem("")
         self.outputFormCombo.addItem("")
         self.outputFormCombo.addItem("")
         self.horizontalLayout_3.addWidget(self.outputFormCombo)
@@ -227,7 +227,6 @@ class Ui_OGR2Layers(object):
         self.browseButton.setText(QtGui.QApplication.translate("OGR2Layers", "Browse", None, QtGui.QApplication.UnicodeUTF8))
         self.outputFormCombo.setItemText(0, QtGui.QApplication.translate("OGR2Layers", "GeoJSON", None, QtGui.QApplication.UnicodeUTF8))
         self.outputFormCombo.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "GML", None, QtGui.QApplication.UnicodeUTF8))
-        self.outputFormCombo.setItemText(2, QtGui.QApplication.translate("OGR2Layers", "KML", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("OGR2Layers", "QGIS", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("OGR2Layers", "Map Title :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("OGR2Layers", "Map Size :", None, QtGui.QApplication.UnicodeUTF8))
