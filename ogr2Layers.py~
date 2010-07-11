@@ -21,24 +21,18 @@
 #
 #
 
-# Python, PyQt and QGIS imports
+
+#Python, PyQt and QGIS imports
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
-
-#import system class
+from ogr2layersdialog import OGR2LayersDialog
+from aboutdialog import OGR2LayersAboutDialog
+from querydialog import OGR2LayersQueryDialog
 import sys
 import os
 import resources_rc
-
-# import dialog of other window
-from ogr2layersdialog import OGR2LayersDialog
-from aboutdialog import OGR2LayersAboutDialog
-# for next version
-from querydialog import OGR2LayersQueryDialog
-
-#import function from other files
 import style_OGR2Layers
 import vect_OGR2Layers
 import query_OGR2Layers
@@ -77,7 +71,7 @@ class OGR2Layers:
 	#function for open about dialog
 	QObject.connect(self.dlg.ui.helpButton, SIGNAL("clicked()"), self.helpAbout) 
 
-	#function for open query dialog in next version
+	#function for open query dialog
 	#QObject.connect(self.dlg.ui.queryButton, SIGNAL("clicked()"), self.showQuery) 
 
 
@@ -95,7 +89,6 @@ class OGR2Layers:
 	mapCanvas = self.iface.mapCanvas()
 	#Checks vector type and populates the layer list view in opposite order for the correct visualization on OL
 	for i in range(mapCanvas.layerCount()-1,-1,-1):
-		# define actual layer
 		layer = mapCanvas.layer(i)
 		#check if is a vector
 		if layer.type() == layer.VectorLayer:
@@ -184,7 +177,7 @@ class OGR2Layers:
 
  
     def SelectKmlDir(self):
-	#set up the output dir for new vector files
+	#set up the output dir for KML
 	global mydir
 	mydir = QFileDialog.getExistingDirectory( None,QString("Choose the GML files destination folder"),"")
 	self.dlg.ui.kmldirpath.setText(mydir)
@@ -196,15 +189,12 @@ class OGR2Layers:
 	self.dlg.ui.textBrowser.setHtml(layerString)
 	#configure ProgressBar
 	if len(self.layers) > 0 and len(self.layersWFS) > 0:
-	    #exist also ogr layers and WFS layers
 	    self.dlg.ui.progressBar.setMinimum(0) 
 	    self.dlg.ui.progressBar.setMaximum(len(self.layers)+len(self.layersWFS)+1) 
 	elif len(self.layers) > 0 and len(self.layersWFS) == 0:
-	    #only ogr layers
 	    self.dlg.ui.progressBar.setMinimum(0) 
 	    self.dlg.ui.progressBar.setMaximum(len(self.layers)+1) 
 	elif len(self.layers) == 0 and len(self.layersWFS) > 0:
-	    # only WFS layer
 	    self.dlg.ui.progressBar.setMinimum(0) 
 	    self.dlg.ui.progressBar.setMaximum(len(self.layersWFS)+1) 
 	#variable for the ProgressBar
@@ -215,7 +205,7 @@ class OGR2Layers:
 	if str(self.dlg.ui.kmldirpath.text())=='':
 	    control.append("Please select the output directory first")
 	else:
-	    #if the directory is set, check if exist DA CORREGGERE COL METODO USATO CON MODIS
+	    #if the directory is set, check if exist
 	    mydirtest=self.dlg.ui.kmldirpath.text()
 	    if not os.path.exists(mydirtest):
 		control.append("Please check the validity of the output directory.")
@@ -266,6 +256,7 @@ class OGR2Layers:
 		html.append("map = new OpenLayers.Map('map');\n\t")
 		projection="EPSG:4326"
 	    #Save chose Map Base Layer
+	    # Lucadelu: add OpenLayers.Layer.OSM mapnik, osmarender, cyclemap
 	    if (mapBaseLayer) == 0: #OpenStreetMap (Mapnik)
 		html.append('olmapnik = new OpenLayers.Layer.OSM("OpenStreetMap Mapnik", "http://tile.openstreetmap.org/${z}/${x}/${y}.png");\n\t')
 		html.append('map.addLayer(olmapnik);\n\t')
@@ -291,7 +282,6 @@ class OGR2Layers:
 		html.append('map.addLayer(bmwms);\n\t')
 		html.append('map.setBaseLayer(bmwms);\n\t')
 
-	    # set variable of output format for set the correct OpenLayers.Vector
 	    layerSwitcherOutput = self.dlg.ui.outputFormCombo.currentIndex()
 	    # add vector layer
 	    if len(self.layers) != 0:
@@ -303,16 +293,12 @@ class OGR2Layers:
 			#check the type of query
 			##simple query
 			if self.dlg.ui.query.isChecked():
-			    ##add vector layer
-			    #if it is GeoJSON
+			    #add vector layer
 			    if layerSwitcherOutput == 0:
-				# add geojson vector with style 
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON, styleMap: '+layer.name()+'_style});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    # elif is GML
 			    elif layerSwitcherOutput == 1:
-				# add glm vector with style
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    #add simple query to vector 
+			    #add query
 			    html.extend(query_OGR2Layers.createQuery(layer,0))
 			##query using OL cluster strategy (work only with vector point)    
 			elif self.dlg.ui.query_2.isChecked():
@@ -322,16 +308,12 @@ class OGR2Layers:
 				if layer.geometryType()==0:
 				    #add OL strategy cluster
 				    html.append('var strategy = new OpenLayers.Strategy.Cluster();')
-				    ##add layer
-				    # add geojson vector with style 
+				    #add layer
 				    if layerSwitcherOutput == 0:
-					# add geojson vector with style
 					html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON, styleMap: '+layer.name()+'_style, strategies: [strategy]});\n\tmap.addLayer('+layer.name()+')\n\t')
-				    # elif is GML
 				    elif layerSwitcherOutput == 1:
-					# add glm vector with style
 					html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style, strategies: [strategy]});\n\tmap.addLayer('+layer.name()+')\n\t')
-				    #add cluster strategy query to vector 
+				    #add query
 				    html.extend(query_OGR2Layers.createQuery(layer,1))
 				else:
 				    #return an error if the type is different from point
@@ -343,47 +325,42 @@ class OGR2Layers:
 				return 0
 
 			else:
-			    #add GML file without query, with style
+			    #add layer without query, with style
 			    if layerSwitcherOutput == 0:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON, styleMap: '+layer.name()+'_style});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    #add GeoJSON file without query, with style
 			    elif layerSwitcherOutput == 1:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GML","'+layer.name()+'.gml",{styleMap: '+layer.name()+'_style});\n\tmap.addLayer('+layer.name()+')\n\t')
 
 		    else:
 			#simple query, default rendering
 			if self.dlg.ui.query.isChecked():
-			    #add GeoJSON vector with simple query and default rendering
+			    #add vector with simple query and default rendering
 			    if layerSwitcherOutput == 0:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    #add GML vector with simple query and default rendering
 			    elif layerSwitcherOutput == 1:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+" "+'GML","'+layer.name()+'.gml");\n\tmap.addLayer('+layer.name()+');\n\t')
-			    # add simple query
-			    html.extend(query_OGR2Layers.createQuery(layer,0))
+				html.extend(query_OGR2Layers.createQuery(layer,0))
 			#query strategy cluster, default rendering
 			elif self.dlg.ui.query_2.isChecked():
 			    #if geometry type is point
 			    if layer.geometryType()==0:
 				#add strategy cluster
 				html.append('var strategy = new OpenLayers.Strategy.Cluster();')
-				#add GeoJSON vector with strategy cluste query and default rendering 
+				#add layer
 				if layerSwitcherOutput == 0:
 				    html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON, strategies: [strategy]});\n\tmap.addLayer('+layer.name()+')\n\t')
-				#add GML vector with strategy cluste query and default rendering 
 				elif layerSwitcherOutput == 1:
 				    html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+" "+'GML","'+layer.name()+'.gml",{strategies: [strategy]});\n\tmap.addLayer('+layer.name()+');\n\t')
-				#add query with strategy cluster
+				#add query
 				html.extend(query_OGR2Layers.createQuery(layer,1))
 			    else:
 				#return an error if the type is not point
 				QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, ("Cluster Strategy support only vector point\n"), QMessageBox.Ok, QMessageBox.Ok)
 				return 0
 			else:
-			    #add simple GeoJSON vector, without query and style
+			    #add simple vector, without query and style
 			    if layerSwitcherOutput == 0:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+' GeoJSON","'+layer.name()+'.json",{format: OpenLayers.Format.GeoJSON});\n\tmap.addLayer('+layer.name()+')\n\t')
-			    #add simple GML vector, without query and style
 			    elif layerSwitcherOutput == 1:
 				html.append('var '+layer.name()+' = new OpenLayers.Layer.GML("'+layer.name()+" "+'GML","'+layer.name()+'.gml");\n\tmap.addLayer('+layer.name()+');\n\t')
 		#add a variable with select controls for each layer
@@ -401,10 +378,10 @@ class OGR2Layers:
 
 	    #Layer Switcher active or not
 	    layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
-	    #it's active
+	    
 	    if layerSwitcherActive == 0:
 		html.append('var ls= new OpenLayers.Control.LayerSwitcher(); \n\tmap.addControl(ls); \n\tls.maximizeControl(); \n\t')
-	    #is not active
+		    
 	    elif layerSwitcherActive == 1:
 		html.append('\n\t')
 

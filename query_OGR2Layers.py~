@@ -16,12 +16,8 @@
 # 	 See the GNU General Public License for more details.			#
 #############################################
 
-
+#create javascript code for query
 def createQuery(layer,typeQuery):
-    """ Create javascript code for query to add at the file HTML
-    layer = input layers
-    typeQuery = the type of query (0 = simple query, 1 = query with cluster strategy)
-    """
     #set the field name of the vector
     fieldsLayer=fieldsName(layer)
     #start javascript code for the query (add selectControl)
@@ -44,10 +40,8 @@ def createQuery(layer,typeQuery):
     #return javascript code for the query
     return html_query
 
+#read all the fields of a vector
 def fieldsName(layer):
-    """ Read all the fields of a vector; it's used in createQuery
-    layer = input layer 
-    """
     #dataprovider for the layer
     vprovider = layer.dataProvider()
     #fields of a layer (in number)
@@ -59,11 +53,8 @@ def fieldsName(layer):
     #return a list with the name of fields
     return nameFields
 
+#create html table for the single query
 def htmlTable(fields,layer):
-    """ Create html table for the single query; it's used in createQuery
-    fields = a list of all field name (return from fieldsName function)
-    layer = the input layer
-    """
     #add javascript table for popup
     html=['\n\t\ttable'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table>']
     #for each field add a column for the feature
@@ -73,11 +64,8 @@ def htmlTable(fields,layer):
     #return javascript code
     return html
 
+#create html table for the query using cluster strategy
 def htmlTableCluster(fields,layer):
-    """ Create html table for the query using cluster strategy; it's used in createQuery
-    fields = a list of all field name (return from fieldsName function)
-    layer = the input layer
-    """
     #start table
     html=['\n\t\ttable'+layer.name()+'="<html><meta http-equiv=\'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table><tr bgcolor=\'#c5e2ca\'>']
     #for each field add a column with the name of the field
@@ -94,11 +82,8 @@ def htmlTableCluster(fields,layer):
     #return javascript code
     return html
 
+#function for add a javascript variable, it contain the selectControl for all layer
 def addselectsControls(layers):
-    """ Function for add a javascript variable, it contain the selectControl for all layer; 
-    used in ogr2Layers in class OGR2Layers function WriteKML 
-    layers = list of layers
-    """
     #start html code
     html=['selectsControls=[']
     cont=0

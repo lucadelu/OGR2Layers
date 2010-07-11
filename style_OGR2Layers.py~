@@ -19,8 +19,8 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+#function for create the javascript code for the style
 def createStyle(layer):
-    """ Function for create the javascript code for the style to add in HTML file of output """
     #layer name
     layerName=str(layer.name())
     #type of symbology
@@ -111,108 +111,69 @@ def createStyle(layer):
 	    html_style.append('\n\t\t\t}\n\t\t}\n\t);\n\t')
     return html_style
 
+#function for the name of field used in "Unique Value" symbology
 def nameAttrField(layer,n):
-    """ Function for the name of field used in "Unique Value" symbology;
-	it's used in createStyle
-    layer = the layer
-    n = the number of field used to unique value classification
-    """
-    # return the provider
     vprovider = layer.dataProvider()
-    # return all the fields
     fields = vprovider.fields()
     #return the name of field
     return fields[n].name()
 
+#function for the point size (used with vector point)
 def pointStyle(styleMap,nameField):
-    """ Function for the point size (used with vector point);
-	it's used in createStyle
-    styleMap = stile map in qgis format
-    nameField = the name of field for the classification
-    """
     value=0
-    # the higher number od styleMap
-    higValue=len(styleMap)-1   
-    #for each field in styleMap
+    higValue=len(styleMap)-1    
     for z,y in styleMap.iteritems():
-	# if the field is the first
 	if (value==0):
 	    html_point=['getPointSize: function(feature) {\n\t\t\t\t\tif (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tpoint='+str(y.pointSize())+';\n\t\t\t\t\t}']
 	    value=value+1
-	# if the field is the last
 	elif (value==higValue):
 	    html_point.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tpoint='+str(y.pointSize())+';\n\t\t\t\t\t}\n\t\t\t\t\treturn point;\n\t\t\t\t},\n\t\t\t\t')
 	else:
 	    html_point.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tpoint='+str(y.pointSize())+';\n\t\t\t\t\t}')
 	    value=value+1
-    #return the code
     return html_point
 
+#function for the stroke color
 def colorStyle(styleMap,nameField):
-    """ Function for the stroke color;
-	it's used in createStyle
-    styleMap = stile map in qgis format
-    nameField = the name of field for the classification
-    """
     value=0
-    # the higher number od styleMap
     higValue=len(styleMap)-1
     for z,y in styleMap.iteritems():
-	# if the field is the first
 	if (value==0):
 	    html_color=['getScolor: function(feature) {\n\t\t\t\t\tif (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tscolor="'+y.color().name()+'";\n\t\t\t\t\t}']
 	    value=value+1
-	# if the field is the last
 	elif (value==higValue):
 	    html_color.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tscolor="'+y.color().name()+'";\n\t\t\t\t\t}\n\t\t\t\t\treturn scolor;\n\t\t\t\t},\n\t\t\t\t')
 	else:
 	    html_color.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tscolor="'+y.color().name()+'";\n\t\t\t\t\t}')
 	    value=value+1
-    #return the code
     return html_color
 
+#function for the fill color
 def fillStyle(styleMap,nameField):
-    """ Function for the fill color;
-	it's used in createStyle
-    styleMap = stile map in qgis format
-    nameField = the name of field for the classification
-    """
     value=0
-    # the higher number od styleMap
     higValue=len(styleMap)-1    
     for z,y in styleMap.iteritems():
-	# if the field is the first
 	if (value==0):
 	    html_fill=['fillColor: function(feature) {\n\t\t\t\t\tif (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tfillcolor="'+y.fillColor().name()+'";\n\t\t\t\t\t}']
 	    value=value+1
-	# if the field is the last
 	elif (value==higValue):
 	    html_fill.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tfillcolor="'+y.fillColor().name()+'";\n\t\t\t\t\t}\n\t\t\t\t\treturn fillcolor;\n\t\t\t\t},\n\t\t\t\t')
 	else:
 	    html_fill.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tfillcolor="'+y.fillColor().name()+'";\n\t\t\t\t\t}')
 	    value=value+1
-    #return the code
     return html_fill
-    
+
+#function for the line width
 def lineStyle(styleMap,nameField):
-    """ Function for return the line width;
-	it's used in createStyle
-    styleMap = stile map in qgis format
-    nameField = the name of field for the classification    
-    """
     value=0
-    # the higher number od styleMap
     higValue=len(styleMap)-1    
     for z,y in styleMap.iteritems():
-	# if the field is the first
 	if (value==0):
 	    html_line=['lineWidth: function(feature) {\n\t\t\t\t\tif (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}']
 	    value=value+1
-	# if the field is the last
 	elif (value==higValue):
 	    html_line.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}\n\t\t\t\t\treturn lineWidth;\n\t\t\t\t},\n\t\t\t\t')
 	else:
 	    html_line.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}')
 	    value=value+1
-    #return the code
     return html_line

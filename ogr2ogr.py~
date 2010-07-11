@@ -94,12 +94,11 @@ def Ogr2Ogr(inputs,outputpath,outputEPSG,inputEPSG,outputFormat):
     #destroy input and output datasource
     inDatasource.Destroy()
     outDatasource.Destroy()
+
     return 3
 
+#check the geometry type and return the ogr definition
 def geometryType(geomType):
-    """ check the geometry type and return the ogr definition for that type
-    geomType = geometry type of input vector
-    """
     if geomType==1:
 	geomwkb = ogr.wkbPoint 
     elif geomType==2:
@@ -117,60 +116,39 @@ def geometryType(geomType):
 	return 0
     return geomwkb
 
+#return the output feature definition from the input definition
 def featureDefinition(layer,outlayer):
-    """ Return the output feature definition from the input definition; it's used in Ogr2Ogr function
-    layer = imput vector file
-    outlayer = output vector file
-    """
     #out feature definition
     outFeatureDefn = ogr.FeatureDefn()
     #input feature definition
     featureDefn = layer.GetLayerDefn()
-    #for each field
     for i in range(featureDefn.GetFieldCount()):
 	#input field definition
 	fieldDefn = featureDefn.GetFieldDefn(i)
 	#create outlayer field definition IT'S VERY IMPORTANT
 	outlayer.CreateField(fieldDefn)
-	# obtain the name
 	nameField = fieldDefn.GetName()
-	# obtain the type
 	typeField = fieldDefn.GetType()
-	# obtain 
 	justiField = fieldDefn.GetJustify()
-	# obtain the width of field
 	widthField = fieldDefn.GetWidth()
-	# obtain the precision of field
 	precField = fieldDefn.GetPrecision()
 	#output field definition
 	outField = ogr.FieldDefn()
-	# set the name
 	outField.SetName(nameField)
-	# set the type
 	outField.SetType(typeField)
-	#
 	outField.SetJustify(justiField)
-	# set the width
 	outField.SetWidth(widthField)
-	# set the precision
 	outField.SetPrecision(precField)
-	# add field definition to feature definition
 	outFeatureDefn.AddFieldDefn(outField)
-    #return feature definition
     return outFeatureDefn
 
+#return a list of field's name
 def fieldsName(layer):
-    """ Return a list of field's name; it's used on Ogr2Ogr function
-    layer = input vector layer
-    """
     #out list of fieldDefn
     fields = []
-    # feature definiton of input layer
     featureDefn = layer.GetLayerDefn()
-    # for each field
     for i in range(featureDefn.GetFieldCount()):
 	#input field definition
 	fieldDefn = featureDefn.GetFieldDefn(i)
-	#add field name
 	fields.append(fieldDefn.GetName())
     return fields
