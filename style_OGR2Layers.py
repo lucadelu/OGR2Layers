@@ -210,7 +210,7 @@ def lineStyle(styleMap,nameField):
 	    value=value+1
 	# if the field is the last
 	elif (value==higValue):
-	    html_line.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}\n\t\t\t\t\treturn lineWidth;\n\t\t\t\t},\n\t\t\t\t')
+	    html_line.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}\n\t\t\t\t\treturn lineWidth;\n\t\t\t\t}\n\t\t\t\t')
 	else:
 	    html_line.append(' else if (feature.attributes.'+nameField+'=="'+z+'"){\n\t\t\t\t\t\tlineWidth='+str(y.lineWidth())+';\n\t\t\t\t\t}')
 	    value=value+1
