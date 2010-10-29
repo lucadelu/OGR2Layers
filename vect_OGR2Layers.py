@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #############################################
 #	OGR2Layers Plugin (c)  for Quantum GIS					#
 #	(c) Copyright Nicolas BOZON - 2008					#
@@ -23,7 +24,8 @@ from qgis.gui import *
 import ogr2ogr
 import sys
 import os
-import urllib2
+#import urllib2
+import string
 
 def createOGR(layer,ui,mydir,iface):
     """ Convert ogr layer to gml - geojson; 
@@ -96,7 +98,12 @@ def createOGR(layer,ui,mydir,iface):
 		#res=os.popen(myogr2ogr).readlines()
 		#####
 	    #add grass
-	    #elif (str(myprovidername)==""): #grass
+	    elif (str(myprovidername)=="grass"): #grass
+		mysource_temp = str(mysource).split('/')[0:-1]
+		mysource_temp.insert(-1,"vector")
+		mysource_temp.append("head")
+		mysource_ogr_format = string.join(mysource_temp,'/')
+		ogr2ogr.Ogr2Ogr(mysource_ogr_format,mydestpath,outputepsg,myproj4,outputFormat)
 
 	    else: #do nothing and warn the user for unsupportade providers
 		QMessageBox.information(iface.mainWindow(),"Information",str("Only postgres and ogr providers are supported") )
