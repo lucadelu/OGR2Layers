@@ -89,7 +89,14 @@ def createOGR(layer,ui,mydir,iface):
 		######old convert
 		#myogr2ogr = 'ogr2ogr -a_srs EpsgCrsId:'+str(myepsg)+' -t_srs \''+str(outputepsg)+'\' -overwrite -f "GML" "'+str(mydestpath)+'" PG:"' + str(mypglayerinfo) + '" layer ' + str(myname) + ' 2>&1 > $HOME/.ogr2layers/ogr2layers.log'
 		#res=os.popen(myogr2ogr).readlines()
-		#
+		
+		#for spatialite
+	    elif (str(myprovidername)=="spatialite"):
+		mysource_temp = mysource.split(' ')[0]
+		mysource_temp = str(mysource_temp.split('=')[1])
+		mysource_ogr_format = mysource_temp.replace("'","")
+		ogr2ogr.Ogr2Ogr(mysource_ogr_format,mydestpath,outputepsg,myproj4,outputFormat)
+	      
 	    elif (str(myprovidername)=="ogr"): #ogr
 		ogr2ogr.Ogr2Ogr(str(mysource),mydestpath,outputepsg,myproj4,outputFormat)
 
