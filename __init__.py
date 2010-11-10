@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #############################################
 #       OGR2Layers Plugin (c)  for Quantum GIS                                  #
 #       (c) Copyright Nicolas BOZON - 2008                                      #
@@ -23,7 +24,7 @@ def description():
   return " A plugin to export OGR layers to OpenLayers HTML"
 
 def version():
-  return "Version 0.7"
+  return "Version 0.8"
 
 def qgisMinimumVersion():
   return "1.4"
