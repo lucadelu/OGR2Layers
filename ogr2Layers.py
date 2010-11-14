@@ -202,7 +202,7 @@ class OGR2Layers:
 	html = []
 	try:
 	    html.append(OGR2LayersHtml.createHtml())
-	    htmlfileName = str(mydir)+'/index.html'
+	    htmlfileName = mydir+'/index.html'
 	    #open a file
 	    file = open(htmlfileName, "w")
 	    #write the file

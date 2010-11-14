@@ -26,7 +26,8 @@ from OGR2Funz import *
 class OGR2LayersClassStyle:
   """A class to create style of layer and the relative code"""
   def __init__(self, 
-		layer
+		layer,
+		directory
 	      ):
     #qgis layer
     self.layer = layer
@@ -34,6 +35,8 @@ class OGR2LayersClassStyle:
     self.typeGeom = self.layer.geometryType()
     #layer name
     self.name = self.layer.name()
+    # path to save image from svg
+    self.path = directory
     # layer renderer
     self.renderer = self.layer.renderer()
     #type of rendering
@@ -245,3 +248,19 @@ class OGR2LayersClassStyle:
     '\n\t\t\t\t\t return element;\n\t\t\t\t},\n\t\t\t\t\n\t\t\t}\n\t\t}\n\t);'\
     '\n\t')
     return html_style
+
+  def imagePNG(self,style):
+    name = str(style[0].pointSymbolName())
+    typ = name.split(':')
+    actualSize = style[0].pointSize()
+    if typ[0] == 'svg':
+      if actualSize <= 50:
+	style[0].setPointSize(50)
+	image=style[0].getPointSymbolAsImage()
+	style[0].setPointSize(actualSize)
+      else:
+	image=style[0].getPointSymbolAsImage()
+      self.svg = True
+    else:
+      self.svg = False
+    

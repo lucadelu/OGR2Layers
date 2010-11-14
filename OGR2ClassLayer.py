@@ -58,7 +58,7 @@ class OGR2LayersClassLayer:
     #layer output format
     self.outputFormat = outputFormat
     #putput vector name 
-    self.outputName = str(self.name + "." + self.outputFormat)
+    self.outputName = unicode(self.name + "." + self.outputFormat)
     #input epsg
     self.inEpsg = self.layer.srs().epsg() 
     #set the output epsg code
@@ -73,13 +73,13 @@ class OGR2LayersClassLayer:
     #type of vector
     self.providerName = str(self.layer.dataProvider().name())
     #directory where save files
-    self.pathSave = str(mydir)
+    self.pathSave = mydir
     #name of file to write
     self.destPathName =  os.path.abspath(os.path.join(self.pathSave,self.outputName))
     #class query	
     self.classQuery = OGR2LayersClassQuery(self.layer, self.query)
     #class rendering
-    self.classStyle = OGR2LayersClassStyle(self.layer)
+    self.classStyle = OGR2LayersClassStyle(self.layer,self.pathSave)
 
 	      
   def convertOGR(self):
@@ -113,7 +113,7 @@ class OGR2LayersClassLayer:
     #add other vector type
     else :
       #spatialite
-      if (self.providerName == "spatialite" or self.providerName == "postgres"): #spatialite
+      if (self.providerName == "spatialite" or self.providerName == "postgres"): 
 	if self.writeShape():
 	  return 0	
 	else:
@@ -138,7 +138,7 @@ class OGR2LayersClassLayer:
 
   def writeShape(self):
       nameFile = os.path.abspath(os.path.join(self.pathSave, 
-      str(self.name) + "_temp.shp"))
+      self.name + '_temp.shp'))
       QgsVectorFileWriter.deleteShapeFile(nameFile)
       inputQgsReference = QgsCoordinateReferenceSystem()
       inputQgsReference.createFromEpsg(self.inEpsg)

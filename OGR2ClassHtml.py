@@ -23,7 +23,7 @@ from OGR2ClassLayer import *
 from OGR2ClassQuery import OGR2LayersClassControlSel
 
 class OGR2LayersClassHtml:
-  """A class to create html and javascript code"""
+  """The class to create html and javascript code"""
   def __init__(self, 
 		layers,
 		dlg,
@@ -222,6 +222,7 @@ class OGR2LayersClassHtml:
       if self.myQuery != 'none':
 	html.extend(OGR2LayersLayer.htmlQuery())
       html.extend(OGR2LayersLayer.htmlLayer())
+      #self.dlg.ui.textBrowser.  ##AGGIUNGERE TESTO AL TEXTBROWSER PER BUONA RIUSCITA CONVERSIONE
       compteur = compteur + 1	    
       self.dlg.ui.progressBar.setValue(compteur)
       
