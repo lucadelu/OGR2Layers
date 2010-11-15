@@ -53,7 +53,8 @@ class OGR2Layers:
     #plugin is loaded
     def initGui(self):
 	#loaded icon
-	self.action = QAction(QIcon(":/plugins/OGR2Layers/ogr2layersicon.png"), "OGR2Layers", self.iface.mainWindow())
+	self.action = QAction(QIcon(":/plugins/OGR2Layers/ogr2layersicon.png"),
+	"OGR2Layers", self.iface.mainWindow())
 	self.action.setWhatsThis("Configuration for OGR2Layers plugin")
 	QObject.connect(self.action, SIGNAL("triggered()"), self.run)
 	#add icon to the toolbar
@@ -82,13 +83,17 @@ class OGR2Layers:
 	layers =  self.iface.activeLayer()
 	#Checks for loaded layers, do not load if no layers
 	if layers == None:
-	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, ("No active layer found\n" "Please make one or more OGR layer active\n" "Beware of layers sizes for export"), QMessageBox.Ok, QMessageBox.Ok)
+	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
+	    ("No active layer found\n" "Please make one or more OGR layer '\
+	    'active\n" "Beware of layers sizes for export"), QMessageBox.Ok, 
+	    QMessageBox.Ok)
 	    return
 	#OGR layers 
 	self.layers = [] 
 	#load qgis mapCanvas
 	mapCanvas = self.iface.mapCanvas()
-	#Checks vector type and populates the layer list view in opposite order for the correct visualization on OL
+	#Checks vector type and populates the layer list view in opposite 
+	#order for the correct visualization on OL
 	for i in range(mapCanvas.layerCount()-1,-1,-1):
 	    # define actual layer
 	    layer = mapCanvas.layer(i)
@@ -101,7 +106,9 @@ class OGR2Layers:
 		self.dlg.ui.LayerList.addItem(source)
 	#check if there is some vectors layer, else return an error
 	if len(self.layers) == 0:
-	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, ("No vector layer found\n" "Please load one or more OGR layer\n"), QMessageBox.Ok, QMessageBox.Ok)
+	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
+	    ("No vector layer found\n" "Please load one or more OGR layer\n"), 
+	    QMessageBox.Ok, QMessageBox.Ok)
 	    return
 	#button for start the plugin
 	QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.WriteKML)
@@ -149,14 +156,24 @@ class OGR2Layers:
 	    #set the version number
 	    version=regexVers.cap(1)
 	#add version to the label 
-	self.aboutDlg.uiAbout.version_n.setText(QApplication.translate("AboutDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n" "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n" "p, li { white-space: pre-wrap; }\n" "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n" "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:400;\" align=\"center\">"+version+"</span></p></body></html>", None, QApplication.UnicodeUTF8))
+	self.aboutDlg.uiAbout.version_n.setText(QApplication.translate(
+	"AboutDialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \""\
+	"http://www.w3.org/TR/REC-html40/strict.dtd\">\n" "<html><head><meta "\
+	"name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n" "p,"\
+	" li { white-space: pre-wrap; }\n" "</style></head><body style=\" "\
+	"font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; "\
+	"font-style:normal;\">\n" "<p style=\" margin-top:0px; margin-bottom:"\
+	"0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; "\
+	"text-indent:0px;\"><span style=\" font-size:12pt; font-weight:400;\" align=\"center\">"+version+"</span></p></body></html>", None, 
+	QApplication.UnicodeUTF8))
 	#show dialog
 	self.aboutDlg.show()
 
     def SelectKmlDir(self):
 	#set up the output dir for new vector files
 	global mydir
-	mydir = QFileDialog.getExistingDirectory( None,QString("Choose the GML files destination folder"),"")
+	mydir = QFileDialog.getExistingDirectory( None,QString("Choose the GML"\
+	" files destination folder"),"")
 	self.dlg.ui.kmldirpath.setText(mydir)
 	    
     def WriteKML(self):
@@ -198,7 +215,8 @@ class OGR2Layers:
 	    self.dlg.ui.tabWidget.setCurrentIndex(lastTab)
 	    ##change ok button in close button and show a messages
 	    self.dlg.ui.buttonBox.setStandardButtons(QDialogButtonBox.Close)			
-	    QMessageBox.information(self.dlg,"Information",str("The OpenLayers Map has been created! Click \"Close\" for exit from the plugin") )	
+	    QMessageBox.information(self.dlg,"Information",str("The OpenLayers"\
+	    " Map has been created! Click \"Close\" for exit from the plugin") )	
 	except Exception, e:
 	    #raise e
 	    self.error(e)
