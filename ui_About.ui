@@ -32,7 +32,7 @@
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>9</x>
@@ -47,7 +47,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -171,7 +171,7 @@ p, li { white-space: pre-wrap; }
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
          <widget class="QLabel" name="label_help">
@@ -219,9 +219,9 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;The second important part is &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;your vector layer has a  known spatial reference system&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; (e.g. file .prj for shapefile) then you can load vector data and start OGR2Layer plugin, now  you choose the directory where the plugin save the files (.html for internet page and gml for vector data) and several option to add in OpenLayers.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;For use the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;QGIS Render&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; in the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Render option&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; remember  that work only &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Single Symbol&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; and &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Unique Value&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; symbology&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;From &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;version 0.8&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt; &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;QGIS Render&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; in the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Render option&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; support all symbologies of &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Old symbology Style&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot;&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;In the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Query Options&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; the option &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;query more features&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; use OpenLayers Strategy Cluster, this solution allow to cluster more features and query the group, it's useful for points specially when they are very neighbouring. &lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;In the &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Query Options&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; the option &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;query more features&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; use OpenLayers Strategy Cluster, this solution allow to cluster more point features and query the group, it's useful when points are very neighbouring.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Important&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;: remember &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;query more features&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; doesn't work with &amp;quot;&lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;Unique Value&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;&amp;quot; symbology&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>

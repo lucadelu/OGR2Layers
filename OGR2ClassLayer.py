@@ -95,19 +95,21 @@ class OGR2LayersClassLayer:
       #else write shapefile from WFS and reproject it with the right 
       #projection and load it like OpenLayers.Layer.GML
       else:
-	nameFileWFS = os.path.abspath(os.path.join(self.pathSave, 
-	str(self.name) + "_temp.shp"))
-	QgsVectorFileWriter.deleteShapeFile(nameFileWFS)
-	inputQgsReference = QgsCoordinateReferenceSystem()
-	inputQgsReference.createFromEpsg(self.inEpsg)
-	writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer, 
-	nameFileWFS, "UTF8", inputQgsReference)
-	if writeShape == QgsVectorFileWriter.NoError:
-	  OGR2ogr.Ogr2Ogr(nameFileWFS, str(self.destPathName), self.outputEpsg,
-	  self.inEpsg, self.outputFormat)
-	  self.OpenLayersFormat = "GML"
+	if self.writeShape():
+	  return 0
+	#nameFileWFS = os.path.abspath(os.path.join(self.pathSave, 
+	#str(self.name) + "_temp.shp"))
+	#QgsVectorFileWriter.deleteShapeFile(nameFileWFS)
+	#inputQgsReference = QgsCoordinateReferenceSystem()
+	#inputQgsReference.createFromEpsg(self.inEpsg)
+	#writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer, 
+	#nameFileWFS, "UTF8", inputQgsReference)
+	#if writeShape == QgsVectorFileWriter.NoError:
+	  #OGR2ogr.Ogr2Ogr(nameFileWFS, str(self.destPathName), self.outputEpsg,
+	  #self.inEpsg, self.outputFormat)
+	  #self.OpenLayersFormat = "GML"
 	else:
-	  raise Exception, "Some problem with convertion from WFS to Shapefile"
+	  raise Exception, "Some problem with convertion from WFS"
     #add other vector type
     else :
       #postgresql
@@ -115,8 +117,12 @@ class OGR2LayersClassLayer:
 	mypglayerinfo = self.source.split('table')[0]
       #spatialite
       elif (self.providerName == "spatialite"): #spatialite
-	raise Exception, "There is a bug with OGR and Spatialite and " \
-	+ "now it isn't possible support Spatialite\n" # WORK
+	if self.writeShape():
+	  return 0	
+	else:
+	  raise Exception, "Some problem with convertion from Spatialite"	
+	#raise Exception, "There is a bug with OGR and Spatialite and " \
+	#+ "now it isn't possible support Spatialite\n" # WORK
 	#mysource_temp = self.source.split(' ')[0]
 	#mysource_temp = str(mysource_temp.split('=')[1])
 	#self.source = mysource_temp.replace("'","")
@@ -132,6 +138,22 @@ class OGR2LayersClassLayer:
       self.OpenLayersFormat = "GML"
       
       return 0
+
+  def writeShape(self):
+      nameFile = os.path.abspath(os.path.join(self.pathSave, 
+      str(self.name) + "_temp.shp"))
+      QgsVectorFileWriter.deleteShapeFile(nameFile)
+      inputQgsReference = QgsCoordinateReferenceSystem()
+      inputQgsReference.createFromEpsg(self.inEpsg)
+      writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer, 
+      nameFile, "UTF8", inputQgsReference)
+      if writeShape == QgsVectorFileWriter.NoError:
+	OGR2ogr.Ogr2Ogr(nameFile, str(self.destPathName), self.outputEpsg,
+	self.inEpsg, self.outputFormat)
+	self.OpenLayersFormat = "GML"
+	QgsVectorFileWriter.deleteShapeFile(nameFile)
+	return True
+      
 
   def htmlStyle(self):
     """Create javascript code for style"""
