@@ -84,8 +84,8 @@ class OGR2Layers:
 	#Checks for loaded layers, do not load if no layers
 	if layers == None:
 	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
-	    ("No active layer found\n" "Please make one or more OGR layer '\
-	    'active\n" "Beware of layers sizes for export"), QMessageBox.Ok, 
+	    ("No active layer found\n" "Please make one or more OGR layer "\
+	    "active\n" "Beware of layers sizes for export"), QMessageBox.Ok, 
 	    QMessageBox.Ok)
 	    return
 	#OGR layers 

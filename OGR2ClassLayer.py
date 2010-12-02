@@ -112,15 +112,12 @@ class OGR2LayersClassLayer:
 	  raise Exception, "Some problem with convertion from WFS"
     #add other vector type
     else :
-      #postgresql
-      if (self.providerName == "postgres"): #postgresql
-	mypglayerinfo = self.source.split('table')[0]
       #spatialite
-      elif (self.providerName == "spatialite"): #spatialite
+      if (self.providerName == "spatialite" or self.providerName == "postgres"): #spatialite
 	if self.writeShape():
 	  return 0	
 	else:
-	  raise Exception, "Some problem with convertion from Spatialite"	
+	  raise Exception, "Some problem with convertion from database"	
 	#raise Exception, "There is a bug with OGR and Spatialite and " \
 	#+ "now it isn't possible support Spatialite\n" # WORK
 	#mysource_temp = self.source.split(' ')[0]
