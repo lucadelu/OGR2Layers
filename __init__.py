@@ -24,13 +24,16 @@ def description():
   return " A plugin to export OGR layers to OpenLayers HTML"
 
 def version():
-  return "Version 0.8.0"
+  return "Version 0.8.1"
 
 def qgisMinimumVersion():
   return "1.4"
 
 def authorName():
   return "Nicolas BOZON, Rene-Luc D'HONT, Michael DOUCHIN, Mathias Walker, Luca DELUCCHI"
+
+def icon():
+  return "icongui.png"
 
 def classFactory(iface):
   from ogr2Layers import OGR2Layers
