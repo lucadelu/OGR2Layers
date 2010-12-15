@@ -102,9 +102,12 @@ class OGR2LayersClassHtml:
     if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 3:
       html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+').transform(new OpenLayers.Projection("EPSG:4326"), new '\
       'OpenLayers.Projection("EPSG:900913"));\n\t']
-      html.append('map.zoomToExtent(extent);\n')	
+      	
     else:
-      html = ['map.zoomToExtent(new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n']
+      html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n']
+    html.append('map.zoomToExtent(extent);\n')
+    #if self.dlg.ui.maxExtent.isChecked():
+      #AGGIUNGERE IL CODICE PER IL MAX EXTEND
     return html
 	  
   def olBaseLayer(self):
