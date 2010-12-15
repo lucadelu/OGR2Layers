@@ -21,6 +21,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 
+import os
+
 from OGR2Funz import *
 
 class OGR2LayersClassStyle:
@@ -84,11 +86,23 @@ class OGR2LayersClassStyle:
     if self.typeGeom == 0:
       pointSize=style[0].pointSize()
       html_style.append('pointRadius: ' + str(pointSize) + ',\n\t\t')
-    html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
-      'strokeOpacity: 1,\n\t\t'\
-      'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
-      'fillColor: "' + str(fillColor) + '",\n\t\t'\
-      'fillOpacity: 1\n\t'\
+      self.imagePNG(style)
+      if self.svg:
+	html_style.append('externalGraphic: "' + str(self.nameSvg) + '",\n\t')
+      else:
+	html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
+	  'strokeOpacity: 1,\n\t\t'\
+	  'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
+	  'fillColor: "' + str(fillColor) + '",\n\t\t'\
+	  'fillOpacity: 1\n\t')
+    else:
+      html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
+	'strokeOpacity: 1,\n\t\t'\
+	'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
+	'fillColor: "' + str(fillColor) + '",\n\t\t'\
+	'fillOpacity: 1\n\t')
+	  
+    html_style.append(  
       '}\n\t'\
       'var ' + self.name + '_style = new OpenLayers.Style(' + self.name + 
 	'_template)\n\t')
@@ -267,7 +281,14 @@ class OGR2LayersClassStyle:
 	style[0].setPointSize(actualSize)
       else:
 	image=style[0].getPointSymbolAsImage()
-      self.svg = True
+      self.nameSvg = os.path.abspath(os.path.join(str(self.path), 'image.png'))
+      if image.save(self.nameSvg,'png'):
+	#set svg variable tu true
+	self.svg = True
+      else:
+	raise Exception, "There are some problem in the conversion of symbol in png image\n"
     else:
-      self.svg = False
+      #set svg variable to False
+      self.svg = False 
+    return 0
     
