@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Mon Jul  5 17:27:18 2010
+# Created: Wed Dec 15 16:28:13 2010
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,31 +108,36 @@ class Ui_OGR2Layers(object):
         self.label_9.setGeometry(QtCore.QRect(190, 90, 101, 16))
         self.label_9.setObjectName("label_9")
         self.lineEdit = QtGui.QLineEdit(self.tab_2)
-        self.lineEdit.setGeometry(QtCore.QRect(10, 180, 100, 20))
+        self.lineEdit.setGeometry(QtCore.QRect(10, 170, 100, 20))
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit_2 = QtGui.QLineEdit(self.tab_2)
-        self.lineEdit_2.setGeometry(QtCore.QRect(130, 180, 100, 20))
+        self.lineEdit_2.setGeometry(QtCore.QRect(130, 170, 100, 20))
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.lineEdit_3 = QtGui.QLineEdit(self.tab_2)
-        self.lineEdit_3.setGeometry(QtCore.QRect(260, 180, 100, 20))
+        self.lineEdit_3.setGeometry(QtCore.QRect(260, 170, 100, 20))
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.lineEdit_4 = QtGui.QLineEdit(self.tab_2)
-        self.lineEdit_4.setGeometry(QtCore.QRect(390, 180, 100, 20))
+        self.lineEdit_4.setGeometry(QtCore.QRect(390, 170, 100, 20))
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.label_10 = QtGui.QLabel(self.tab_2)
-        self.label_10.setGeometry(QtCore.QRect(10, 160, 121, 16))
+        self.label_10.setGeometry(QtCore.QRect(10, 150, 121, 16))
         self.label_10.setObjectName("label_10")
         self.label_11 = QtGui.QLabel(self.tab_2)
-        self.label_11.setGeometry(QtCore.QRect(10, 220, 151, 21))
+        self.label_11.setGeometry(QtCore.QRect(10, 230, 151, 21))
         self.label_11.setObjectName("label_11")
         self.layerSwitcherActive = QtGui.QComboBox(self.tab_2)
-        self.layerSwitcherActive.setGeometry(QtCore.QRect(170, 220, 69, 21))
+        self.layerSwitcherActive.setGeometry(QtCore.QRect(170, 230, 69, 21))
         self.layerSwitcherActive.setObjectName("layerSwitcherActive")
         self.layerSwitcherActive.addItem("")
         self.layerSwitcherActive.addItem("")
         self.mapTitle = QtGui.QLineEdit(self.tab_2)
         self.mapTitle.setGeometry(QtCore.QRect(10, 40, 481, 20))
         self.mapTitle.setObjectName("mapTitle")
+        self.maxExtent = QtGui.QCheckBox(self.tab_2)
+        self.maxExtent.setEnabled(False)
+        self.maxExtent.setGeometry(QtCore.QRect(10, 190, 461, 20))
+        self.maxExtent.setLayoutDirection(QtCore.Qt.RightToLeft)
+        self.maxExtent.setObjectName("maxExtent")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtGui.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -212,7 +217,7 @@ class Ui_OGR2Layers(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
 
         self.retranslateUi(OGR2Layers)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), OGR2Layers.reject)
         QtCore.QMetaObject.connectSlotsByName(OGR2Layers)
 
@@ -243,6 +248,7 @@ class Ui_OGR2Layers(object):
         self.label_11.setText(QtGui.QApplication.translate("OGR2Layers", "Layer Switcher active ?", None, QtGui.QApplication.UnicodeUTF8))
         self.layerSwitcherActive.setItemText(0, QtGui.QApplication.translate("OGR2Layers", "yes", None, QtGui.QApplication.UnicodeUTF8))
         self.layerSwitcherActive.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "no", None, QtGui.QApplication.UnicodeUTF8))
+        self.maxExtent.setText(QtGui.QApplication.translate("OGR2Layers", "Click here if you want use this bounding box as max extent of the map", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtGui.QApplication.translate("OGR2Layers", "OpenLayers", None, QtGui.QApplication.UnicodeUTF8))
         self.label_12.setText(QtGui.QApplication.translate("OGR2Layers", "Choose other map controls", None, QtGui.QApplication.UnicodeUTF8))
         self.mousepos.setText(QtGui.QApplication.translate("OGR2Layers", "mouseposition", None, QtGui.QApplication.UnicodeUTF8))
