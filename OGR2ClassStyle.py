@@ -71,7 +71,11 @@ class OGR2LayersClassStyle:
     #set stroke color
     strokeColor=style[0].color().name()
     #set fill color
-    fillColor=style[0].fillColor().name()
+    # check if it's opaque or not
+    if style[0].brush().isOpaque():
+      fillColor=style[0].fillColor().name()
+    else:
+      fillColor=0
     #set line width
     lineWidth=style[0].lineWidth()
     #javascript code
@@ -135,7 +139,10 @@ class OGR2LayersClassStyle:
       elif element == 'LineWidth':
 	valueStyle = str(y.lineWidth())
       elif element == 'FillColor':
-	valueStyle = '"' + str(y.fillColor().name()) + '"'
+	if y.brush().isOpaque():
+	  valueStyle = '"' + str(y.fillColor().name()) + '"'
+	else:
+	  valueStyle = '"0"'
       # if the field is the first
       if (value==0):
 	html_element = ['get' + element + ': function(feature) {\n\t\t\t\t\t' \
