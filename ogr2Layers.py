@@ -139,6 +139,7 @@ class OGR2Layers:
 	result = self.dlg.exec_() 
 
     def error(self,errorStr):
+	#function to return error
 	QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, str(errorStr))
 	#raise errorStr
 	self.dlg.close()
@@ -197,11 +198,14 @@ class OGR2Layers:
 	    #if the directory is set, check if exist DA CORREGGERE COL METODO USATO CON MODIS
 	    if not os.path.exists(myDirectory):
 	        self.error("Please check the validity of the output directory")
-		
+	#initialize OGR2LayersClassHtml 
 	OGR2LayersHtml = OGR2LayersClassHtml(self.layers,self.dlg,myDirectory)
+	#start html code
 	html = []
 	try:
+	    #write html code
 	    html.append(OGR2LayersHtml.createHtml())
+	    #name to write file with html code
 	    htmlfileName = mydir+'/index.html'
 	    #open a file
 	    file = open(htmlfileName, "w")
