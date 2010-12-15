@@ -137,13 +137,13 @@ class OGR2LayersClassLayer:
       return 0
 
   def writeShape(self):
-      nameFile = os.path.abspath(os.path.join(self.pathSave, 
-      self.name + '_temp.shp'))
+      nameFile = os.path.abspath(os.path.join(str(self.pathSave), 
+      str(self.name) + '_temp.shp'))
       QgsVectorFileWriter.deleteShapeFile(nameFile)
       inputQgsReference = QgsCoordinateReferenceSystem()
       inputQgsReference.createFromEpsg(self.inEpsg)
       writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer, 
-      nameFile, "UTF8", inputQgsReference)
+      str(nameFile), "UTF8", inputQgsReference)
       if writeShape == QgsVectorFileWriter.NoError:
 	OGR2ogr.Ogr2Ogr(nameFile, str(self.destPathName), self.outputEpsg,
 	self.inEpsg, self.outputFormat)
