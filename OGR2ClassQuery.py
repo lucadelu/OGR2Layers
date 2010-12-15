@@ -102,7 +102,7 @@ class OGR2LayersClassQuery:
     html.append('\n\t\tfor (var i=0; i < feature.cluster.length; ++i){'\
     '\n\t\t\ttable'+self.name+'+="<tr>')
     #for each field add a column in the row of selected features
-    for field in fields:
+    for field in self.fieldsNameLayer:
       html.append('<td>"+feature.cluster[i].attributes.'+field+'+"</td>')
     html.append('</tr>"\n\t\t}\n\t\ttable'+self.name+'+="</table></body>'\
     '</html>"; ')
