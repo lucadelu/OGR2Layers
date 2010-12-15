@@ -185,23 +185,33 @@ class OGR2LayersClassHtml:
       
   def htmlLayer(self):
     """Add the code for layer, name, style and query"""
+    # used for number of vector
     compteur = 0
+    # variable to write html code
     html = []
+    # variable to the string in the output tab
+    layerString=""
     outputFormat = self.outFormat()
     for layer in self.layers:
+      stringLayer = 'The vector <b>' + str(layer.name()) + '</b>'\
+      ' is converted correctly'
       if self.dlg.ui.qgisRender.isChecked():
 	myRendering = 'qgis'
+	stringLayer = stringLayer + ', using QGIS rendering' 
       else:
 	myRendering = 'default'
 	  
       if self.dlg.ui.query.isChecked():
 	self.myQuery = 'single'
+	stringLayer = stringLayer + ' with single query'
       elif self.dlg.ui.query_2.isChecked():
 	if layer.geometryType() == 0:
 	  if myRendering == 'qgis' and layer.renderer().name() == 'Single Symbol':
 	    self.myQuery = 'cluster'
+	    stringLayer = stringLayer + ' with cluster strategy query'
 	  elif myRendering == 'default':
 	    self.myQuery = 'cluster'
+	    stringLayer = stringLayer + ' with cluster strategy query'	    
 	  elif myRendering == 'qgis' and not layer.renderer().name() == 'Single Symbol':
 	    #return an error if the symbology is different from Single Symbol
 	    raise Exception, "Unique value classification doesn't work with "\
@@ -226,8 +236,13 @@ class OGR2LayersClassHtml:
 	html.extend(OGR2LayersLayer.htmlQuery())
       html.extend(OGR2LayersLayer.htmlLayer())
       #self.dlg.ui.textBrowser.  ##AGGIUNGERE TESTO AL TEXTBROWSER PER BUONA RIUSCITA CONVERSIONE
+      #add the string to textBrowser
+      stringLayer = stringLayer + '<br />'
+      layerString = layerString + stringLayer
       compteur = compteur + 1	    
       self.dlg.ui.progressBar.setValue(compteur)
+      
+    self.dlg.ui.textBrowser.setHtml(layerString)
       
     return html
 	  
