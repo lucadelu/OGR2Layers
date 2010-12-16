@@ -29,6 +29,10 @@ class OGR2LayersClassHtml:
 		dlg,
 		directory
 	      ):
+    # layers = list of layers to insert in html code
+    # dlg = dialog object
+    # directory = directory where user want save data
+        
     #the active layers
     self.layers = layers
     #the dialog
@@ -42,6 +46,7 @@ class OGR2LayersClassHtml:
       
   def createHtml(self):
     """Create the html code"""
+    
     html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
     html.append('<html xmlns="http://www.w3.org/1999/xhtml">\n')
     html.append('<head>\n')
@@ -84,6 +89,7 @@ class OGR2LayersClassHtml:
     
   def olMapSize(self):
     #add the style of map (dimension)
+    
     mapSize = self.dlg.ui.mapSize.currentIndex()
     if (mapSize) == 0: #400x400
       return '<style>\n #map{width:400px;height:400px;}\n</style>\n'
@@ -94,17 +100,20 @@ class OGR2LayersClassHtml:
 
   def extentHtml(self):
     """add coordinate transformation to 900913 if baseLayer is OSM"""
-    #User defined Bounds
+    
+    # User defined Bounds
     xmin = self.dlg.ui.lineEdit.text()
     xmax = self.dlg.ui.lineEdit_2.text()
     ymin = self.dlg.ui.lineEdit_3.text()
-    ymax = self.dlg.ui.lineEdit_4.text()		
+    ymax = self.dlg.ui.lineEdit_4.text()
+    # set the extent with osm projection
     if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 3:
       html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+').transform(new OpenLayers.Projection("EPSG:4326"), new '\
       'OpenLayers.Projection("EPSG:900913"));\n\t']
-      	
+    # set the extent to latlong
     else:
       html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n']
+    # set the zoom of the map to extent
     html.append('map.zoomToExtent(extent);\n')
     #if self.dlg.ui.maxExtent.isChecked():
       #AGGIUNGERE IL CODICE PER IL MAX EXTEND
@@ -112,6 +121,8 @@ class OGR2LayersClassHtml:
 	  
   def olBaseLayer(self):
     """Define the baseLayer"""
+    
+    # set the projection options for the map
     if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 3:
       html = ['\tvar option = {\n\t\tprojection: new '\
       'OpenLayers.Projection("EPSG:900913"),\n\t\tdisplayProjection: new OpenLayers.Projection("EPSG:4326")\n\t};\n\t']
@@ -146,6 +157,8 @@ class OGR2LayersClassHtml:
       
   def olControl(self):
     """Layer Switcher active or not and add the chosen control"""
+    
+    # set the index of layer switcher
     layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
     #it's active
     if layerSwitcherActive == 0:
@@ -175,7 +188,10 @@ class OGR2LayersClassHtml:
       
   def outFormat(self):
     """The output format chosen"""
+    
+    # set the indix of output type
     layerSwitcherOutput = self.dlg.ui.outputFormCombo.currentIndex()
+    # GeoJSON format
     if layerSwitcherOutput == 0:
       outputFormat='GeoJSON'
     # GML format
@@ -185,18 +201,25 @@ class OGR2LayersClassHtml:
       
   def htmlLayer(self):
     """Add the code for layer, name, style and query"""
+    
     # used for number of vector
     compteur = 0
     # variable to write html code
     html = []
     # variable to the string in the output tab
     layerString=""
+    # set the output format
     outputFormat = self.outFormat()
+    # cycle for each layer
     for layer in self.layers:
+      # start the string for the layer to add in the output panel 
       stringLayer = 'The vector <b>' + str(layer.name()) + '</b>'\
       ' is converted correctly'
+      # check if qgis renderer is chosen
       if self.dlg.ui.qgisRender.isChecked():
+	# set my rendering
 	myRendering = 'qgis'
+	
 	stringLayer = stringLayer + ', using QGIS rendering' 
       else:
 	myRendering = 'default'
@@ -235,9 +258,9 @@ class OGR2LayersClassHtml:
       if self.myQuery != 'none':
 	html.extend(OGR2LayersLayer.htmlQuery())
       html.extend(OGR2LayersLayer.htmlLayer())
-      #self.dlg.ui.textBrowser.  ##AGGIUNGERE TESTO AL TEXTBROWSER PER BUONA RIUSCITA CONVERSIONE
       #add the string to textBrowser
       stringLayer = stringLayer + '<br />'
+      #add the string to textBrowser
       layerString = layerString + stringLayer
       compteur = compteur + 1	    
       self.dlg.ui.progressBar.setValue(compteur)
