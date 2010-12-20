@@ -246,10 +246,6 @@ class OGR2LayersClassHtml:
 
       OGR2LayersLayer = OGR2LayersClassLayer(layer, myRendering, self.myQuery, 
       outputFormat, self.projection, self.myDirectory)
-      try:
-	OGR2LayersLayer.convertOGR()
-      except Exception, e:
-	raise e # WORK
       if myRendering == 'qgis':
 	try:
 	  html.extend(OGR2LayersLayer.htmlStyle())
@@ -257,6 +253,10 @@ class OGR2LayersClassHtml:
 	  raise e
       if self.myQuery != 'none':
 	html.extend(OGR2LayersLayer.htmlQuery())
+      try:
+	OGR2LayersLayer.convertOGR()
+      except Exception, e:
+	raise e # WORK
       html.extend(OGR2LayersLayer.htmlLayer())
       #add the string to textBrowser
       stringLayer = stringLayer + '<br />'

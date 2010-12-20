@@ -22,6 +22,7 @@ from PyQt4.QtGui import *
 from qgis.core import *
 
 import os
+import os2emxpath
 
 from OGR2Funz import *
 
@@ -48,7 +49,8 @@ class OGR2LayersClassStyle:
       self.nameField = nameAttrField(self.layer,self.numFieldClass)
     # data provider
     self.provider = self.layer.dataProvider()
-      
+    self.svg = False   
+    
   def typeRendering(self):
     """Choose the function for each rendering type"""
     ##if Continuous Color
@@ -86,26 +88,29 @@ class OGR2LayersClassStyle:
     if self.typeGeom == 0:
       pointSize=style[0].pointSize()
       html_style.append('pointRadius: ' + str(pointSize) + ',\n\t\t')
-      self.imagePNG(style)
+      self.imagePNG(style[0])
       if self.svg:
-	html_style.append('externalGraphic: "' + str(self.nameSvg) + '",\n\t')
+	html_style.append('externalGraphic: "' + str(self.nameSvg) + '"\n\t')
       else:
 	html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
 	  'strokeOpacity: 1,\n\t\t'\
 	  'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
 	  'fillColor: "' + str(fillColor) + '",\n\t\t'\
-	  'fillOpacity: 1\n\t')
+	  'fillOpacity: 1\n\t'
+	)
     else:
       html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
 	'strokeOpacity: 1,\n\t\t'\
 	'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
 	'fillColor: "' + str(fillColor) + '",\n\t\t'\
-	'fillOpacity: 1\n\t')
+	'fillOpacity: 1\n\t'
+      )
 	  
     html_style.append(  
       '}\n\t'\
       'var ' + self.name + '_style = new OpenLayers.Style(' + self.name + 
-	'_template)\n\t')
+	'_template)\n\t'
+    )
     return html_style
 
   def uniqueVal(self):
@@ -115,22 +120,34 @@ class OGR2LayersClassStyle:
     html_style.append('OpenLayers.Util.applyDefaults({ \n\t\t\t')
     if self.typeGeom == 0:
       html_style.append('pointRadius: "${getPoint}",\n\t\t\t')
-    html_style.append('strokeColor: "${getStrokeColor}",\n\t\t\t'\
-      'strokeOpacity: 1,\n\t\t\t'\
-      'strokeWidth: "${getLineWidth}",\n\t\t\t'\
-      'fillColor: "${getFillColor}",\n\t\t\t'\
-      'fillOpacity: 1\n\t\t'\
-      '}, OpenLayers.Feature.Vector.style["default"]), {\n\t\t\t'\
-      'context: {\n\t\t\t\t')
+      symbol = styleMap.values()[0]
+      self.imagePNG(symbol)
+      if self.svg:
+	html_style.append('externalGraphic: "${getGraphic}"\n\t\t\t'\
+	  '}, OpenLayers.Feature.Vector.style["default"]), {\n\t\t\t'\
+	  'context: {\n\t\t\t\t'
+	)
+    if not self.svg:
+      html_style.append('strokeColor: "${getStrokeColor}",\n\t\t\t'\
+	'strokeOpacity: 1,\n\t\t\t'\
+	'strokeWidth: "${getLineWidth}",\n\t\t\t'\
+	'fillColor: "${getFillColor}",\n\t\t\t'\
+	'fillOpacity: 1\n\t\t'\
+	'}, OpenLayers.Feature.Vector.style["default"]), {\n\t\t\t'\
+	'context: {\n\t\t\t\t'
+      )
     if self.typeGeom == 0:
       #add style for stroke color value
       html_style.extend(self.addElementStyleUnique(styleMap,'Point'))
-    #add style for stroke color value
-    html_style.extend(self.addElementStyleUnique(styleMap,'StrokeColor'))
-    #add style for fill color value
-    html_style.extend(self.addElementStyleUnique(styleMap,'FillColor'))
-    #add style for line width value
-    html_style.extend(self.addElementStyleUnique(styleMap,'LineWidth'))
+      if self.svg:
+	html_style.extend(self.addElementStyleUnique(styleMap,'Graphic'))
+    if not self.svg:
+      #add style for stroke color value
+      html_style.extend(self.addElementStyleUnique(styleMap,'StrokeColor'))
+      #add style for fill color value
+      html_style.extend(self.addElementStyleUnique(styleMap,'FillColor'))
+      #add style for line width value
+      html_style.extend(self.addElementStyleUnique(styleMap,'LineWidth'))
     #close the style
     html_style.append('\n\t\t\t}\n\t\t}\n\t);\n\t')
     return html_style
@@ -148,6 +165,9 @@ class OGR2LayersClassStyle:
     for z,y in styleMap.iteritems():
       if element == 'Point':
 	valueStyle = str(y.pointSize())
+      elif element == 'Graphic':
+	self.imagePNG(y)
+	valueStyle = '"' + str(self.nameSvg) + '"'
       elif element == 'StrokeColor':
 	valueStyle = '"' + str(y.color().name()) + '"'
       elif element == 'LineWidth':
@@ -271,24 +291,24 @@ class OGR2LayersClassStyle:
     return html_style
 
   def imagePNG(self,style):
-    name = str(style[0].pointSymbolName())
+    name = str(style.pointSymbolName())
     typ = name.split(':')
-    actualSize = style[0].pointSize()
+    # DA CORREGGERE PER FAR FUNZIONARE SOTTO WIN
+    nameImage = os2emxpath.basename(typ[1]).split('.')[0]
+    actualSize = style.pointSize()
     if typ[0] == 'svg':
       if actualSize <= 50:
-	style[0].setPointSize(50)
-	image=style[0].getPointSymbolAsImage()
-	style[0].setPointSize(actualSize)
+	style.setPointSize(50)
+	image=style.getPointSymbolAsImage()
+	style.setPointSize(actualSize)
       else:
-	image=style[0].getPointSymbolAsImage()
-      self.nameSvg = os.path.abspath(os.path.join(str(self.path), 'image.png'))
+	image=style.getPointSymbolAsImage()
+      self.nameSvg = os.path.abspath(os.path.join(str(self.path), nameImage + 
+      '.png'))
       if image.save(self.nameSvg,'png'):
 	#set svg variable tu true
 	self.svg = True
       else:
-	raise Exception, "There are some problem in the conversion of symbol in png image\n"
-    else:
-      #set svg variable to False
-      self.svg = False 
+	raise Exception, "There are some problem in the conversion of symbol in png image\n"     
     return 0
     

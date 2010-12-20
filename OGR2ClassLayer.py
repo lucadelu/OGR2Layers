@@ -80,6 +80,7 @@ class OGR2LayersClassLayer:
     self.classQuery = OGR2LayersClassQuery(self.layer, self.query)
     #class rendering
     self.classStyle = OGR2LayersClassStyle(self.layer,self.pathSave)
+    self.image = self.classStyle.svg
 
 	      
   def convertOGR(self):
