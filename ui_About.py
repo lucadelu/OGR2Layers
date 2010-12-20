@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Sun Nov 21 13:57:28 2010
+# Created: Mon Dec 20 23:39:08 2010
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,21 +23,21 @@ class Ui_AboutDialog(object):
         self.line.setFrameShape(QtGui.QFrame.VLine)
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.widget = QtGui.QWidget(AboutDialog)
-        self.widget.setGeometry(QtCore.QRect(9, 10, 522, 368))
-        self.widget.setObjectName("widget")
-        self.verticalLayout_3 = QtGui.QVBoxLayout(self.widget)
+        self.layoutWidget = QtGui.QWidget(AboutDialog)
+        self.layoutWidget.setGeometry(QtCore.QRect(9, 10, 522, 368))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout_3 = QtGui.QVBoxLayout(self.layoutWidget)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.splitter = QtGui.QSplitter(self.widget)
+        self.splitter = QtGui.QSplitter(self.layoutWidget)
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
         self.splitter.setObjectName("splitter")
-        self.widget1 = QtGui.QWidget(self.splitter)
-        self.widget1.setObjectName("widget1")
-        self.verticalLayout = QtGui.QVBoxLayout(self.widget1)
+        self.layoutWidget1 = QtGui.QWidget(self.splitter)
+        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.about = QtGui.QLabel(self.widget1)
+        self.about = QtGui.QLabel(self.layoutWidget1)
         self.about.setMinimumSize(QtCore.QSize(0, 25))
         self.about.setMaximumSize(QtCore.QSize(16777215, 25))
         font = QtGui.QFont()
@@ -47,16 +47,16 @@ class Ui_AboutDialog(object):
         self.about.setFont(font)
         self.about.setObjectName("about")
         self.horizontalLayout_3.addWidget(self.about)
-        self.logo = QtGui.QLabel(self.widget1)
+        self.logo = QtGui.QLabel(self.layoutWidget1)
         self.logo.setObjectName("logo")
         self.horizontalLayout_3.addWidget(self.logo)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.version = QtGui.QLabel(self.widget1)
+        self.version = QtGui.QLabel(self.layoutWidget1)
         self.version.setObjectName("version")
         self.horizontalLayout.addWidget(self.version)
-        self.version_n = QtGui.QLabel(self.widget1)
+        self.version_n = QtGui.QLabel(self.layoutWidget1)
         self.version_n.setMaximumSize(QtCore.QSize(200, 16777215))
         self.version_n.setText("")
         self.version_n.setObjectName("version_n")
@@ -64,27 +64,27 @@ class Ui_AboutDialog(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.autors = QtGui.QLabel(self.widget1)
+        self.autors = QtGui.QLabel(self.layoutWidget1)
         self.autors.setObjectName("autors")
         self.horizontalLayout_2.addWidget(self.autors)
-        self.autors_name = QtGui.QLabel(self.widget1)
+        self.autors_name = QtGui.QLabel(self.layoutWidget1)
         self.autors_name.setMaximumSize(QtCore.QSize(150, 16777215))
         self.autors_name.setObjectName("autors_name")
         self.horizontalLayout_2.addWidget(self.autors_name)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.textBrowser_3 = QtGui.QTextBrowser(self.widget1)
+        self.textBrowser_3 = QtGui.QTextBrowser(self.layoutWidget1)
         self.textBrowser_3.setObjectName("textBrowser_3")
         self.verticalLayout.addWidget(self.textBrowser_3)
-        self.widget2 = QtGui.QWidget(self.splitter)
-        self.widget2.setObjectName("widget2")
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.widget2)
+        self.layoutWidget2 = QtGui.QWidget(self.splitter)
+        self.layoutWidget2.setObjectName("layoutWidget2")
+        self.verticalLayout_2 = QtGui.QVBoxLayout(self.layoutWidget2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_help = QtGui.QLabel(self.widget2)
+        self.label_help = QtGui.QLabel(self.layoutWidget2)
         self.label_help.setMinimumSize(QtCore.QSize(0, 25))
         self.label_help.setMaximumSize(QtCore.QSize(16777215, 25))
         self.label_help.setObjectName("label_help")
         self.verticalLayout_2.addWidget(self.label_help)
-        self.textBrowser_2 = QtGui.QTextBrowser(self.widget2)
+        self.textBrowser_2 = QtGui.QTextBrowser(self.layoutWidget2)
         font = QtGui.QFont()
         font.setWeight(50)
         font.setBold(False)
@@ -92,7 +92,7 @@ class Ui_AboutDialog(object):
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.verticalLayout_2.addWidget(self.textBrowser_2)
         self.verticalLayout_3.addWidget(self.splitter)
-        self.buttonBox = QtGui.QDialogButtonBox(self.widget)
+        self.buttonBox = QtGui.QDialogButtonBox(self.layoutWidget)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout_3.addWidget(self.buttonBox)
@@ -156,9 +156,12 @@ class Ui_AboutDialog(object):
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">The second important part is </span><span style=\" font-size:10pt; font-weight:600;\">your vector layer has a  known spatial reference system</span><span style=\" font-size:10pt;\"> (e.g. file .prj for shapefile) then you can load vector data and start OGR2Layer plugin, now  you choose the directory where the plugin save the files (.html for internet page and gml for vector data) and several option to add in OpenLayers.</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">For use the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">QGIS Render</span><span style=\" font-size:10pt;\">&quot; in the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Render option</span><span style=\" font-size:10pt;\">&quot; remember  that work only &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">&quot; and &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot; symbology</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.0</span><span style=\" font-size:10pt;\"> &quot;</span><span style=\" font-size:10pt; font-style:italic;\">QGIS Render</span><span style=\" font-size:10pt;\">&quot; in the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Render option</span><span style=\" font-size:10pt;\">&quot; support all symbologies of &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Old symbology Style</span><span style=\" font-size:10pt;\">&quot;</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">In the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-size:10pt;\">&quot; the option &quot;</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">&quot; use OpenLayers Strategy Cluster, this solution allow to cluster more features and query the group, it\'s useful for points specially when they are very neighbouring. </span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.1</span><span style=\" font-size:10pt;\"> support also the QGIS svg symbols for &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">&quot; and &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot;.</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: Only svg icons can be used.</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">In the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-size:10pt;\">&quot; the option &quot;</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">&quot; use OpenLayers Strategy Cluster, this solution allow to cluster more point features and query the group, it\'s useful when points are very neighbouring.</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: remember &quot;</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">&quot; doesn\'t work with &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot; symbology</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc

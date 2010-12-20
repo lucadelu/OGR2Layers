@@ -152,7 +152,7 @@ class OGR2Layers:
 	#set the dialog of about/help
 	self.aboutDlg=OGR2LayersAboutDialog()
 	#set the regular expression for found the version
-	regexVers = QRegExp('Version ([\d]+\.[\d]+)')
+	regexVers = QRegExp('Version ([\d]+\.[\d]+\.[\d]+)')
 	if regexVers.indexIn(source) > -1:
 	    #set the version number
 	    version=regexVers.cap(1)
