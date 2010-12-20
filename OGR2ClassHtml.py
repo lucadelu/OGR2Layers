@@ -112,10 +112,11 @@ class OGR2LayersClassHtml:
       'OpenLayers.Projection("EPSG:900913"));\n\t']
     # set the extent to latlong
     else:
-      html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n']
+      html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n\t']
     # set the zoom of the map to extent
     html.append('map.zoomToExtent(extent);\n')
-    #if self.dlg.ui.maxExtent.isChecked():
+    if self.dlg.ui.maxExtent.isChecked():
+      html.append('\tmap.maxExtent(extent);\n')
       #AGGIUNGERE IL CODICE PER IL MAX EXTEND
     return html
 	  
