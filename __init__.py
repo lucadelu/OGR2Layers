@@ -24,7 +24,7 @@ def description():
   return " A plugin to export OGR layers to OpenLayers HTML"
 
 def version():
-  return "Version 0.8.1"
+  return "Version 0.8.2"
 
 def qgisMinimumVersion():
   return "1.4"
