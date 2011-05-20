@@ -41,12 +41,26 @@ class OGR2LayersClassStyle:
     # path to save image from svg
     self.path = directory
     # layer renderer
-    self.renderer = self.layer.renderer()
-    #type of rendering
-    self.typeRend = str(self.renderer.name())
-    if self.typeRend != 'Single Symbol':
-      self.numFieldClass = self.renderer.classificationAttributes()[0]
-      self.nameField = nameAttrField(self.layer,self.numFieldClass)
+    if self.layer.renderer() != None:
+      self.version = 1
+      self.renderer = self.layer.renderer()
+      #type of rendering
+      self.typeRend = str(self.renderer.name())
+      if self.typeRend != 'Single Symbol':
+	self.numFieldClass = self.renderer.classificationAttributes()[0]
+	self.nameField = nameAttrField(self.layer,self.numFieldClass)      
+    elif self.layer.rendererV2() != None:
+      raise Exception, "New symbology is not yet implement, it'll be soon ready\n"
+      #self.version = 2
+      #self.renderer = self.layer.rendererV2()
+      ##type of rendering
+      #self.typeRend = str(self.renderer.type()) 
+      #if self.typeRend != 'singleSymbol':
+	#self.numFieldClass = self.renderer.classAttribute()[0]
+	#print self.numFieldClass
+	#self.nameField = nameAttrField(self.layer,self.numFieldClass)   
+    else:
+      raise Exception, "There are some problem with the rendering\n"
     # data provider
     self.provider = self.layer.dataProvider()
     self.svg = False   
@@ -57,13 +71,13 @@ class OGR2LayersClassStyle:
     if self.typeRend == 'Continuous Color':
       return self.contColor()
     ##if Graduated Symbol
-    if self.typeRend == 'Graduated Symbol':
+    if self.typeRend == 'Graduated Symbol' or self.typeRend == 'graduatedSymbol':
       return self.gradSymbol()
     #if Single Symbol
-    elif self.typeRend == 'Single Symbol':
+    elif self.typeRend == 'Single Symbol' or self.typeRend == 'singleSymbol':
       return self.singleSymbol()
     #if Unique Value
-    elif self.typeRend == 'Unique Value':
+    elif self.typeRend == 'Unique Value' or self.typeRend == 'categorizedSymbol':
       return self.uniqueVal()
     else:
       raise Exception, "There are some problem with the rendering\n"

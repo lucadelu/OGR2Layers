@@ -60,7 +60,7 @@ class OGR2LayersClassLayer:
     #putput vector name 
     self.outputName = unicode(self.name + "." + self.outputFormat)
     #input epsg
-    self.inEpsg = self.layer.srs().epsg() 
+    self.inEpsg = self.layer.crs().epsg() 
     #set the output epsg code
     if outProj == "EPSG:900913":
 	self.outputEpsg = 900913
