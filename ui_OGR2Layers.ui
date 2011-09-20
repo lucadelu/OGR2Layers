@@ -237,6 +237,11 @@
        </item>
        <item>
         <property name="text">
+         <string>Google Streets</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Demis WMS</string>
         </property>
        </item>

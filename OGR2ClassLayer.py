@@ -78,9 +78,6 @@ class OGR2LayersClassLayer:
     self.destPathName =  os.path.abspath(os.path.join(self.pathSave,self.outputName))
     #class query	
     self.classQuery = OGR2LayersClassQuery(self.layer, self.query)
-    #class rendering
-    self.classStyle = OGR2LayersClassStyle(self.layer,self.pathSave)
-    self.image = self.classStyle.svg
 
 	      
   def convertOGR(self):
@@ -157,6 +154,9 @@ class OGR2LayersClassLayer:
     """Create javascript code for style"""
     if self.rendering == 'qgis':
       try:
+        #class rendering
+        self.classStyle = OGR2LayersClassStyle(self.layer,self.pathSave)
+        self.image = self.classStyle.svg
 	return self.classStyle.typeRendering()
       except Exception, e:
 	raise Exception, e
@@ -199,4 +199,3 @@ class OGR2LayersClassLayer:
     htmlLayer.append(');\n\tmap.addLayer('+ self.name +');\n\t')
     
     return htmlLayer
-      

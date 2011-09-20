@@ -40,7 +40,12 @@ class OGR2LayersClassHtml:
     #the directory where save the data
     self.myDirectory = directory
     #type of query
-    self.myQuery = 'none' 
+    if self.dlg.ui.query.isChecked():
+      self.myQuery = 'single'
+    elif self.dlg.ui.query_2.isChecked():
+      self.myQuery = 'cluster'
+    else:
+      self.myQuery = 'none'
     #the map baseLayer
     self.mapBaseLayer = self.dlg.ui.mapBaseLayer.currentIndex()
       
@@ -55,8 +60,17 @@ class OGR2LayersClassHtml:
     html.extend(self.olMapSize()) 
     #Call for OpenLayers 2.10 API on Metacarta servers
     html.append('<script src="http://www.openlayers.org/api/OpenLayers.js"></script>\n')
+    if self.mapBaseLayer == 4:
+      html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
     #start javascript code
     html.append('<script type="text/javascript">\n')
+    #set a function to check if it is a url or not http://
+    if self.myQuery != 'none':
+      html.append('function urlCheck(str) {\n'\
+      '\tvar v = new RegExp();\n'\
+      '\tv.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");\n'
+      '\tif (!v.test(str)) {\n\t\treturn "<i>"+str+"</i>";\n'\
+      '\t}\n\t\treturn "<a href=\"+str+\" target:"_blank">open url</a>";\n};\n')
     #set global variable (map, selectsControls)
     html.append('var map, selectsControls\n')
     #start function for OL
@@ -107,12 +121,12 @@ class OGR2LayersClassHtml:
     ymin = self.dlg.ui.lineEdit_3.text()
     ymax = self.dlg.ui.lineEdit_4.text()
     # set the extent with osm projection
-    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 3:
+    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 5:
       html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+').transform(new OpenLayers.Projection("EPSG:4326"), new '\
       'OpenLayers.Projection("EPSG:900913"));\n\t']
     # set the extent to latlong
     else:
-      html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+'))\n\t']
+      html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+');\n\t']
     # set the zoom of the map to extent
     html.append('map.zoomToExtent(extent);\n')
     if self.dlg.ui.maxExtent.isChecked():
@@ -124,7 +138,7 @@ class OGR2LayersClassHtml:
     """Define the baseLayer"""
     
     # set the projection options for the map
-    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 3:
+    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 5:
       html = ['\tvar option = {\n\t\tprojection: new '\
       'OpenLayers.Projection("EPSG:900913"),\n\t\tdisplayProjection: new OpenLayers.Projection("EPSG:4326")\n\t};\n\t']
       html.append("map = new OpenLayers.Map('map', option);\n\t")	    
@@ -149,11 +163,16 @@ class OGR2LayersClassHtml:
       html.append('olwms = new OpenLayers.Layer.WMS( "OpenLayers WMS", ["http://labs.metacarta.com/wms/vmap0"], {layers: "basic", format: '\
       '"image/gif" } );\n\t')
       html.append('map.addLayer(olwms);\n\t')
-      html.append('map.setBaseLayer(olwms);\n\t')    
+      html.append('map.setBaseLayer(olwms);\n\t')
     elif (self.mapBaseLayer) == 4: #Demis WMS
+      html.append('gtile = new OpenLayers.Layer.Google('\
+      ' "Google Streets", {numZoomLevels: 20} );\n\t')
+      html.append('map.addLayer(gtile);\n\t')
+      html.append('map.setBaseLayer(gtile);\n\t')  
+    elif (self.mapBaseLayer) == 5: #Demis WMS
       html.append('bmwms = new OpenLayers.Layer.WMS( "Demis WMS", ["http://www2.demis.nl/WMS/wms.asp?wms=WorldMap"], {layers: "Bathymetry,Countries,Topography,Hillshading,Builtup+areas,Coastlines,Waterbodies,Inundated,Rivers,Streams,Railroads,Highways,Roads,Trails,Borders,Cities,Settlements"} );\n\t')
       html.append('map.addLayer(bmwms);\n\t')
-      html.append('map.setBaseLayer(bmwms);\n\t')	
+      html.append('map.setBaseLayer(bmwms);\n\t')
     return html
       
   def olControl(self):
@@ -225,16 +244,13 @@ class OGR2LayersClassHtml:
       else:
 	myRendering = 'default'
 	  
-      if self.dlg.ui.query.isChecked():
-	self.myQuery = 'single'
+      if self.myQuery == 'single':
 	stringLayer = stringLayer + ' with single query'
-      elif self.dlg.ui.query_2.isChecked():
+      elif self.myQuery == 'cluster':
 	if layer.geometryType() == 0:
 	  if myRendering == 'qgis' and layer.renderer().name() == 'Single Symbol':
-	    self.myQuery = 'cluster'
 	    stringLayer = stringLayer + ' with cluster strategy query'
 	  elif myRendering == 'default':
-	    self.myQuery = 'cluster'
 	    stringLayer = stringLayer + ' with cluster strategy query'	    
 	  elif myRendering == 'qgis' and not layer.renderer().name() == 'Single Symbol':
 	    #return an error if the symbology is different from Single Symbol
@@ -248,6 +264,7 @@ class OGR2LayersClassHtml:
       OGR2LayersLayer = OGR2LayersClassLayer(layer, myRendering, self.myQuery, 
       outputFormat, self.projection, self.myDirectory)
       if myRendering == 'qgis':
+        print "stile qgis"
 	try:
 	  html.extend(OGR2LayersLayer.htmlStyle())
 	except Exception, e:

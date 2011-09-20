@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Mon Dec 20 23:17:06 2010
+# Created: Wed Sep 21 00:43:39 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -99,6 +99,7 @@ class Ui_OGR2Layers(object):
         self.mapBaseLayer = QtGui.QComboBox(self.tab_2)
         self.mapBaseLayer.setGeometry(QtCore.QRect(190, 110, 231, 22))
         self.mapBaseLayer.setObjectName("mapBaseLayer")
+        self.mapBaseLayer.addItem("")
         self.mapBaseLayer.addItem("")
         self.mapBaseLayer.addItem("")
         self.mapBaseLayer.addItem("")
@@ -242,7 +243,8 @@ class Ui_OGR2Layers(object):
         self.mapBaseLayer.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "OpenStreetMap (OSMarender)", None, QtGui.QApplication.UnicodeUTF8))
         self.mapBaseLayer.setItemText(2, QtGui.QApplication.translate("OGR2Layers", "OpenStreetMap (Cycleway)", None, QtGui.QApplication.UnicodeUTF8))
         self.mapBaseLayer.setItemText(3, QtGui.QApplication.translate("OGR2Layers", "OpenLayers WMS", None, QtGui.QApplication.UnicodeUTF8))
-        self.mapBaseLayer.setItemText(4, QtGui.QApplication.translate("OGR2Layers", "Demis WMS", None, QtGui.QApplication.UnicodeUTF8))
+        self.mapBaseLayer.setItemText(4, QtGui.QApplication.translate("OGR2Layers", "Google Streets", None, QtGui.QApplication.UnicodeUTF8))
+        self.mapBaseLayer.setItemText(5, QtGui.QApplication.translate("OGR2Layers", "Demis WMS", None, QtGui.QApplication.UnicodeUTF8))
         self.label_9.setText(QtGui.QApplication.translate("OGR2Layers", "Map Base Layer :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_10.setText(QtGui.QApplication.translate("OGR2Layers", "Default Map Extent :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_11.setText(QtGui.QApplication.translate("OGR2Layers", "Layer Switcher active ?", None, QtGui.QApplication.UnicodeUTF8))

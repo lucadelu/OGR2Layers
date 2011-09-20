@@ -79,8 +79,8 @@ class OGR2LayersClassQuery:
     'content=\'text/html; charset=UTF-8\'><body><table>']
     #for each field add a column for the feature
     for field in self.fieldsNameLayer:
-      html.append('<tr><td><b>' + field + ':</b></td><td><i>"+feature.'\
-      'attributes.' + field + '+"</i></td></tr>')
+      html.append('<tr><td><b>' + field + ':</b></td><td>"+urlCheck(feature.'\
+      'attributes.' + field + ')+"</td></tr>')
     html.append('</table></body></html>"; ')
     #return javascript code
     return html
@@ -103,7 +103,7 @@ class OGR2LayersClassQuery:
     '\n\t\t\ttable'+self.name+'+="<tr>')
     #for each field add a column in the row of selected features
     for field in self.fieldsNameLayer:
-      html.append('<td>"+feature.cluster[i].attributes.'+field+'+"</td>')
+      html.append('<td>"+urlCheck(feature.cluster[i].attributes.'+field+')+"</td>')
     html.append('</tr>"\n\t\t}\n\t\ttable'+self.name+'+="</table></body>'\
     '</html>"; ')
     #return javascript code
