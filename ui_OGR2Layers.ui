@@ -242,6 +242,21 @@
        </item>
        <item>
         <property name="text">
+         <string>Google Physical</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Google Hybrid</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Google Satellite</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Demis WMS</string>
         </property>
        </item>

@@ -60,7 +60,7 @@ class OGR2LayersClassHtml:
     html.extend(self.olMapSize()) 
     #Call for OpenLayers 2.10 API on Metacarta servers
     html.append('<script src="http://www.openlayers.org/api/OpenLayers.js"></script>\n')
-    if self.mapBaseLayer == 4:
+    if self.mapBaseLayer in [4, 5, 6, 7]:
       html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
     #start javascript code
     html.append('<script type="text/javascript">\n')
@@ -121,7 +121,7 @@ class OGR2LayersClassHtml:
     ymin = self.dlg.ui.lineEdit_3.text()
     ymax = self.dlg.ui.lineEdit_4.text()
     # set the extent with osm projection
-    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 5:
+    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 8:
       html = ['extent = new OpenLayers.Bounds(' +str(xmin)+','+str(xmax)+','+str(ymin)+','+str(ymax)+').transform(new OpenLayers.Projection("EPSG:4326"), new '\
       'OpenLayers.Projection("EPSG:900913"));\n\t']
     # set the extent to latlong
@@ -138,7 +138,7 @@ class OGR2LayersClassHtml:
     """Define the baseLayer"""
     
     # set the projection options for the map
-    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 5:
+    if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 8:
       html = ['\tvar option = {\n\t\tprojection: new '\
       'OpenLayers.Projection("EPSG:900913"),\n\t\tdisplayProjection: new OpenLayers.Projection("EPSG:4326")\n\t};\n\t']
       html.append("map = new OpenLayers.Map('map', option);\n\t")	    
@@ -164,12 +164,28 @@ class OGR2LayersClassHtml:
       '"image/gif" } );\n\t')
       html.append('map.addLayer(olwms);\n\t')
       html.append('map.setBaseLayer(olwms);\n\t')
-    elif (self.mapBaseLayer) == 4: #Demis WMS
+    elif (self.mapBaseLayer) == 4: #Google Streets
       html.append('gtile = new OpenLayers.Layer.Google('\
       ' "Google Streets", {numZoomLevels: 20} );\n\t')
       html.append('map.addLayer(gtile);\n\t')
       html.append('map.setBaseLayer(gtile);\n\t')  
-    elif (self.mapBaseLayer) == 5: #Demis WMS
+    elif (self.mapBaseLayer) == 5: #Google Physical
+      html.append('gphy = new OpenLayers.Layer.Google('\
+      ' "Google Physical", {type: google.maps.MapTypeId.TERRAIN} );\n\t')
+      html.append('map.addLayer(gphy);\n\t')
+      html.append('map.setBaseLayer(gphy);\n\t')  
+    elif (self.mapBaseLayer) == 6: #Google Hybrid
+      html.append('ghyb = new OpenLayers.Layer.Google('\
+      ' "Google Hybrid", {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20} );\n\t')
+      html.append('map.addLayer(ghyb);\n\t')
+      html.append('map.setBaseLayer(ghyb);\n\t')  
+    elif (self.mapBaseLayer) == 7: #Google Satellite
+      html.append('gsat = new OpenLayers.Layer.Google('\
+      ' "Google Satellite", {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22} );\n\t')
+      html.append('map.addLayer(gsat);\n\t')
+      html.append('map.setBaseLayer(gsat);\n\t')  
+      
+    elif (self.mapBaseLayer) == 8: #Demis WMS
       html.append('bmwms = new OpenLayers.Layer.WMS( "Demis WMS", ["http://www2.demis.nl/WMS/wms.asp?wms=WorldMap"], {layers: "Bathymetry,Countries,Topography,Hillshading,Builtup+areas,Coastlines,Waterbodies,Inundated,Rivers,Streams,Railroads,Highways,Roads,Trails,Borders,Cities,Settlements"} );\n\t')
       html.append('map.addLayer(bmwms);\n\t')
       html.append('map.setBaseLayer(bmwms);\n\t')
