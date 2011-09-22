@@ -26,6 +26,7 @@ class OGR2LayersClassHtml:
   """The class to create html and javascript code"""
   def __init__(self, 
 		layers,
+		rasters,
 		dlg,
 		directory
 	      ):
@@ -33,8 +34,10 @@ class OGR2LayersClassHtml:
     # dlg = dialog object
     # directory = directory where user want save data
         
-    #the active layers
+    #the active ogr layers
     self.layers = layers
+    #the active gdal layers
+    self.rasters = rasters
     #the dialog
     self.dlg = dlg
     #the directory where save the data
@@ -48,10 +51,11 @@ class OGR2LayersClassHtml:
       self.myQuery = 'none'
     #the map baseLayer
     self.mapBaseLayer = self.dlg.ui.mapBaseLayer.currentIndex()
+    # used for number of vector
+    self.compteur = 0
       
   def createHtml(self):
     """Create the html code"""
-    
     html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
     html.append('<html xmlns="http://www.w3.org/1999/xhtml">\n')
     html.append('<head>\n')
@@ -79,9 +83,16 @@ class OGR2LayersClassHtml:
     html.extend(self.olBaseLayer()) 
     #add the controls
     html.extend(self.olControl())
-    #try to add the code for layer
+    #try to add the code for layers
     try:
-      html.extend(self.htmlLayer())
+      if self.layers:
+          print "vector"
+          #vector layer
+          html.extend(self.htmlLayer())
+      if self.rasters:
+          print "raster"
+          #raster layer
+          html.extend(self.htmlRaster())
     #return errors
     except Exception, e:
       raise e
@@ -222,7 +233,7 @@ class OGR2LayersClassHtml:
       html.append('map.addControl(new OpenLayers.Control.PanZoomBar());\n\t')	
     return html
       
-  def outFormat(self):
+  def outFormatLayer(self):
     """The output format chosen"""
     
     # set the indix of output type
@@ -237,15 +248,12 @@ class OGR2LayersClassHtml:
       
   def htmlLayer(self):
     """Add the code for layer, name, style and query"""
-    
-    # used for number of vector
-    compteur = 0
     # variable to write html code
     html = []
     # variable to the string in the output tab
     layerString=""
     # set the output format
-    outputFormat = self.outFormat()
+    outputFormat = self.outFormatLayer()
     # cycle for each layer
     for layer in self.layers:
       # start the string for the layer to add in the output panel 
@@ -296,10 +304,10 @@ class OGR2LayersClassHtml:
       stringLayer = stringLayer + '<br />'
       #add the string to textBrowser
       layerString = layerString + stringLayer
-      compteur = compteur + 1	    
-      self.dlg.ui.progressBar.setValue(compteur)
+      self.compteur = self.compteur + 1
+      self.dlg.ui.progressBar.setValue(self.compteur)
       
-    self.dlg.ui.textBrowser.setHtml(layerString)
+    self.dlg.ui.textBrowserLayer.setHtml(layerString)
       
     return html
 	  
@@ -307,3 +315,38 @@ class OGR2LayersClassHtml:
     """Add the code for have all layer queryable"""
     classControl = OGR2LayersClassControlSel(self.layers)
     return classControl.htmlSelectControl()
+
+  def outFormatRaster(self):
+    """The output format chosen"""
+    
+    # set the indix of output type
+    layerSwitcherOutput = self.dlg.ui.outputRasterCombo.currentIndex()
+    # PNG format
+    if layerSwitcherOutput == 0:
+      outputFormat='PNG'
+    # JPEG format
+    elif layerSwitcherOutput == 1:
+      outputFormat='JPEG'                    
+    return outputFormat
+
+  def htmlRaster(self):
+    # variable to write html code
+    html = []
+    # variable to the string in the output tab
+    layerString=""
+    # set the output format
+    outputFormat = self.outFormatRaster()
+    # cycle for each layer
+    for raster in self.rasters:
+      # start the string for the layer to add in the output panel 
+      stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
+      ' is converted correctly'
+      #GDAL2LayersLayer = GDAL2LayersClassLayer(layer,outputFormat, 
+      #                   self.projection, self.myDirectory)
+      #add the string to textBrowser
+      layerString = layerString + stringLayer
+      self.compteur = self.compteur + 1
+      self.dlg.ui.progressBar.setValue(self.compteur)
+      
+    self.dlg.ui.textBrowserRaster.setHtml(layerString)
+    return "<!-- ADD RASTER -->"

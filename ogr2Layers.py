@@ -90,13 +90,15 @@ class OGR2Layers:
 	    return
 	#OGR layers 
 	self.layers = [] 
+	#GDAL layers
+	self.rasters = []
 	#load qgis mapCanvas
-	mapCanvas = self.iface.mapCanvas()
+	self.mapCanvas = self.iface.mapCanvas()
 	#Checks vector type and populates the layer list view in opposite 
 	#order for the correct visualization on OL
-	for i in range(mapCanvas.layerCount()-1,-1,-1):
+	for i in range(self.mapCanvas.layerCount()-1,-1,-1):
 	    # define actual layer
-	    layer = mapCanvas.layer(i)
+	    layer = self.mapCanvas.layer(i)
 	    #check if is a vector
 	    if layer.type() == layer.VectorLayer:
 		self.layers.append(layer)
@@ -104,21 +106,36 @@ class OGR2Layers:
 		source=layer.source()
 		source.remove(QRegExp('\|layerid=[\d]+$'))
 		self.dlg.ui.LayerList.addItem(source)
+            if layer.type() == layer.RasterLayer:
+                self.rasters.append(layer)
+                #this is for remove "layerid=*" when use "Unique Value" symbology
+                source=layer.source()
+                source.remove(QRegExp('\|layerid=[\d]+$'))
+                self.dlg.ui.RasterList.addItem(source)              
 	#check if there is some vectors layer, else return an error
-	if len(self.layers) == 0:
-	    QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
-	    ("No vector layer found\n" "Please load one or more OGR layer\n"), 
-	    QMessageBox.Ok, QMessageBox.Ok)
-	    return
+	#if len(self.layers) == 0:
+	    #QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
+	    #("No vector layer found\n" "Please load one or more OGR layer\n"), 
+	    #QMessageBox.Ok, QMessageBox.Ok)
+	    #return
 	#button for start the plugin
 	QObject.connect(self.dlg.ui.buttonBox, SIGNAL("accepted()"), self.WriteKML)
 	#button for close the plugin after create openlayers file
 	QObject.connect(self.dlg.ui.buttonBox, SIGNAL("rejected()"), self.dlg.close)
 	#Set up the default map extent
-	Extent = mapCanvas.extent()
-	if len(self.layers) > 0:
+	Extent = self.mapCanvas.extent()
+	if len(self.layers) != 0:
 		mylayer = self.layers[0]
 		myprovider = mylayer.dataProvider()
+        elif len(self.rasters) != 0:
+                mylayer = self.rasters[0]
+                myprovider = mylayer.dataProvider()
+        else:
+            QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE, 
+            ("No active layer found\n" "Please make one or more OGR layer "\
+            "active\n" "Beware of layers sizes for export"), QMessageBox.Ok, 
+            QMessageBox.Ok)
+            return
 	#set coordinate system of my first vector
 	SrsSrc = myprovider.crs()
 	#set wgs84 coordinate system
@@ -181,12 +198,13 @@ class OGR2Layers:
 	#string for textBrowser of last tab
 	layerString=""
 	#add the string to textBrowser
-	self.dlg.ui.textBrowser.setHtml(layerString)
+	self.dlg.ui.textBrowserLayer.setHtml(layerString)
+        self.dlg.ui.textBrowserRaster.setHtml(layerString)
 	#configure ProgressBar
 	if len(self.layers) > 0:
 	    #exist also ogr layers and WFS layers
 	    self.dlg.ui.progressBar.setMinimum(0) 
-	    self.dlg.ui.progressBar.setMaximum(len(self.layers)) 
+	    self.dlg.ui.progressBar.setMaximum(len(self.mapCanvas.layers())) 
 	    
 	#control variable
 	control =[]
@@ -199,7 +217,7 @@ class OGR2Layers:
 	    if not os.path.exists(myDirectory):
 	        self.error("Please check the validity of the output directory")
 	#initialize OGR2LayersClassHtml 
-	OGR2LayersHtml = OGR2LayersClassHtml(self.layers,self.dlg,myDirectory)
+	OGR2LayersHtml = OGR2LayersClassHtml(self.layers,self.rasters,self.dlg,myDirectory)
 	#start html code
 	html = []
 	try:
