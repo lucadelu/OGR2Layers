@@ -21,6 +21,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from OGR2ClassLayer import *
 from OGR2ClassQuery import OGR2LayersClassControlSel
+from GDAL2ClassLayer import *
 
 class OGR2LayersClassHtml:
   """The class to create html and javascript code"""
@@ -74,7 +75,7 @@ class OGR2LayersClassHtml:
       '\tvar v = new RegExp();\n'\
       '\tv.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");\n'
       '\tif (!v.test(str)) {\n\t\treturn "<i>"+str+"</i>";\n'\
-      '\t}\n\t\treturn "<a href=\"+str+\" target:"_blank">open url</a>";\n};\n')
+      '\t}\n\t\treturn "<a href=\"+str+\" target:\'_blank\'>open url</a>";\n};\n')
     #set global variable (map, selectsControls)
     html.append('var map, selectsControls\n')
     #start function for OL
@@ -245,7 +246,7 @@ class OGR2LayersClassHtml:
     elif layerSwitcherOutput == 1:
       outputFormat='GML'		    
     return outputFormat
-      
+
   def htmlLayer(self):
     """Add the code for layer, name, style and query"""
     # variable to write html code
@@ -306,9 +307,9 @@ class OGR2LayersClassHtml:
       layerString = layerString + stringLayer
       self.compteur = self.compteur + 1
       self.dlg.ui.progressBar.setValue(self.compteur)
-      
+
     self.dlg.ui.textBrowserLayer.setHtml(layerString)
-      
+
     return html
 	  
   def controlSel(self):
@@ -349,4 +350,5 @@ class OGR2LayersClassHtml:
       self.dlg.ui.progressBar.setValue(self.compteur)
       
     self.dlg.ui.textBrowserRaster.setHtml(layerString)
+    
     return "<!-- ADD RASTER -->"

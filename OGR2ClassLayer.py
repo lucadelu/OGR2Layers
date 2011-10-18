@@ -177,7 +177,7 @@ class OGR2LayersClassLayer:
       htmlLayer.append(', {format: OpenLayers.Format.GeoJSON')
       #add cluster strategy query if it's choosen
       if self.query == 'cluster':
-	htmlLayer.append(', strategies: [strategy]')
+	htmlLayer.append(', strategies: [new OpenLayers.Strategy.Cluster()]')
       #add style if qgis style if it's choosen
       if self.rendering == 'qgis':
 	htmlLayer.append(', styleMap: ' + self.name + '_style')
@@ -186,7 +186,7 @@ class OGR2LayersClassLayer:
     else:
       #add cluster strategy
       if self.query == 'cluster':
-	htmlLayer.append(', {strategies: [strategy]')
+	htmlLayer.append(', {strategies: [new OpenLayers.Strategy.Cluster()]')
 	#if qgis style it's choosen add it, I use this indentation for { 
 	#because it is already open with strategy cluster
 	if self.query == 'qgis':
