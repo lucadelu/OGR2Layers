@@ -192,7 +192,11 @@ class OGR2Layers:
 	global mydir
 	mydir = QFileDialog.getExistingDirectory( None,QString("Choose the GML"\
 	" files destination folder"),"")
-	self.dlg.ui.kmldirpath.setText(mydir)
+	if os.access(mydir, os.W_OK):
+            self.dlg.ui.kmldirpath.setText(mydir)
+            return
+        else:
+            self.error("It is not possible to write into folder '%s'" % mydir)
 	    
     def WriteKML(self):
 	#string for textBrowser of last tab
