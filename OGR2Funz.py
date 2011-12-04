@@ -27,3 +27,10 @@ def nameAttrField(layer,n):
   fields = vprovider.fields()
   #return the name of field
   return fields[n].name()
+
+def dictV2(dic):
+  """Return good dictionary from style properties of V2rendering"""
+  output = {}
+  for k in dic:
+    output[str(k)]=str(dic[k])
+  return output

@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 #############################################
-#	OGR2Layers Plugin (c)  for Quantum GIS				
-#	(c) Copyright Nicolas BOZON - 2008				
+#	OGR2Layers Plugin (c)  for Quantum GIS
+#	(c) Copyright Nicolas BOZON - 2008
 #	Authors: Nicolas BOZON, Rene-Luc D'HONT, Michael DOUCHIN, Luca DELUCCHI
-#	Email: nicolas_dot_bozon_at_gmail_dot_com			
-#									
+#	Email: nicolas_dot_bozon_at_gmail_dot_com
+#
 #############################################
-#    OGR2Layers Plugin is licensed under the terms of GNU GPL 2		
+#    OGR2Layers Plugin is licensed under the terms of GNU GPL 2
 #  	This program is free software; you can redistribute it and/or modify
 # 	 it under the terms of the GNU General Public License as published by
 # 	 the Free Software Foundation; either version 2 of the License, or
-# 	 (at your option) any later version.				
-#	This program is distributed in the hope that it will be useful,	
-#	 but WITHOUT ANY WARRANTY; without even implied warranty of	
-# 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.		 
-# 	 See the GNU General Public License for more details.		
+# 	 (at your option) any later version.
+#	This program is distributed in the hope that it will be useful,
+#	 but WITHOUT ANY WARRANTY; without even implied warranty of
+# 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# 	 See the GNU General Public License for more details.
 #############################################
 
 from PyQt4.QtCore import *
@@ -38,7 +38,7 @@ class OGR2LayersClassLayer:
       query = type of query (none,single,cluster)
       outputFormat = output format 
       outProj = output projection
-      mydir = directory where save the files    
+      mydir = directory where save the files
   """
   def __init__(self, 
 		layer,
@@ -54,7 +54,7 @@ class OGR2LayersClassLayer:
     self.source = self.layer.source()
     self.source.remove(QRegExp('\|layerid=[\d]+$'))
     #layer name
-    self.name = self.layer.name()   
+    self.name = self.layer.name()
     #layer output format
     self.outputFormat = outputFormat
     #putput vector name 
@@ -79,7 +79,6 @@ class OGR2LayersClassLayer:
     #class query	
     self.classQuery = OGR2LayersClassQuery(self.layer, self.query)
 
-	      
   def convertOGR(self):
     """Convert vector layer and set the variable for html file"""
     #add WFS
@@ -115,7 +114,7 @@ class OGR2LayersClassLayer:
 	if self.writeShape():
 	  return 0	
 	else:
-	  raise Exception, "Some problem with convertion from database"	
+	  raise Exception, "Some problem with convertion from database"
 	#raise Exception, "There is a bug with OGR and Spatialite and " \
 	#+ "now it isn't possible support Spatialite\n" # WORK
 	#mysource_temp = self.source.split(' ')[0]
@@ -131,7 +130,6 @@ class OGR2LayersClassLayer:
       OGR2ogr.Ogr2Ogr(str(self.source), str(self.destPathName), self.outputEpsg,
       self.inEpsg, self.outputFormat)
       self.OpenLayersFormat = "GML"
-      
       return 0
 
   def writeShape(self):
@@ -148,7 +146,6 @@ class OGR2LayersClassLayer:
 	self.OpenLayersFormat = "GML"
 	QgsVectorFileWriter.deleteShapeFile(nameFile)
 	return True
-      
 
   def htmlStyle(self):
     """Create javascript code for style"""
@@ -160,42 +157,41 @@ class OGR2LayersClassLayer:
 	return self.classStyle.typeRendering()
       except Exception, e:
 	raise Exception, e
-	    
-	  
+
+  def logStyle(self):
+    """Return the log string of style operation for output"""
+    if self.rendering == 'qgis':
+      try:
+        #return the log string
+        return self.classStyle.retLog()
+      except Exception, e:
+        raise Exception, e
+
   def htmlQuery(self):
-    """Create javascript code for query"""      
+    """Create javascript code for query"""
     return self.classQuery.createQuery()
 
   def htmlLayer(self):
     """Create the Javascript code for vector layer"""
     htmlLayer = ['var ' + self.name + ' = new OpenLayers.Layer.' \
     + self.OpenLayersFormat + '("' + self.name + ' ' + self.outputFormat \
-    + '", "' + self.outputName + '"']
+    + '", "' + self.outputName + '", {']
     #if outputFormat is GeoJson
     if self.outputFormat == 'GeoJSON':
       #add the format
-      htmlLayer.append(', {format: OpenLayers.Format.GeoJSON')
-      #add cluster strategy query if it's choosen
-      if self.query == 'cluster':
-	htmlLayer.append(', strategies: [new OpenLayers.Strategy.Cluster()]')
-      #add style if qgis style if it's choosen
+      htmlLayer.append('format: OpenLayers.Format.GeoJSON')
+    #add cluster strategy
+    if self.query == 'cluster':
+      htmlLayer.append(', strategies: [new OpenLayers.Strategy.Cluster()]')
+      #if qgis style it's choosen add it, I use this indentation for { 
+      #because it is already open with strategy cluster
       if self.rendering == 'qgis':
-	htmlLayer.append(', styleMap: ' + self.name + '_style')
+          htmlLayer.append(', styleMap: ' + self.name + '_style')
       htmlLayer.append('}')
-    #outputFormat is GML
-    else:
-      #add cluster strategy
-      if self.query == 'cluster':
-	htmlLayer.append(', {strategies: [new OpenLayers.Strategy.Cluster()]')
-	#if qgis style it's choosen add it, I use this indentation for { 
-	#because it is already open with strategy cluster
-	if self.query == 'qgis':
-	    htmlLayer.append(', styleMap: ' + self.name + '_style')
-	htmlLayer.append('}')
-      #if only qgis style it's choosen I must open {
-      if self.query != 'cluster' and self.query == 'qgis':
-	htmlLayer.append(', {styleMap: ' + self.name + '_style}')
+    #if only qgis style it's choosen I must open {
+    if self.query != 'cluster' and self.rendering == 'qgis':
+      htmlLayer.append(', styleMap: ' + self.name + '_style}')
     #for all it closes the layer ) and add it to the map
     htmlLayer.append(');\n\tmap.addLayer('+ self.name +');\n\t')
-    
+
     return htmlLayer

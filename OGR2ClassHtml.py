@@ -34,7 +34,6 @@ class OGR2LayersClassHtml:
     # layers = list of layers to insert in html code
     # dlg = dialog object
     # directory = directory where user want save data
-        
     #the active ogr layers
     self.layers = layers
     #the active gdal layers
@@ -54,7 +53,7 @@ class OGR2LayersClassHtml:
     self.mapBaseLayer = self.dlg.ui.mapBaseLayer.currentIndex()
     # used for number of vector
     self.compteur = 0
-      
+
   def createHtml(self):
     """Create the html code"""
     html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
@@ -62,7 +61,7 @@ class OGR2LayersClassHtml:
     html.append('<head>\n')
     html.append('<title>OGR2Layers</title>\n')
     #add style for map
-    html.extend(self.olMapSize()) 
+    html.extend(self.olMapSize())
     #Call for OpenLayers 2.10 API on Metacarta servers
     html.append('<script src="http://www.openlayers.org/api/OpenLayers.js"></script>\n')
     if self.mapBaseLayer in [4, 5, 6, 7]:
@@ -79,7 +78,7 @@ class OGR2LayersClassHtml:
     #set global variable (map, selectsControls)
     html.append('var map, selectsControls\n')
     #start function for OL
-    html.append('function init(){\n')	
+    html.append('function init(){\n')
     #add the base layer
     html.extend(self.olBaseLayer()) 
     #add the controls
@@ -110,12 +109,10 @@ class OGR2LayersClassHtml:
     html.append('<h1>'+ mapTitle +'</h1>\n')		    
     #add the map and close the html file
     html.append('<div id="map"></div>\n</body>\n</html>\n')
-    
     return html
-    
+
   def olMapSize(self):
     #add the style of map (dimension)
-    
     mapSize = self.dlg.ui.mapSize.currentIndex()
     if (mapSize) == 0: #400x400
       return '<style>\n #map{width:400px;height:400px;}\n</style>\n'
@@ -126,7 +123,6 @@ class OGR2LayersClassHtml:
 
   def extentHtml(self):
     """add coordinate transformation to 900913 if baseLayer is OSM"""
-    
     # User defined Bounds
     xmin = self.dlg.ui.lineEdit.text()
     xmax = self.dlg.ui.lineEdit_2.text()
@@ -145,10 +141,10 @@ class OGR2LayersClassHtml:
       html.append('\tmap.maxExtent(extent);\n')
       #AGGIUNGERE IL CODICE PER IL MAX EXTEND
     return html
-	  
+
   def olBaseLayer(self):
     """Define the baseLayer"""
-    
+
     # set the projection options for the map
     if (self.mapBaseLayer) == 0 or (self.mapBaseLayer) < 8:
       html = ['\tvar option = {\n\t\tprojection: new '\
@@ -196,16 +192,16 @@ class OGR2LayersClassHtml:
       ' "Google Satellite", {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22} );\n\t')
       html.append('map.addLayer(gsat);\n\t')
       html.append('map.setBaseLayer(gsat);\n\t')  
-      
+
     elif (self.mapBaseLayer) == 8: #Demis WMS
       html.append('bmwms = new OpenLayers.Layer.WMS( "Demis WMS", ["http://www2.demis.nl/WMS/wms.asp?wms=WorldMap"], {layers: "Bathymetry,Countries,Topography,Hillshading,Builtup+areas,Coastlines,Waterbodies,Inundated,Rivers,Streams,Railroads,Highways,Roads,Trails,Borders,Cities,Settlements"} );\n\t')
       html.append('map.addLayer(bmwms);\n\t')
       html.append('map.setBaseLayer(bmwms);\n\t')
     return html
-      
+
   def olControl(self):
     """Layer Switcher active or not and add the chosen control"""
-    
+
     # set the index of layer switcher
     layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
     #it's active
@@ -233,10 +229,10 @@ class OGR2LayersClassHtml:
     if  self.dlg.ui.zoomBar.isChecked():
       html.append('map.addControl(new OpenLayers.Control.PanZoomBar());\n\t')	
     return html
-      
+
   def outFormatLayer(self):
     """The output format chosen"""
-    
+
     # set the indix of output type
     layerSwitcherOutput = self.dlg.ui.outputFormCombo.currentIndex()
     # GeoJSON format
@@ -244,7 +240,7 @@ class OGR2LayersClassHtml:
       outputFormat='GeoJSON'
     # GML format
     elif layerSwitcherOutput == 1:
-      outputFormat='GML'		    
+      outputFormat='GML'
     return outputFormat
 
   def htmlLayer(self):
@@ -264,11 +260,9 @@ class OGR2LayersClassHtml:
       if self.dlg.ui.qgisRender.isChecked():
 	# set my rendering
 	myRendering = 'qgis'
-	
 	stringLayer = stringLayer + ', using QGIS rendering' 
       else:
 	myRendering = 'default'
-	  
       if self.myQuery == 'single':
 	stringLayer = stringLayer + ' with single query'
       elif self.myQuery == 'cluster':
@@ -292,6 +286,8 @@ class OGR2LayersClassHtml:
         print "stile qgis"
 	try:
 	  html.extend(OGR2LayersLayer.htmlStyle())
+	  #OGR2LayersLayer.logStyle()
+	  stringLayer = stringLayer + '<br />' + OGR2LayersLayer.logStyle()
 	except Exception, e:
 	  raise e
       if self.myQuery != 'none':
@@ -309,9 +305,8 @@ class OGR2LayersClassHtml:
       self.dlg.ui.progressBar.setValue(self.compteur)
 
     self.dlg.ui.textBrowserLayer.setHtml(layerString)
-
     return html
-	  
+
   def controlSel(self):
     """Add the code for have all layer queryable"""
     classControl = OGR2LayersClassControlSel(self.layers)
@@ -319,7 +314,7 @@ class OGR2LayersClassHtml:
 
   def outFormatRaster(self):
     """The output format chosen"""
-    
+
     # set the indix of output type
     layerSwitcherOutput = self.dlg.ui.outputRasterCombo.currentIndex()
     # PNG format
@@ -348,7 +343,9 @@ class OGR2LayersClassHtml:
       layerString = layerString + stringLayer
       self.compteur = self.compteur + 1
       self.dlg.ui.progressBar.setValue(self.compteur)
-      
+      #GDAL2LayersLayer = GDAL2LayersClassLayer(layer, outputFormat, self.projection, self.myDirectory)
+      #GDAL2LayersLayer.convert()
+      #html.extend(GDAL2LayersLayer.htmlLayer())
+
     self.dlg.ui.textBrowserRaster.setHtml(layerString)
-    
-    return "<!-- ADD RASTER -->"
+    return html
