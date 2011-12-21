@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Wed Oct 19 01:37:34 2011
+# Created: Wed Dec 21 22:46:14 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,35 +18,35 @@ class Ui_AboutDialog(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(AboutDialog.sizePolicy().hasHeightForWidth())
         AboutDialog.setSizePolicy(sizePolicy)
-        self.widget = QtGui.QWidget(AboutDialog)
-        self.widget.setGeometry(QtCore.QRect(273, 2, 258, 381))
-        self.widget.setObjectName("widget")
-        self.verticalLayout_2 = QtGui.QVBoxLayout(self.widget)
+        self.layoutWidget = QtGui.QWidget(AboutDialog)
+        self.layoutWidget.setGeometry(QtCore.QRect(273, 2, 258, 381))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout_2 = QtGui.QVBoxLayout(self.layoutWidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_help = QtGui.QLabel(self.widget)
+        self.label_help = QtGui.QLabel(self.layoutWidget)
         self.label_help.setMinimumSize(QtCore.QSize(0, 25))
         self.label_help.setMaximumSize(QtCore.QSize(16777215, 25))
         self.label_help.setObjectName("label_help")
         self.verticalLayout_2.addWidget(self.label_help)
-        self.textBrowser_2 = QtGui.QTextBrowser(self.widget)
+        self.textBrowser_2 = QtGui.QTextBrowser(self.layoutWidget)
         font = QtGui.QFont()
         font.setWeight(50)
         font.setBold(False)
         self.textBrowser_2.setFont(font)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.verticalLayout_2.addWidget(self.textBrowser_2)
-        self.buttonBox = QtGui.QDialogButtonBox(self.widget)
+        self.buttonBox = QtGui.QDialogButtonBox(self.layoutWidget)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout_2.addWidget(self.buttonBox)
-        self.widget1 = QtGui.QWidget(AboutDialog)
-        self.widget1.setGeometry(QtCore.QRect(10, 10, 265, 334))
-        self.widget1.setObjectName("widget1")
-        self.verticalLayout = QtGui.QVBoxLayout(self.widget1)
+        self.layoutWidget1 = QtGui.QWidget(AboutDialog)
+        self.layoutWidget1.setGeometry(QtCore.QRect(10, 10, 265, 334))
+        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.about = QtGui.QLabel(self.widget1)
+        self.about = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -61,7 +61,7 @@ class Ui_AboutDialog(object):
         self.about.setFont(font)
         self.about.setObjectName("about")
         self.horizontalLayout_3.addWidget(self.about)
-        self.logo = QtGui.QLabel(self.widget1)
+        self.logo = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -74,7 +74,7 @@ class Ui_AboutDialog(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.version = QtGui.QLabel(self.widget1)
+        self.version = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -84,7 +84,7 @@ class Ui_AboutDialog(object):
         self.version.setMaximumSize(QtCore.QSize(72, 19))
         self.version.setObjectName("version")
         self.horizontalLayout.addWidget(self.version)
-        self.version_n = QtGui.QLabel(self.widget1)
+        self.version_n = QtGui.QLabel(self.layoutWidget1)
         self.version_n.setMaximumSize(QtCore.QSize(200, 16777215))
         self.version_n.setText("")
         self.version_n.setObjectName("version_n")
@@ -92,7 +92,7 @@ class Ui_AboutDialog(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.autors = QtGui.QLabel(self.widget1)
+        self.autors = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -102,7 +102,7 @@ class Ui_AboutDialog(object):
         self.autors.setMaximumSize(QtCore.QSize(77, 19))
         self.autors.setObjectName("autors")
         self.horizontalLayout_2.addWidget(self.autors)
-        self.autors_name = QtGui.QLabel(self.widget1)
+        self.autors_name = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -113,7 +113,7 @@ class Ui_AboutDialog(object):
         self.autors_name.setObjectName("autors_name")
         self.horizontalLayout_2.addWidget(self.autors_name)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.textBrowser_3 = QtGui.QTextBrowser(self.widget1)
+        self.textBrowser_3 = QtGui.QTextBrowser(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -149,10 +149,13 @@ class Ui_AboutDialog(object):
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">The second important part is </span><span style=\" font-size:10pt; font-weight:600;\">your vector layer has a  known spatial reference system</span><span style=\" font-size:10pt;\"> (e.g. file .prj for shapefile) then you can load vector data and start OGR2Layer plugin, now  you choose the directory where the plugin save the files (.html for internet page and gml for vector data) and several option to add in OpenLayers.</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.0</span><span style=\" font-size:10pt;\"> &quot;</span><span style=\" font-size:10pt; font-style:italic;\">QGIS Render</span><span style=\" font-size:10pt;\">&quot; in the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Render option</span><span style=\" font-size:10pt;\">&quot; support all symbologies of &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Old symbology Style</span><span style=\" font-size:10pt;\">&quot;</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.0</span><span style=\" font-size:10pt;\"> &quot;</span><span style=\" font-size:10pt; font-style:italic;\">QGIS Render</span><span style=\" font-size:10pt;\">&quot; in the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Render option</span><span style=\" font-size:10pt;\">&quot; supports all symbologies of &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Old symbology Style</span><span style=\" font-size:10pt;\">&quot;</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.1</span><span style=\" font-size:10pt;\"> support also the QGIS svg symbols for &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">&quot; and &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot;.</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.1</span><span style=\" font-size:10pt;\"> it supports also the QGIS svg symbols for &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">&quot; and &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot;, using &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Old symbology</span><span style=\" font-size:10pt;\">&quot;. </span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: Only svg icons can be used.</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">From </span><span style=\" font-size:10pt; font-weight:600;\">version 0.8.4</span><span style=\" font-size:10pt;\"> it supports the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">New Symbology</span><span style=\" font-size:10pt;\">&quot;, it is possible to use only simple simbology for &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Single Symbol</span><span style=\" font-size:10pt;\">&quot;, &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Catagorized</span><span style=\" font-size:10pt;\">&quot;, &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Graduated</span><span style=\" font-size:10pt;\">&quot;. </span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Warning</span><span style=\" font-size:10pt;\">: The svg icons are not supported yet</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">In the &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-size:10pt;\">&quot; the option &quot;</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">&quot; use OpenLayers Strategy Cluster, this solution allow to cluster more point features and query the group, it\'s useful when points are very neighbouring.</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt; font-weight:600;\">Important</span><span style=\" font-size:10pt;\">: remember &quot;</span><span style=\" font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-size:10pt;\">&quot; doesn\'t work with &quot;</span><span style=\" font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-size:10pt;\">&quot; symbology</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
