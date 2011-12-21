@@ -187,11 +187,10 @@ class OGR2LayersClassLayer:
       #because it is already open with strategy cluster
       if self.rendering == 'qgis':
           htmlLayer.append(', styleMap: ' + self.name + '_style')
-      htmlLayer.append('}')
     #if only qgis style it's choosen I must open {
     if self.query != 'cluster' and self.rendering == 'qgis':
-      htmlLayer.append(', styleMap: ' + self.name + '_style}')
+      htmlLayer.append(', styleMap: ' + self.name + '_style')
     #for all it closes the layer ) and add it to the map
-    htmlLayer.append(');\n\tmap.addLayer('+ self.name +');\n\t')
+    htmlLayer.append('});\n\tmap.addLayer('+ self.name +');\n\t')
 
     return htmlLayer

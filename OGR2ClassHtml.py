@@ -86,13 +86,11 @@ class OGR2LayersClassHtml:
     #try to add the code for layers
     try:
       if self.layers:
-          print "vector"
           #vector layer
           html.extend(self.htmlLayer())
-      if self.rasters:
-          print "raster"
-          #raster layer
-          html.extend(self.htmlRaster())
+      #if self.rasters:
+          ##raster layer
+          #html.extend(self.htmlRaster())
     #return errors
     except Exception, e:
       raise e
@@ -260,30 +258,40 @@ class OGR2LayersClassHtml:
       if self.dlg.ui.qgisRender.isChecked():
 	# set my rendering
 	myRendering = 'qgis'
-	stringLayer = stringLayer + ', using QGIS rendering' 
+	stringLayer = stringLayer + ', using QGIS rendering'
       else:
 	myRendering = 'default'
+      #check the type of quert
       if self.myQuery == 'single':
 	stringLayer = stringLayer + ' with single query'
       elif self.myQuery == 'cluster':
+        #check if geometry type is point
 	if layer.geometryType() == 0:
-	  if myRendering == 'qgis' and layer.renderer().name() == 'Single Symbol':
+          rendererName = False
+          #try used because two different function of old and new symbology
+          #check if symbology is single or not
+          try:
+            if layer.renderer().name() == 'Single Symbol':
+              rendererName = True
+          except:
+            if layer.rendererV2().type() == 'singleSymbol':
+              rendererName = True
+	  if myRendering == 'qgis' and rendererName:
 	    stringLayer = stringLayer + ' with cluster strategy query'
 	  elif myRendering == 'default':
-	    stringLayer = stringLayer + ' with cluster strategy query'	    
-	  elif myRendering == 'qgis' and not layer.renderer().name() == 'Single Symbol':
+	    stringLayer = stringLayer + ' with cluster strategy query'
+	  elif myRendering == 'qgis' and not rendererName:
 	    #return an error if the symbology is different from Single Symbol
-	    raise Exception, "Unique value classification doesn't work with "\
-	    "Cluster Strategy\n" # WORK
+	    raise Exception, "Classification doesn't work with Cluster Strategy\n"
 	    break
+	#geometry it isn't point
 	else:
-	  raise Exception, "Cluster Strategy support only vector point\n" # WORK
+	  raise Exception, "Cluster Strategy support only vector point\n"
 	  break
 
-      OGR2LayersLayer = OGR2LayersClassLayer(layer, myRendering, self.myQuery, 
+      OGR2LayersLayer = OGR2LayersClassLayer(layer, myRendering, self.myQuery,
       outputFormat, self.projection, self.myDirectory)
       if myRendering == 'qgis':
-        print "stile qgis"
 	try:
 	  html.extend(OGR2LayersLayer.htmlStyle())
 	  #OGR2LayersLayer.logStyle()

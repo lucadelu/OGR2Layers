@@ -342,7 +342,6 @@ class OGR2LayersClassStyle:
     value=0
     # the higher number od styleMap
     higValue=len(styleMap)-1
-    print >> sys.stderr, 'Prima di ciclo'
     #for each field in styleMap
     for cat in styleMap:
       z = cat.value().toString()
@@ -370,6 +369,9 @@ class OGR2LayersClassStyle:
         valueStyle = '"rgb(%s)"' % ",".join(style['color'].split(',')[:-1])
       elif element == 'Opacity':
         valueStyle = str(symbol.alpha())
+      #check if " string is present in the values and replace with \"
+      #(this fix for example OSM tags, data downloaded with QGIS OSM plugin)
+      z=z.replace('"','\\"')
       # if the field is the first
       if (value==0):
         html_element = ['get' + element + ': function(feature) {\n\t\t\t\t\t' \
