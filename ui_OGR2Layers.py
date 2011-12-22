@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Tue Oct 18 23:45:56 2011
+# Created: Fri Dec 23 00:00:56 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_OGR2Layers(object):
     def setupUi(self, OGR2Layers):
         OGR2Layers.setObjectName("OGR2Layers")
-        OGR2Layers.resize(561, 435)
+        OGR2Layers.resize(567, 435)
         self.verticalLayout_3 = QtGui.QVBoxLayout(OGR2Layers)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -74,11 +74,11 @@ class Ui_OGR2Layers(object):
         self.horizontalLayout_11 = QtGui.QHBoxLayout()
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.label_15 = QtGui.QLabel(self.layoutWidget)
-        self.label_15.setEnabled(True)
+        self.label_15.setEnabled(False)
         self.label_15.setObjectName("label_15")
         self.horizontalLayout_11.addWidget(self.label_15)
         self.label_30 = QtGui.QLabel(self.layoutWidget)
-        self.label_30.setEnabled(True)
+        self.label_30.setEnabled(False)
         self.label_30.setLayoutDirection(QtCore.Qt.RightToLeft)
         self.label_30.setObjectName("label_30")
         self.horizontalLayout_11.addWidget(self.label_30)
@@ -284,6 +284,7 @@ class Ui_OGR2Layers(object):
         self.textBrowserLayer.setObjectName("textBrowserLayer")
         self.verticalLayout_11.addWidget(self.textBrowserLayer)
         self.label_14 = QtGui.QLabel(self.layoutWidget4)
+        self.label_14.setEnabled(False)
         self.label_14.setObjectName("label_14")
         self.verticalLayout_11.addWidget(self.label_14)
         self.textBrowserRaster = QtGui.QTextBrowser(self.layoutWidget4)

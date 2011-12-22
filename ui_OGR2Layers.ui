@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
+    <width>567</width>
     <height>435</height>
    </rect>
   </property>
@@ -132,7 +132,7 @@
           <item>
            <widget class="QLabel" name="label_15">
             <property name="enabled">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="text">
              <string>GDAL active layers :</string>
@@ -142,7 +142,7 @@
           <item>
            <widget class="QLabel" name="label_30">
             <property name="enabled">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="layoutDirection">
              <enum>Qt::RightToLeft</enum>
@@ -608,6 +608,9 @@
         </item>
         <item>
          <widget class="QLabel" name="label_14">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="text">
            <string>Raster proiection trasformation information</string>
           </property>
