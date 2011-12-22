@@ -21,7 +21,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from OGR2ClassLayer import *
 from OGR2ClassQuery import OGR2LayersClassControlSel
-from GDAL2ClassLayer import *
+#from GDAL2ClassLayer import *
 
 class OGR2LayersClassHtml:
   """The class to create html and javascript code"""
