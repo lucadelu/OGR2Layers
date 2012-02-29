@@ -200,6 +200,7 @@ class OGR2LayersClassHtml:
         """Layer Switcher active or not and add the chosen control"""
 
         # set the index of layer switcher
+        
         layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
         #it's active
         if layerSwitcherActive == 0:
@@ -225,6 +226,8 @@ class OGR2LayersClassHtml:
         ##--panZoomBar
         if  self.dlg.ui.zoomBar.isChecked():
             html.append('map.addControl(new OpenLayers.Control.PanZoomBar());\n\t')
+        ##--navigation  
+        html.append('map.addControl(new OpenLayers.Control.Navigation());\n\t')
         return html
 
     def outFormatLayer(self):

@@ -2,16 +2,21 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Wed Dec 21 22:46:14 2011
-#      by: PyQt4 UI code generator 4.7.3
+# Created: Thu Mar  1 00:24:54 2012
+#      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
 class Ui_AboutDialog(object):
     def setupUi(self, AboutDialog):
-        AboutDialog.setObjectName("AboutDialog")
+        AboutDialog.setObjectName(_fromUtf8("AboutDialog"))
         AboutDialog.resize(536, 382)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -20,32 +25,34 @@ class Ui_AboutDialog(object):
         AboutDialog.setSizePolicy(sizePolicy)
         self.layoutWidget = QtGui.QWidget(AboutDialog)
         self.layoutWidget.setGeometry(QtCore.QRect(273, 2, 258, 381))
-        self.layoutWidget.setObjectName("layoutWidget")
+        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.layoutWidget)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout_2.setMargin(0)
+        self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.label_help = QtGui.QLabel(self.layoutWidget)
         self.label_help.setMinimumSize(QtCore.QSize(0, 25))
         self.label_help.setMaximumSize(QtCore.QSize(16777215, 25))
-        self.label_help.setObjectName("label_help")
+        self.label_help.setObjectName(_fromUtf8("label_help"))
         self.verticalLayout_2.addWidget(self.label_help)
         self.textBrowser_2 = QtGui.QTextBrowser(self.layoutWidget)
         font = QtGui.QFont()
-        font.setWeight(50)
         font.setBold(False)
+        font.setWeight(50)
         self.textBrowser_2.setFont(font)
-        self.textBrowser_2.setObjectName("textBrowser_2")
+        self.textBrowser_2.setObjectName(_fromUtf8("textBrowser_2"))
         self.verticalLayout_2.addWidget(self.textBrowser_2)
         self.buttonBox = QtGui.QDialogButtonBox(self.layoutWidget)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Close)
-        self.buttonBox.setObjectName("buttonBox")
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.verticalLayout_2.addWidget(self.buttonBox)
         self.layoutWidget1 = QtGui.QWidget(AboutDialog)
         self.layoutWidget1.setGeometry(QtCore.QRect(10, 10, 265, 334))
-        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.layoutWidget1.setObjectName(_fromUtf8("layoutWidget1"))
         self.verticalLayout = QtGui.QVBoxLayout(self.layoutWidget1)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setMargin(0)
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.about = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -56,10 +63,10 @@ class Ui_AboutDialog(object):
         self.about.setMaximumSize(QtCore.QSize(91, 25))
         font = QtGui.QFont()
         font.setPointSize(12)
-        font.setWeight(75)
         font.setBold(True)
+        font.setWeight(75)
         self.about.setFont(font)
-        self.about.setObjectName("about")
+        self.about.setObjectName(_fromUtf8("about"))
         self.horizontalLayout_3.addWidget(self.about)
         self.logo = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
@@ -69,11 +76,11 @@ class Ui_AboutDialog(object):
         self.logo.setSizePolicy(sizePolicy)
         self.logo.setMinimumSize(QtCore.QSize(70, 79))
         self.logo.setMaximumSize(QtCore.QSize(70, 79))
-        self.logo.setObjectName("logo")
+        self.logo.setObjectName(_fromUtf8("logo"))
         self.horizontalLayout_3.addWidget(self.logo)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.version = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -82,16 +89,16 @@ class Ui_AboutDialog(object):
         self.version.setSizePolicy(sizePolicy)
         self.version.setMinimumSize(QtCore.QSize(72, 19))
         self.version.setMaximumSize(QtCore.QSize(72, 19))
-        self.version.setObjectName("version")
+        self.version.setObjectName(_fromUtf8("version"))
         self.horizontalLayout.addWidget(self.version)
         self.version_n = QtGui.QLabel(self.layoutWidget1)
         self.version_n.setMaximumSize(QtCore.QSize(200, 16777215))
-        self.version_n.setText("")
-        self.version_n.setObjectName("version_n")
+        self.version_n.setText(_fromUtf8(""))
+        self.version_n.setObjectName(_fromUtf8("version_n"))
         self.horizontalLayout.addWidget(self.version_n)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.autors = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -100,7 +107,7 @@ class Ui_AboutDialog(object):
         self.autors.setSizePolicy(sizePolicy)
         self.autors.setMinimumSize(QtCore.QSize(77, 19))
         self.autors.setMaximumSize(QtCore.QSize(77, 19))
-        self.autors.setObjectName("autors")
+        self.autors.setObjectName(_fromUtf8("autors"))
         self.horizontalLayout_2.addWidget(self.autors)
         self.autors_name = QtGui.QLabel(self.layoutWidget1)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
@@ -110,7 +117,7 @@ class Ui_AboutDialog(object):
         self.autors_name.setSizePolicy(sizePolicy)
         self.autors_name.setMinimumSize(QtCore.QSize(136, 89))
         self.autors_name.setMaximumSize(QtCore.QSize(136, 89))
-        self.autors_name.setObjectName("autors_name")
+        self.autors_name.setObjectName(_fromUtf8("autors_name"))
         self.horizontalLayout_2.addWidget(self.autors_name)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.textBrowser_3 = QtGui.QTextBrowser(self.layoutWidget1)
@@ -121,11 +128,11 @@ class Ui_AboutDialog(object):
         self.textBrowser_3.setSizePolicy(sizePolicy)
         self.textBrowser_3.setMinimumSize(QtCore.QSize(263, 121))
         self.textBrowser_3.setMaximumSize(QtCore.QSize(261, 121))
-        self.textBrowser_3.setObjectName("textBrowser_3")
+        self.textBrowser_3.setObjectName(_fromUtf8("textBrowser_3"))
         self.verticalLayout.addWidget(self.textBrowser_3)
 
         self.retranslateUi(AboutDialog)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), AboutDialog.reject)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), AboutDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(AboutDialog)
 
     def retranslateUi(self, AboutDialog):
@@ -192,6 +199,6 @@ class Ui_AboutDialog(object):
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://wiki.github.com/lucadelu/OGR2Layers/</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;\"></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You can add an issue or a bug</p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://lucadelu.org:3000/project/OGR2Layers</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://hub.qgis.org/projects/ogr2layers</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc
