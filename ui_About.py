@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Thu Mar  1 00:24:54 2012
+# Created: Thu Mar  1 00:29:05 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -196,9 +196,9 @@ class Ui_AboutDialog(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Sans Serif\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">More info</p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://wiki.github.com/lucadelu/OGR2Layers/</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;\"></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://wiki.github.com/lucadelu/OGR2Layers/ \"><span style=\" font-weight:600; text-decoration: underline; color:#0000ff;\">http://wiki.github.com/lucadelu/OGR2Layers/</span></a></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; text-decoration: underline; color:#0000ff;\"></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">You can add an issue or a bug</p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">http://hub.qgis.org/projects/ogr2layers</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://hub.qgis.org/projects/ogr2layers\"><span style=\" font-weight:600; text-decoration: underline; color:#0000ff;\">http://hub.qgis.org/projects/ogr2layers</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc
