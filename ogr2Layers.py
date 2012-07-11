@@ -208,7 +208,9 @@ class OGR2Layers:
 	if len(self.layers) > 0:
 	    #exist also ogr layers and WFS layers
 	    self.dlg.ui.progressBar.setMinimum(0) 
-	    self.dlg.ui.progressBar.setMaximum(len(self.mapCanvas.layers())) 
+	    #TO DECOMMENT WHEN ALSO RASTER WILL BE SUPPORTED
+	    #self.dlg.ui.progressBar.setMaximum(len(self.mapCanvas.layers())) 
+	    self.dlg.ui.progressBar.setMaximum(len(self.layers))
 	    
 	#control variable
 	control =[]
