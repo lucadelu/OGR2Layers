@@ -63,7 +63,7 @@ class OGR2LayersClassHtml:
     #add style for map
     html.extend(self.olMapSize())
     #Call for OpenLayers 2.10 API on Metacarta servers
-    html.append('<script src="http://www.openlayers.org/api/OpenLayers.js"></script>\n')
+    html.append('<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>\n')
     if self.mapBaseLayer in [4, 5, 6, 7]:
       html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
     #start javascript code
