@@ -3,7 +3,7 @@
 name=OGR2Layers
 qgisMinimumVersion=1.6
 description=Export OGR layers to OpenLayers HTML
-version=version 0.8.4
+version=version 0.8.6
 ; end of mandatory metadata
 
 ; start of optional metadata
@@ -18,7 +18,7 @@ tags=vector,web,openlayers
 ; be probably possible to create a project on redmine
 ; if they are not filled
 homepage=https://github.com/lucadelu/OGR2Layers/wiki
-tracker=http://redmine.lucadelu.org/projects/ogr2layers
+tracker=http://hub.qgis.org/projects/ogr2layers
 repository=https://github.com/lucadelu/OGR2Layers/
 icon=icongui.png
 

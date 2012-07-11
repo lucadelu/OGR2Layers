@@ -28,4 +28,3 @@ class Ui_QueryDialog(object):
 
     def retranslateUi(self, QueryDialog):
         QueryDialog.setWindowTitle(QtGui.QApplication.translate("QueryDialog", "OGR2Layers Plugin: Query options", None, QtGui.QApplication.UnicodeUTF8))
-
