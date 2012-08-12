@@ -53,117 +53,60 @@ class OGR2LayersClassHtml:
         # used for number of vector
         self.compteur = 0
 
-<<<<<<< HEAD
-  def createHtml(self):
-    """Create the html code"""
-    html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
-    html.append('<html xmlns="http://www.w3.org/1999/xhtml">\n')
-    html.append('<head>\n')
-    html.append('<title>OGR2Layers</title>\n')
-    #add style for map
-    html.extend(self.olMapSize())
-    #Call for OpenLayers 2.10 API on Metacarta servers
-    html.append('<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>\n')
-    if self.mapBaseLayer in [4, 5, 6, 7]:
-      html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
-    #start javascript code
-    html.append('<script type="text/javascript">\n')
-    #set a function to check if it is a url or not http://
-    if self.myQuery != 'none':
-      html.append('function urlCheck(str) {\n'\
-      '\tvar v = new RegExp();\n'\
-      '\tv.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");\n'
-      '\tif (!v.test(str)) {\n\t\treturn "<i>"+str+"</i>";\n'\
-      '\t}\n\t\treturn "<a href=\"+str+\" target:\'_blank\'>open url</a>";\n};\n')
-    #set global variable (map, selectsControls)
-    html.append('var map, selectsControls\n')
-    #start function for OL
-    html.append('function init(){\n')
-    #add the base layer
-    html.extend(self.olBaseLayer()) 
-    #add the controls
-    html.extend(self.olControl())
-    #try to add the code for layers
-    try:
-      if self.layers:
-          #vector layer
-          html.extend(self.htmlLayer())
-      #if self.rasters:
-          ##raster layer
-          #html.extend(self.htmlRaster())
-    #return errors
-    except Exception, e:
-      raise e
-    #add the query 
-    if self.myQuery != 'none':
-      html.extend(self.controlSel())
-    html.extend(self.extentHtml())
-    #close the init function
-    html.append('};\n')	    
-    #close javascript script and start body where is loaded init function
-    html.append('</script>\n</head>\n<body onload="init()">\n')
-    #Generate H1 Map Title
-    mapTitle = self.dlg.ui.mapTitle.text()
-    html.append('<h1>'+ mapTitle +'</h1>\n')		    
-    #add the map and close the html file
-    html.append('<div id="map"></div>\n</body>\n</html>\n')
-    return html
-=======
     def createHtml(self):
-        """Create the html code"""
-        html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
-        html.append('<html xmlns="http://www.w3.org/1999/xhtml">\n')
-        html.append('<head>\n')
-        html.append('<title>OGR2Layers</title>\n')
-        #add style for map
-        html.extend(self.olMapSize())
-        #Call for OpenLayers 2.10 API on Metacarta servers
-        html.append('<script src="http://www.openlayers.org/api/OpenLayers.js"></script>\n')
-        if self.mapBaseLayer in [4, 5, 6, 7]:
-            html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
-        #start javascript code
-        html.append('<script type="text/javascript">\n')
-        #set a function to check if it is a url or not http://
-        if self.myQuery != 'none':
-            html.append('function urlCheck(str) {\n'\
-            '\tvar v = new RegExp();\n'\
-            '\tv.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");\n'
-            '\tif (!v.test(str)) {\n\t\treturn "<i>"+str+"</i>";\n'\
-            '\t}\n\t\treturn "<a href=\"+str+\" target:\'_blank\'>open url</a>";\n};\n')
-        #set global variable (map, selectsControls)
-        html.append('var map, selectsControls\n')
-        #start function for OL
-        html.append('function init(){\n')
-        #add the base layer
-        html.extend(self.olBaseLayer())
-        #add the controls
-        html.extend(self.olControl())
-        #try to add the code for layers
-        try:
-            if self.layers:
-                #vector layer
-                html.extend(self.htmlLayer())
-            #if self.rasters:
-                ##raster layer
-                #html.extend(self.htmlRaster())
-        #return errors
-        except Exception, e:
-            raise e
-        #add the query
-        if self.myQuery != 'none':
-            html.extend(self.controlSel())
-        html.extend(self.extentHtml())
-        #close the init function
-        html.append('};\n')
-        #close javascript script and start body where is loaded init function
-        html.append('</script>\n</head>\n<body onload="init()">\n')
-        #Generate H1 Map Title
-        mapTitle = self.dlg.ui.mapTitle.text()
-        html.append('<h1>'+ mapTitle +'</h1>\n')
-        #add the map and close the html file
-        html.append('<div id="map"></div>\n</body>\n</html>\n')
-        return html
->>>>>>> a5baae990c1557f597d2e47879d2af2840fe34ab
+	"""Create the html code"""
+	html = ['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n']
+	html.append('<html xmlns="http://www.w3.org/1999/xhtml">\n')
+	html.append('<head>\n')
+	html.append('<title>OGR2Layers</title>\n')
+	#add style for map
+	html.extend(self.olMapSize())
+	#Call for OpenLayers 2.10 API on Metacarta servers
+	html.append('<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>\n')
+	if self.mapBaseLayer in [4, 5, 6, 7]:
+	  html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
+	#start javascript code
+	html.append('<script type="text/javascript">\n')
+	#set a function to check if it is a url or not http://
+	if self.myQuery != 'none':
+	  html.append('function urlCheck(str) {\n'\
+	  '\tvar v = new RegExp();\n'\
+	  '\tv.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");\n'
+	  '\tif (!v.test(str)) {\n\t\treturn "<i>"+str+"</i>";\n'\
+	  '\t}\n\t\treturn "<a href=\"+str+\" target:\'_blank\'>open url</a>";\n};\n')
+	#set global variable (map, selectsControls)
+	html.append('var map, selectsControls\n')
+	#start function for OL
+	html.append('function init(){\n')
+	#add the base layer
+	html.extend(self.olBaseLayer()) 
+	#add the controls
+	html.extend(self.olControl())
+	#try to add the code for layers
+	try:
+	  if self.layers:
+	      #vector layer
+	      html.extend(self.htmlLayer())
+	  #if self.rasters:
+	      ##raster layer
+	      #html.extend(self.htmlRaster())
+	#return errors
+	except Exception, e:
+	  raise e
+	#add the query 
+	if self.myQuery != 'none':
+	  html.extend(self.controlSel())
+	html.extend(self.extentHtml())
+	#close the init function
+	html.append('};\n')	    
+	#close javascript script and start body where is loaded init function
+	html.append('</script>\n</head>\n<body onload="init()">\n')
+	#Generate H1 Map Title
+	mapTitle = self.dlg.ui.mapTitle.text()
+	html.append('<h1>'+ mapTitle +'</h1>\n')		    
+	#add the map and close the html file
+	html.append('<div id="map"></div>\n</body>\n</html>\n')
+	return html
 
     def olMapSize(self):
         #add the style of map (dimension)

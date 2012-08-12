@@ -218,8 +218,8 @@ class OGR2Layers:
         #add the string to textBrowser
         self.dlg.ui.textBrowserLayer.setHtml(layerString)
         self.dlg.ui.textBrowserRaster.setHtml(layerString)
-<<<<<<< HEAD
-	#configure ProgressBar
+
+        #configure ProgressBar
 	if len(self.layers) > 0:
 	    #exist also ogr layers and WFS layers
 	    self.dlg.ui.progressBar.setMinimum(0) 
@@ -263,52 +263,6 @@ class OGR2Layers:
 	except Exception, e:
 	    #raise e
 	    self.error(e)
-=======
-        #configure ProgressBar
-        if len(self.layers) > 0:
-            #exist also ogr layers and WFS layers
-            self.dlg.ui.progressBar.setMinimum(0) 
-            #TO DECOMMENT WHEN ALSO RASTER WILL BE SUPPORTED
-            #self.dlg.ui.progressBar.setMaximum(len(self.mapCanvas.layers())) 
-            self.dlg.ui.progressBar.setMaximum(len(self.layers))
-            
-        #control variable
-        control =[]
-        #test if the output dir "mydir" is set
-        myDirectory = unicode(self.dlg.ui.kmldirpath.text())
-        if myDirectory=='':
-            self.error("Please select the output directory first")
-        else:
-            #if the directory is set, check if exist DA CORREGGERE COL METODO USATO CON MODIS
-            if not os.path.exists(myDirectory):
-                self.error("Please check the validity of the output directory")
-        #initialize OGR2LayersClassHtml 
-        OGR2LayersHtml = OGR2LayersClassHtml(self.layers,self.rasters,self.dlg,myDirectory)
-        #start html code
-        html = []
-        try:
-            #write html code
-            html.append(OGR2LayersHtml.createHtml())
-            #name to write file with html code
-            htmlfileName = mydir+'/index.html'
-            #open a file
-            file = open(htmlfileName, "w")
-            #write the file
-            file.writelines(html[0])
-            #close the file
-            file.close()
-            
-            lastTab= self.dlg.ui.tabWidget.count()-1
-            #set the output tab like active
-            self.dlg.ui.tabWidget.setCurrentIndex(lastTab)
-            ##change ok button in close button and show a messages
-            self.dlg.ui.buttonBox.setStandardButtons(QDialogButtonBox.Close)                    
-            QMessageBox.information(self.dlg,"Information",str("The OpenLayers"\
-            " Map has been created! Click \"Close\" for exit from the plugin") )        
-        except Exception, e:
-            #raise e
-            self.error(e)
->>>>>>> a5baae990c1557f597d2e47879d2af2840fe34ab
 
     #for choose what layer is queriable
     #def showQuery(self):

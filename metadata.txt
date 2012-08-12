@@ -3,7 +3,7 @@
 name=OGR2Layers
 qgisMinimumVersion=1.6
 description=Export OGR layers to OpenLayers HTML
-version=version 0.8.6
+version=version 0.8.7
 ; end of mandatory metadata
 
 ; start of optional metadata

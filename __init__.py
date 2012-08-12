@@ -23,7 +23,7 @@ def description():
     return " A plugin to export OGR layers to OpenLayers HTML"
   
 def version():
-    return "Version 0.8.6"
+    return "Version 0.8.7"
   
 def qgisMinimumVersion():
     return "1.6"
