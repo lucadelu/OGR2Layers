@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>435</height>
+    <width>525</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
+     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
       <widget class="QLabel" name="label_2">
        <property name="text">
         <string/>
@@ -79,552 +79,528 @@
       <attribute name="title">
        <string>QGIS</string>
       </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>541</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>OGR active layers :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_29">
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
-            <property name="text">
-             <string>OGR output format</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="outputFormCombo">
-            <item>
+      <layout class="QVBoxLayout" name="verticalLayout_13">
+       <item>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>GeoJSON</string>
+              <string>OGR active layers :</string>
              </property>
-            </item>
-            <item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_29">
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
              <property name="text">
-              <string>GML</string>
+              <string>OGR output format</string>
              </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <widget class="QListWidget" name="LayerList"/>
-        </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_11">
-          <item>
-           <widget class="QLabel" name="label_15">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>GDAL active layers :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_30">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::RightToLeft</enum>
-            </property>
-            <property name="text">
-             <string>GDAL output format</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="outputRasterCombo">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="outputFormCombo">
+             <item>
+              <property name="text">
+               <string>GeoJSON</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>GML</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <widget class="QListWidget" name="LayerList"/>
+         </item>
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QLabel" name="label_15">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
-              <string>PNG</string>
+              <string>GDAL active layers :</string>
              </property>
-            </item>
-            <item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_30">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
              <property name="text">
-              <string>JPEG</string>
+              <string>GDAL output format</string>
              </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="4" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Output directory</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="5" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLineEdit" name="kmldirpath"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="browseButton">
-            <property name="text">
-             <string>Browse</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="0">
-         <widget class="QListWidget" name="RasterList">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="outputRasterCombo">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>PNG</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>JPEG</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Output directory</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="5" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLineEdit" name="kmldirpath"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="browseButton">
+             <property name="text">
+              <string>Browse</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <widget class="QListWidget" name="RasterList">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
        <string>OpenLayers</string>
       </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>-1</x>
-         <y>3</y>
-         <width>541</width>
-         <height>271</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_10">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string>Map Title :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="mapTitle"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_7">
-            <item>
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>Map Base Layer :</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="mapBaseLayer">
-              <item>
+      <layout class="QVBoxLayout" name="verticalLayout_14">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Map Title :</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="mapTitle"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_9">
                <property name="text">
-                <string>OpenStreetMap (Mapnik)</string>
+                <string>Map Base Layer :</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="mapBaseLayer">
+               <item>
+                <property name="text">
+                 <string>OpenStreetMap (Mapnik)</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>OpenStreetMap (OSMarender)</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>OpenStreetMap (Cycleway)</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>OpenLayers WMS</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Google Streets</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Google Physical</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Google Hybrid</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Google Satellite</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Demis WMS</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_8">
                <property name="text">
-                <string>OpenStreetMap (OSMarender)</string>
+                <string>Map Size :</string>
                </property>
-              </item>
-              <item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="mapSize">
+               <item>
+                <property name="text">
+                 <string>400 x 400</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>800 x 600</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Fullscreen</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_11">
                <property name="text">
-                <string>OpenStreetMap (Cycleway)</string>
+                <string>Layer Switcher active ?</string>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>OpenLayers WMS</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Google Streets</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Google Physical</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Google Hybrid</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Google Satellite</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Demis WMS</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_6">
-            <item>
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>Map Size :</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="mapSize">
-              <item>
-               <property name="text">
-                <string>400 x 400</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>800 x 600</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Fullscreen</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_8">
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Layer Switcher active ?</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="layerSwitcherActive">
-              <item>
-               <property name="text">
-                <string>yes</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>no</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item>
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Default Map Extent :</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_13">
-            <item>
-             <widget class="QLineEdit" name="lineEdit"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_2"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_3"/>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_4"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>10</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="maxExtent">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="text">
-             <string>Click here if you want use this bounding box as max extent of the map</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="layerSwitcherActive">
+               <item>
+                <property name="text">
+                 <string>yes</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>no</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Default Map Extent :</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <item>
+              <widget class="QLineEdit" name="lineEdit"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_2"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_3"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_4"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="maxExtent">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Click here if you want use this bounding box as max extent of the map</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
        <string>Optional</string>
       </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>491</width>
-         <height>221</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>Choose other map controls</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="mousepos">
-              <property name="text">
-               <string>mouseposition</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="scale">
-              <property name="text">
-               <string>scale bar</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="copyr">
-              <property name="text">
-               <string>attribution</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="zoomBar">
-              <property name="text">
-               <string>panZoomBar</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="navi">
-              <property name="text">
-               <string>overview map</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="permalink">
-              <property name="text">
-               <string>permalink</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox">
-          <property name="title">
-           <string>Render option</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
+      <layout class="QVBoxLayout" name="verticalLayout_15">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_14">
-             <item>
-              <widget class="QRadioButton" name="defaultRender">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>Choose other map controls</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="mousepos">
                <property name="text">
-                <string>default OpenLayers render</string>
+                <string>mouseposition</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QRadioButton" name="qgisRender">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="scale">
                <property name="text">
-                <string>QGIS render</string>
+                <string>scale bar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="copyr">
+               <property name="text">
+                <string>attribution</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="zoomBar">
+               <property name="text">
+                <string>panZoomBar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="navi">
+               <property name="text">
+                <string>overview map</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="permalink">
+               <property name="text">
+                <string>permalink</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>Query option</string>
-          </property>
-          <widget class="QWidget" name="layoutWidget">
-           <property name="geometry">
-            <rect>
-             <x>10</x>
-             <y>20</y>
-             <width>360</width>
-             <height>31</height>
-            </rect>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>Render option</string>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_15">
+           <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
-             <widget class="QRadioButton" name="query">
-              <property name="text">
-               <string>query one feature</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="query_2">
-              <property name="enabled">
-               <bool>true</bool>
-              </property>
-              <property name="text">
-               <string>query more features </string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="query_3">
-              <property name="text">
-               <string>none</string>
-              </property>
-             </widget>
+             <layout class="QHBoxLayout" name="horizontalLayout_14">
+              <item>
+               <widget class="QRadioButton" name="defaultRender">
+                <property name="text">
+                 <string>default OpenLayers render</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="qgisRender">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>QGIS render</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Query option</string>
+           </property>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>362</width>
+              <height>31</height>
+             </rect>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_15">
+             <item>
+              <widget class="QRadioButton" name="query">
+               <property name="text">
+                <string>query one feature</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="query_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>query more features </string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="query_3">
+               <property name="text">
+                <string>none</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
        <string>Output</string>
       </attribute>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>541</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_11">
-        <item>
-         <widget class="QLabel" name="label_13">
-          <property name="text">
-           <string>Vector proiection trasformation information</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTextBrowser" name="textBrowserLayer"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_14">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Raster proiection trasformation information</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QTextBrowser" name="textBrowserRaster">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_16">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>Vector proiection trasformation information</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextBrowser" name="textBrowserLayer"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_14">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Raster proiection trasformation information</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextBrowser" name="textBrowserRaster">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
