@@ -51,7 +51,6 @@ class OGR2LayersClassLayer:
         self.layer = layer
         #qgis layer source
         self.source = self.layer.source()
-        self.source.remove(QRegExp('\|layerid=[\d]+$'))
         #layer name
         self.name = self.layer.name()
         #layer output format
@@ -59,7 +58,7 @@ class OGR2LayersClassLayer:
         #putput vector name
         self.outputName = unicode(self.name + "." + self.outputFormat)
         #input epsg
-        self.inEpsg = self.layer.crs().epsg()
+        self.inEpsg = self.layer.crs().authid()
         #set the output epsg code
         if outProj == "EPSG:900913":
             self.outputEpsg = 900913

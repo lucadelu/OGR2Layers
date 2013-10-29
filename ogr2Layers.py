@@ -116,15 +116,11 @@ class OGR2Layers:
             #check if is a vector
             if layer.type() == layer.VectorLayer:
                 self.layers.append(layer)
-                #this is for remove "layerid=*" when use "Unique Value" symbology
                 source=layer.source()
-                source.remove(QRegExp('\|layerid=[\d]+$'))
                 self.dlg.ui.LayerList.addItem(source)
             if layer.type() == layer.RasterLayer:
                 self.rasters.append(layer)
-                #this is for remove "layerid=*" when use "Unique Value" symbology
                 source=layer.source()
-                source.remove(QRegExp('\|layerid=[\d]+$'))
                 self.dlg.ui.RasterList.addItem(source)              
         #check if there is some vectors layer, else return an error
         #if len(self.layers) == 0:
@@ -204,8 +200,8 @@ class OGR2Layers:
     def SelectKmlDir(self):
         #set up the output dir for new vector files
         global mydir
-        mydir = QFileDialog.getExistingDirectory( None,QString("Choose the GML"\
-        " files destination folder"),"")
+        mydir = QFileDialog.getExistingDirectory( None,
+                        "Choose the GML files destination folder","")
         if os.access(mydir, os.W_OK):
             self.dlg.ui.kmldirpath.setText(mydir)
             return
