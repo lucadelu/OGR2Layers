@@ -23,10 +23,10 @@ def description():
     return " A plugin to export OGR layers to OpenLayers HTML"
   
 def version():
-    return "Version 0.8.8"
+    return "Version 0.9"
   
 def qgisMinimumVersion():
-    return "1.6"
+    return "2.0"
   
 def authorName():
     return "Nicolas BOZON, Rene-Luc D'HONT, Michael DOUCHIN, Mathias Walker, Luca DELUCCHI"

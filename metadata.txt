@@ -1,9 +1,9 @@
 ; the next section is mandatory
 [general]
 name=OGR2Layers
-qgisMinimumVersion=1.6
+qgisMinimumVersion=2.0
 description=Export OGR layers to OpenLayers HTML
-version=version 0.8.8
+version=version 0.9
 ; end of mandatory metadata
 
 ; start of optional metadata
