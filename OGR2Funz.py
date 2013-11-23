@@ -27,7 +27,7 @@ def fieldsName(layer):
     nameFields=[]
     for i in fields:
         #add the name of field
-        nameFields.append(fields[i].name())
+        nameFields.append(i.name())
     #return a list with the name of fields
     return nameFields
 
