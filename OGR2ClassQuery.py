@@ -18,6 +18,7 @@
 
 from OGR2Funz import *
 
+
 class OGR2LayersClassQuery:
     """A class to convert and add layer to the file
         layer = QGIS layer
@@ -44,8 +45,9 @@ class OGR2LayersClassQuery:
 
     def createQuery(self):
         #start javascript code for the query (add selectControl)
-        html_query=['//START QUERY '+ self.name]
-        html_query.append('\n\tfunction onPopupClose' + self.name + '(evt) {\n\t\tselectControl.unselect(selectedFeature);\n\t}\n\t')
+        html_query = ['//START QUERY ' + self.name]
+        html_query.append('\n\tfunction onPopupClose' + self.name + '(evt) ' \
+                          '{\n\t\tselectControl.unselect(selectedFeature);\n\t}\n\t')
         #add function for features selected
         html_query.append('function onFeatureSelect' + self.name +
         '(feature){\n\t\tselectedFeature = feature;')
@@ -58,13 +60,18 @@ class OGR2LayersClassQuery:
         #else
               #AGGIUNGERE ERRORE
         #add popup to the function for features selected
-        html_query.append('\n\t\tpopup = new OpenLayers.Popup.FramedCloud("chicken", \n\t\t\tfeature.geometry.getBounds().getCenterLonLat(),\n\t\t\tnew '\
-        'OpenLayers.Size(1000,500),\n\t\t\ttable'+self.name+',\n\t\t\tnull,'\
-        '\n\t\t\ttrue,\n\t\t\tonPopupClose'+self.name+'\n\t\t); \n\t\t'\
-        'feature.popup = popup;\n\t\tmap.addPopup(popup);\n\t}\n\t')
+        html_query.append('\n\t\tpopup = new OpenLayers.Popup.FramedCloud(' \
+                          '"chicken", \n\t\t\tfeature.geometry.getBounds().' \
+                          'getCenterLonLat(),\n\t\t\tnew OpenLayers.Size'\
+                          '(1000,500),\n\t\t\ttable' + self.name + ',\n\t\t\t'\
+                          'null,\n\t\t\ttrue,\n\t\t\tonPopupClose' + self.name + \
+                          '\n\t\t); \n\t\tfeature.popup = popup;\n\t\tmap.' \
+                          'addPopup(popup);\n\t}\n\t')
         #create function for unselect features
-        html_query.append('function onFeatureUnselect'+self.name+'(feature) {\n\t\tmap.removePopup(feature.popup);\n\t\tfeature.popup.destroy();'\
-        '\n\t\tfeature.popup = null;\n\t}\n\t//STOP QUERY '+self.name+'\n\t');
+        html_query.append('function onFeatureUnselect' + self.name + \
+                          '(feature) {\n\t\tmap.removePopup(feature.popup);' \
+                          '\n\t\tfeature.popup.destroy();\n\t\tfeature.popup' \
+                          ' = null;\n\t}\n\t//STOP QUERY ' + self.name + '\n\t');
         #return javascript code for the query
         return html_query
 
@@ -74,39 +81,44 @@ class OGR2LayersClassQuery:
         layer = the input layer
         """
         #add javascript table for popup
-        html=['\n\t\ttable'+self.name+'="<html><meta http-equiv=\'Content-Type\' '\
-        'content=\'text/html; charset=UTF-8\'><body><table>"']
+        html = ['\n\t\ttable' + self.name + '="<html><meta http-equiv=\''\
+        'Content-Type\' content=\'text/html; charset=UTF-8\'><body><table>"']
         #for each field add a column for the feature
         for field in self.fieldsNameLayer:
-            html.append('\n\t\ttable'+self.name+'+="<tr><td><b>' + field + ':</b></td><td>"+urlCheck(feature.'\
-            'attributes.' + field + ')+"</td></tr>"')
-        html.append('\n\t\ttable'+self.name+'+="</table></body></html>"; ')
+            html.append('\n\t\ttable' + self.name + '+="<tr><td><b>' + field +\
+                        ':</b></td><td>"+urlCheck(feature.'\
+                        'attributes.' + field + ')+"</td></tr>"')
+        html.append('\n\t\ttable' + self.name + '+="</table></body></html>"; ')
         #return javascript code
         return html
 
     def htmlTableCluster(self):
-        """ Create html table for the query using cluster strategy; it's used in createQuery
+        """ Create html table for the query using cluster strategy; it's used
+        in createQuery
         fields = a list of all field name (return from fieldsName function)
         layer = the input layer
         """
         #start table
-        html=['\n\t\ttable'+self.name+'="<html><meta http-equiv=\'Content-Type\' '\
-        'content=\'text/html; charset=UTF-8\'><body><table><tr bgcolor=\'#c5e2ca\'>']
+        html = ['\n\t\ttable' + self.name + '="<html><meta http-equiv=\''\
+              'Content-Type\' content=\'text/html; charset=UTF-8\'><body>' \
+              '<table><tr bgcolor=\'#c5e2ca\'>']
         #for each field add a column with the name of the field
         for field in self.fieldsNameLayer:
-            html.append('<td>'+field+'</td>')
+            html.append('<td>' + field + '</td>')
         #finisc the caption row
         html.append('</tr>";')
         #add javascript code for all features select create a row
         html.append('\n\t\tfor (var i=0; i < feature.cluster.length; ++i){'\
-        '\n\t\t\ttable'+self.name+'+="<tr>')
+                    '\n\t\t\ttable' + self.name + '+="<tr>')
         #for each field add a column in the row of selected features
         for field in self.fieldsNameLayer:
-            html.append('<td>"+urlCheck(feature.cluster[i].attributes.'+field+')+"</td>')
-        html.append('</tr>"\n\t\t}\n\t\ttable'+self.name+'+="</table></body>'\
-        '</html>"; ')
+            html.append('<td>"+urlCheck(feature.cluster[i].attributes.' + \
+                        field + ')+"</td>')
+        html.append('</tr>"\n\t\t}\n\t\ttable' + self.name + '+="</table>'\
+                    '</body></html>"; ')
         #return javascript code
         return html
+
 
 class OGR2LayersClassControlSel:
     """A class to convert and add layer to the file
@@ -133,14 +145,16 @@ class OGR2LayersClassControlSel:
             #append layer name to control
             html.append(name + ', ')
         html.append('],\n\t\t{\n\t\t\tclickout: true, toggle: false, \n\t\t\t'\
-        'multiple: false, hover: false, \n\t\t\ttoggleKey: "ctrlKey", // ctrl key'\
-        ' removes from selection\n\t\t\tmultipleKey: "shiftKey" // shift key adds'\
-        ' to selection\n\t\t}\n\t);\n\tmap.addControl(selectControl);\n\t'\
-        'selectControl.activate();')
+                    'multiple: false, hover: false, \n\t\t\ttoggleKey: "'\
+                    'ctrlKey", // ctrl key removes from selection\n\t\t\t'\
+                    'multipleKey: "shiftKey" // shift key adds to selection'\
+                    '\n\t\t}\n\t);\n\tmap.addControl(selectControl);\n\t' \
+                    'selectControl.activate();')
         for layer in self.layers:
             name = str(layer.name())
-            html.append('\n\t' + name + '.events.on({\n\t\t"featureselected": '\
-            'function(e) {\n\t\t\tonFeatureSelect' + name + '(e.feature);\n\t\t},'\
-            '\n\t\t"featureunselected": function(e) {\n\t\t\tonFeatureUnselect' +
-            name + '(e.feature);\n\t\t}\n\t});\n\t')
+            html.append('\n\t' + name + '.events.on({\n\t\t"featureselected":'\
+                        ' function(e) {\n\t\t\tonFeatureSelect' + name + \
+                        '(e.feature);\n\t\t},\n\t\t"featureunselected": ' \
+                        'function(e) {\n\t\t\tonFeatureUnselect' + name + \
+                        '(e.feature);\n\t\t}\n\t});\n\t')
         return html

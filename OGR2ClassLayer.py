@@ -21,7 +21,6 @@ from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 
-import sys
 import os
 import string
 
@@ -73,7 +72,8 @@ class OGR2LayersClassLayer:
         #directory where save files
         self.pathSave = mydir
         #name of file to write
-        self.destPathName =  os.path.abspath(os.path.join(self.pathSave,self.outputName))
+        self.destPathName =  os.path.abspath(os.path.join(self.pathSave,
+                                                          self.outputName))
         #class query
         self.classQuery = OGR2LayersClassQuery(self.layer, self.query)
 
@@ -92,21 +92,10 @@ class OGR2LayersClassLayer:
             else:
                 if self.writeShape():
                     return 0
-                #nameFileWFS = os.path.abspath(os.path.join(self.pathSave,
-                #str(self.name) + "_temp.shp"))
-                #QgsVectorFileWriter.deleteShapeFile(nameFileWFS)
-                #inputQgsReference = QgsCoordinateReferenceSystem()
-                #inputQgsReference.createFromEpsg(self.inEpsg)
-                #writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer,
-                #nameFileWFS, "UTF8", inputQgsReference)
-                #if writeShape == QgsVectorFileWriter.NoError:
-                    #OGR2ogr.Ogr2Ogr(nameFileWFS, str(self.destPathName), self.outputEpsg,
-                    #self.inEpsg, self.outputFormat)
-                    #self.OpenLayersFormat = "GML"
                 else:
                     raise Exception, "Some problem with convertion from WFS"
         #add other vector type
-        else :
+        else:
             #spatialite
             if (self.providerName == "spatialite" or self.providerName == "postgres"):
                 if self.writeShape():
@@ -119,14 +108,14 @@ class OGR2LayersClassLayer:
                 #mysource_temp = str(mysource_temp.split('=')[1])
                 #self.source = mysource_temp.replace("'","")
             #grass
-            elif (self.providerName == "grass"): #grass
+            elif (self.providerName == "grass"):  # grass
                 mysource_temp = str(self.source).split('/')[0:-1]
-                mysource_temp.insert(-1,"vector")
+                mysource_temp.insert(-1, "vector")
                 mysource_temp.append("head")
-                self.source = string.join(mysource_temp,'/')
+                self.source = string.join(mysource_temp, '/')
             #other type of vector like Esri shapefile, GML, KML, GeoJson
-            OGR2ogr.Ogr2Ogr(str(self.source), str(self.destPathName), self.outputEpsg,
-            self.inEpsg, self.outputFormat)
+            OGR2ogr.Ogr2Ogr(str(self.source), str(self.destPathName),
+                            self.outputEpsg, self.inEpsg, self.outputFormat)
             self.OpenLayersFormat = "GML"
             return 0
 
@@ -150,7 +139,8 @@ class OGR2LayersClassLayer:
         if self.rendering == 'qgis':
             try:
             #class rendering
-                self.classStyle = OGR2LayersClassStyle(self.layer,self.pathSave)
+                self.classStyle = OGR2LayersClassStyle(self.layer,
+                                                       self.pathSave)
                 self.image = self.classStyle.svg
                 return self.classStyle.typeRendering()
             except Exception, e:
@@ -189,6 +179,6 @@ class OGR2LayersClassLayer:
         if self.query != 'cluster' and self.rendering == 'qgis':
             htmlLayer.append(', styleMap: ' + self.name + '_style')
         #for all it closes the layer ) and add it to the map
-        htmlLayer.append('});\n\tmap.addLayer('+ self.name +');\n\t')
+        htmlLayer.append('});\n\tmap.addLayer(' + self.name + ');\n\t')
 
         return htmlLayer

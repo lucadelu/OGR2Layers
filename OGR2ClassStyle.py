@@ -52,7 +52,8 @@ class OGR2LayersClassStyle:
                 self.numFieldClass = self.renderer.classificationAttributes()[0]
                 self.nameField = nameAttrField(self.layer, self.numFieldClass)
         except:
-            #raise Exception, "New symbology is not yet implement, it'll be soon ready\n"
+            #raise Exception, "New symbology is not yet implement, 
+            #it'll be soon ready\n"
             self.version = 2
             self.renderer = self.layer.rendererV2()
             #type of rendering

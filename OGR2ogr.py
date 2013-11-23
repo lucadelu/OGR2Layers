@@ -6,28 +6,28 @@
 # email : lucadeluge@gmail.com
 #
 #############################################
-#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2              #
-#       This program is free software; you can redistribute it and/or modify    #
-#       it under the terms of the GNU General Public License as published by    #
-#       the Free Software Foundation; either version 2 of the License, or       #
-#       (at your option) any later version.                                     #
-#       This program is distributed in the hope that it will be useful,         #
-#       but WITHOUT ANY WARRANTY; without even implied warranty of              #
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    # 
-#       See the GNU General Public License for more details.                    #
+#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2            #
+#       This program is free software; you can redistribute it and/or modify  #
+#       it under the terms of the GNU General Public License as published by  #
+#       the Free Software Foundation; either version 2 of the License, or     #
+#       (at your option) any later version.                                   #
+#       This program is distributed in the hope that it will be useful,       #
+#       but WITHOUT ANY WARRANTY; without even implied warranty of            #
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                  #
+#       See the GNU General Public License for more details.                  #
 #############################################
 
-import sys, os
-import zipfile
+import os
 import osgeo.ogr as ogr
 import osgeo.osr as osr
 
-def Ogr2Ogr(inputs,outputpath,outputEPSG,inputEPSG,outputFormat):
+
+def Ogr2Ogr(inputs, outputpath, outputEPSG, inputEPSG, outputFormat):
     """ This function convert file of input to output format and output EPSG
-    using ogr and osr python library 
+    using ogr and osr python library
     inputs == path to input file
     outputpath == directory where write file
-    outputEPSG == 
+    outputEPSG ==
     inputEPSG ==
     outputFormat ==
     """
@@ -57,19 +57,18 @@ def Ogr2Ogr(inputs,outputpath,outputEPSG,inputEPSG,outputFormat):
     #create output layer
     outLayer = outDatasource.CreateLayer(inLayerName, geom_type=inGeomwkb)
     #create output feature definition
-    outFeatDefn = featureDefinition(inLayer,outLayer)
+    outFeatDefn = featureDefinition(inLayer, outLayer)
     #field's name list of input layer
     inFieldsName = fieldsName(inLayer)
     #loop inside the feature
     inFeatures = inLayer.GetNextFeature()
-    while inFeatures: 
+    while inFeatures:
         #found geometry and trasform it in the output system reference system
         geom = inFeatures.GetGeometryRef()
-        
+
         ##########
         #settare la geometria a quella di input, variabile inputEPSG
         ############
-    
         geom.TransformTo(outSpatial)
         #create output feature
         outFeature = ogr.Feature(outFeatDefn)
@@ -82,36 +81,38 @@ def Ogr2Ogr(inputs,outputpath,outputEPSG,inputEPSG,outputFormat):
         outLayer.CreateFeature(outFeature)
         #destroy input and output feature
         outFeature.Destroy()
-        inFeatures.Destroy()             
+        inFeatures.Destroy()
         inFeatures = inLayer.GetNextFeature()
     #destroy input and output datasource
     inDatasource.Destroy()
     outDatasource.Destroy()
     return 3
-  
+
+
 def geometryType(geomType):
     """ check the geometry type and return the ogr definition for that type
     geomType = geometry type of input vector
     """
-    if geomType==1:
-        geomwkb = ogr.wkbPoint 
-    elif geomType==2:
+    if geomType == 1:
+        geomwkb = ogr.wkbPoint
+    elif geomType == 2:
         geomwkb = ogr.wkbLineString
-    elif geomType==3:
+    elif geomType == 3:
         geomwkb = ogr.wkbPolygon
-    elif geomType==4:
+    elif geomType == 4:
         geomwkb = ogr.wkbMultiPoint
-    elif geomType==5:
+    elif geomType == 5:
         geomwkb = ogr.wkbMultiLineString
-    elif geomType==6:
+    elif geomType == 6:
         geomwkb = ogr.wkbMultiPolygon
     else:
         print "Some problem occurs in the geometry type"
         return 0
     return geomwkb
-  
-def featureDefinition(layer,outlayer):
-    """ Return the output feature definition from the input definition; it's 
+
+
+def featureDefinition(layer, outlayer):
+    """ Return the output feature definition from the input definition; it's
     used in Ogr2Ogr function
     layer = imput vector file
     outlayer = output vector file
@@ -130,7 +131,7 @@ def featureDefinition(layer,outlayer):
         nameField = fieldDefn.GetName()
         # obtain the type
         typeField = fieldDefn.GetType()
-        # obtain 
+        # obtain
         justiField = fieldDefn.GetJustify()
         # obtain the width of field
         widthField = fieldDefn.GetWidth()
@@ -152,7 +153,8 @@ def featureDefinition(layer,outlayer):
         outFeatureDefn.AddFieldDefn(outField)
     #return feature definition
     return outFeatureDefn
-  
+
+
 def fieldsName(layer):
     """ Return a list of field's name; it's used on Ogr2Ogr function
     layer = input vector layer
