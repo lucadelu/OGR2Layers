@@ -6,15 +6,15 @@
 #       Email: lucadelucchi_at_gmail_dot_com
 #
 #############################################
-#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2              #
-#       This program is free software; you can redistribute it and/or modify    #
-#       it under the terms of the GNU General Public License as published by    #
-#       the Free Software Foundation; either version 2 of the License, or       #
-#       (at your option) any later version.                                     #
-#       This program is distributed in the hope that it will be useful,         #
-#       but WITHOUT ANY WARRANTY; without even implied warranty of              #
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    # 
-#       See the GNU General Public License for more details.                    #
+#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2            #
+#       This program is free software; you can redistribute it and/or modify  #
+#       it under the terms of the GNU General Public License as published by  #
+#       the Free Software Foundation; either version 2 of the License, or     #
+#       (at your option) any later version.                                   #
+#       This program is distributed in the hope that it will be useful,       #
+#       but WITHOUT ANY WARRANTY; without even implied warranty of            #
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                  #
+#       See the GNU General Public License for more details.                  #
 #############################################
 
 
@@ -22,10 +22,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
 
-import os, sys
+import os
 import os2emxpath
 
 from OGR2Funz import *
+
 
 class OGR2LayersClassStyle:
     """A class to create style of layer and the relative code"""
@@ -49,7 +50,7 @@ class OGR2LayersClassStyle:
             self.typeRend = str(self.renderer.name())
             if self.typeRend != 'Single Symbol':
                 self.numFieldClass = self.renderer.classificationAttributes()[0]
-                self.nameField = nameAttrField(self.layer,self.numFieldClass)
+                self.nameField = nameAttrField(self.layer, self.numFieldClass)
         except:
             #raise Exception, "New symbology is not yet implement, it'll be soon ready\n"
             self.version = 2
@@ -98,7 +99,8 @@ class OGR2LayersClassStyle:
             return self.singleSymbol2()
         #if Unique Value
         elif self.typeRend == 'categorizedSymbol':
-            #raise Exception, "New categorized symbology is not yet implement, it'll be soon ready\n"
+            #raise Exception, "New categorized symbology is not yet implement,
+            #it'll be soon ready\n"
             return self.uniqueVal2()
         else:
             raise Exception, "There are some problem with the rendering\n"
@@ -107,20 +109,20 @@ class OGR2LayersClassStyle:
         """Return the javascript code for single symbology"""
         style = self.renderer.symbols()
         #set stroke color
-        strokeColor=style[0].color().name()
+        strokeColor = style[0].color().name()
         #set fill color
         # check if it's opaque or not
         if style[0].brush().isOpaque():
-            fillColor=style[0].fillColor().name()
+            fillColor = style[0].fillColor().name()
         else:
-            fillColor=0
+            fillColor = 0
         #set line width
-        lineWidth=style[0].lineWidth()
+        lineWidth = style[0].lineWidth()
         #javascript code
-        html_style= ['var ' + self.name + '_template = { \n\t\t']
+        html_style = ['var ' + self.name + '_template = { \n\t\t']
         #if is point geometry add the point size
         if self.typeGeom == 0:
-            pointSize=style[0].pointSize()
+            pointSize = style[0].pointSize()
             html_style.append('pointRadius: ' + str(pointSize) + ',\n\t\t')
             self.imagePNG(style[0])
             if self.svg:
@@ -157,13 +159,13 @@ class OGR2LayersClassStyle:
         fillColor = 'rgb(%s)' % ",".join(style['color'].split(',')[:-1])
         alpha = symbol.alpha()
         #javascript code
-        html_style= ['var ' + self.name + '_template = { \n\t\t']
+        html_style = ['var ' + self.name + '_template = { \n\t\t']
         #if is point geometry add the point size
         if self.typeGeom == 0:
             #set stroke color
-            strokeColor='rgb(%s)' % ",".join(style['color_border'].split(',')[:-1])
+            strokeColor = 'rgb(%s)' % ",".join(style['color_border'].split(',')[:-1])
             #set line width
-            size=style['size']
+            size = style['size']
             html_style.append('pointRadius: ' + size + ',\n\t\t')
             #TO CHECK FOR NEW STYLE
             #self.imagePNG(style[0])
@@ -186,7 +188,7 @@ class OGR2LayersClassStyle:
             )
         elif self.typeGeom == 2:
             #set stroke color
-            strokeColor='rgb(%s)' % ",".join(style['color_border'].split(',')[:-1])
+            strokeColor = 'rgb(%s)' % ",".join(style['color_border'].split(',')[:-1])
             lineWidth = style['width_border']
             html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
               'strokeOpacity: ' + str(alpha) + ',\n\t\t'\
@@ -226,16 +228,20 @@ class OGR2LayersClassStyle:
             )
         if self.typeGeom == 0:
             #add style for stroke color value
-            html_style.extend(self.addElementStyleUnique(styleMap,'Point'))
+            html_style.extend(self.addElementStyleUnique(styleMap, 'Point'))
             if self.svg:
-                html_style.extend(self.addElementStyleUnique(styleMap,'Graphic'))
+                html_style.extend(self.addElementStyleUnique(styleMap,
+                                                             'Graphic'))
         if not self.svg:
             #add style for stroke color value
-            html_style.extend(self.addElementStyleUnique(styleMap,'StrokeColor'))
+            html_style.extend(self.addElementStyleUnique(styleMap,
+                                                         'StrokeColor'))
             #add style for fill color value
-            html_style.extend(self.addElementStyleUnique(styleMap,'FillColor'))
+            html_style.extend(self.addElementStyleUnique(styleMap,
+                                                         'FillColor'))
             #add style for line width value
-            html_style.extend(self.addElementStyleUnique(styleMap,'LineWidth'))
+            html_style.extend(self.addElementStyleUnique(styleMap,
+                                                         'LineWidth'))
         #close the style
         html_style.append('\n\t\t\t}\n\t\t}\n\t);\n\t')
         return html_style
@@ -267,39 +273,44 @@ class OGR2LayersClassStyle:
             if self.typeGeom == 0 or self.typeGeom == 2:
                 html_style.append('fillColor: "${getFillColor}",\n\t\t\t'\
                   'fillOpacity: "${getOpacity}"\n\t\t')
-        html_style.append('}, OpenLayers.Feature.Vector.style["default"]), {\n\t\t\t'\
-          'context: {\n\t\t\t\t')
+        html_style.append('}, OpenLayers.Feature.Vector.style["default"]),'\
+                          ' {\n\t\t\tcontext: {\n\t\t\t\t')
         if self.typeGeom == 0:
             #add style for stroke color value
-            html_style.extend(self.addElementStyleUnique2(styleMap,'Point'))
+            html_style.extend(self.addElementStyleUnique2(styleMap, 'Point'))
             if self.svg:
-                html_style.extend(self.addElementStyleUnique2(styleMap,'Graphic'))
+                html_style.extend(self.addElementStyleUnique2(styleMap,
+                                                              'Graphic'))
         if not self.svg:
             #add style for stroke color value
-            html_style.extend(self.addElementStyleUnique2(styleMap,'Opacity'))
+            html_style.extend(self.addElementStyleUnique2(styleMap,
+                                                          'Opacity'))
             #add style for stroke color value
-            html_style.extend(self.addElementStyleUnique2(styleMap,'StrokeColor'))
+            html_style.extend(self.addElementStyleUnique2(styleMap,
+                                                          'StrokeColor'))
             if self.typeGeom != 1:
                 #add style for fill color value
-                html_style.extend(self.addElementStyleUnique2(styleMap,'FillColor'))
+                html_style.extend(self.addElementStyleUnique2(styleMap,
+                                                              'FillColor'))
             if self.typeGeom > 0:
                 #add style for line width value
-                html_style.extend(self.addElementStyleUnique2(styleMap,'LineWidth'))
+                html_style.extend(self.addElementStyleUnique2(styleMap,
+                                                              'LineWidth'))
         #close the style
         html_style.append('\n\t\t\t}\n\t\t}\n\t);\n\t')
         return html_style
 
-    def addElementStyleUnique(self,styleMap,element):
+    def addElementStyleUnique(self, styleMap, element):
         """ Function for the point size (used with vector point);
             it's used in uniqueVal function
         styleMap = stile map in qgis format
         nameField = the name of field for the classification
         """
-        value=0
+        value = 0
         # the higher number od styleMap
-        higValue=len(styleMap)-1
+        higValue = len(styleMap) - 1
         #for each field in styleMap
-        for z,y in styleMap.iteritems():
+        for z, y in styleMap.iteritems():
             if element == 'Point':
                 valueStyle = str(y.pointSize())
             elif element == 'Graphic':
@@ -315,13 +326,13 @@ class OGR2LayersClassStyle:
                 else:
                     valueStyle = '"0"'
             # if the field is the first
-            if (value==0):
+            if (value == 0):
                 html_element = ['get' + element + ': function(feature) {\n\t\t\t\t\t' \
                 + 'if (feature.attributes.' + self.nameField + '=="' + z + '")' \
-                + '{\n\t\t\t\t\t\telement='+ valueStyle +';\n\t\t\t\t\t}']
-                value=value+1
+                + '{\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t}']
+                value = value + 1
             # if the field is the last
-            elif (value==higValue):
+            elif (value == higValue):
                 html_element.append(' else if (feature.attributes.' + self.nameField +
                 '=="' + z + '"){\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t'\
                 + '} else {\n\t\t\t\t\t\telement="NULL";\n\t\t\t\t\t}\n\t\t\t\t\t' \
@@ -329,23 +340,22 @@ class OGR2LayersClassStyle:
             else:
                 html_element.append(' else if (feature.attributes.' + self.nameField +
                 '=="' + z + '"){\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t}')
-                value=value+1
+                value = value + 1
         #return the code
         return html_element
 
-
-    def addElementStyleUnique2(self,styleMap,element):
+    def addElementStyleUnique2(self, styleMap, element):
         """ Function for the point size (used with vector point);
             it's used in uniqueVal function
         styleMap = stile map in qgis format
         nameField = the name of field for the classification
         """
-        value=0
+        value = 0
         # the higher number od styleMap
-        higValue=len(styleMap)-1
+        higValue = len(styleMap) - 1
         #for each field in styleMap
         for cat in styleMap:
-            z = cat.value().toString()
+            z = cat.value()
             symbol = cat.symbol()
             self.checkSymbol2(symbol)
             style = dictV2(symbol.symbolLayer(0).properties())
@@ -372,15 +382,18 @@ class OGR2LayersClassStyle:
                 valueStyle = str(symbol.alpha())
             #check if " string is present in the values and replace with \"
             #(this fix for example OSM tags, data downloaded with QGIS OSM plugin)
-            z=z.replace('"','\\"')
+            try:
+                z = z.replace('"', '\\"')
+            except:
+                z = 'None'
             # if the field is the first
-            if (value==0):
+            if (value == 0):
                 html_element = ['get' + element + ': function(feature) {\n\t\t\t\t\t' \
                 + 'if (feature.attributes.' + self.nameField + '=="' + z + '")' \
-                + '{\n\t\t\t\t\t\telement='+ valueStyle +';\n\t\t\t\t\t}']
-                value=value+1
+                + '{\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t}']
+                value = value + 1
             # if the field is the last
-            elif (value==higValue):
+            elif (value == higValue):
                 html_element.append(' else if (feature.attributes.' + self.nameField +
                 '=="' + z + '"){\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t'\
                 + '} else {\n\t\t\t\t\t\telement="NULL";\n\t\t\t\t\t}\n\t\t\t\t\t' \
@@ -388,10 +401,9 @@ class OGR2LayersClassStyle:
             else:
                 html_element.append(' else if (feature.attributes.' + self.nameField +
                 '=="' + z + '"){\n\t\t\t\t\t\telement=' + valueStyle + ';\n\t\t\t\t\t}')
-                value=value+1
+                value = value + 1
         #return the code
         return html_element
-
 
     def gradSymbol(self):
         """Return the javascript code for graduated symbology"""
@@ -501,37 +513,37 @@ class OGR2LayersClassStyle:
                 valueFeat = attrs.values()[nClassField].toDouble()[0]
                 #diffValue =
                 if (maxValue - minValue != 0):
-                    red = str(maxColor.red() * ( valueFeat - minValue ) /
-                    ( maxValue - minValue ) + minColor.red() * ( maxValue - valueFeat ) /
-                    ( maxValue - minValue ));
-                    green = str(maxColor.green() * ( valueFeat - minValue ) /
-                    ( maxValue - minValue ) + minColor.green() * ( maxValue - valueFeat ) /
-                    ( maxValue - minValue ));
-                    blue =  str(maxColor.blue() * ( valueFeat - minValue ) /
-                    ( maxValue - minValue ) + minColor.blue() * ( maxValue - valueFeat ) /
-                    ( maxValue - minValue ));
-                else :
-                    red = str(minColor.red());
-                    green = str(minColor.green());
-                    blue = str(minColor.blue());
+                    red = str(maxColor.red() * (valueFeat - minValue) /
+                    (maxValue - minValue) + minColor.red() * (maxValue - valueFeat) /
+                    (maxValue - minValue))
+                    green = str(maxColor.green() * (valueFeat - minValue) /
+                    (maxValue - minValue) + minColor.green() * (maxValue - valueFeat) /
+                    (maxValue - minValue))
+                    blue = str(maxColor.blue() * (valueFeat - minValue) /
+                    (maxValue - minValue) + minColor.blue() * (maxValue - valueFeat) /
+                    (maxValue - minValue))
+                else:
+                    red = str(minColor.red())
+                    green = str(minColor.green())
+                    blue = str(minColor.blue())
                 # if the field is the first
                 if (value == 0):
                     html_style.append('getFillColor : function(feature) {\n\t\t\t\t\t' \
                     + 'if (feature.attributes.' + self.nameField + '=="' + str(valueFeat)
-                    + '"){\n\t\t\t\t\t\telement= rgb('+ red +', '+ green +', '+ blue +
+                    + '"){\n\t\t\t\t\t\telement= rgb(' + red + ', ' + green + ', ' + blue +
                     ');\n\t\t\t\t\t}')
-                    value=value+1
+                    value = value + 1
                 else:
                     html_style.append(' else if (feature.attributes.' + self.nameField +
                     '=="' + str(valueFeat) + '"){\n\t\t\t\t\t\telement=rgb('+ red +', '+
-                    green +', '+ blue +');\n\t\t\t\t\t}')
-                    value=value+1
+                    green +', ' + blue +');\n\t\t\t\t\t}')
+                    value = value + 1
         html_style.append(' else {\n\t\t\t\t\t\telement="NULL";\n\t\t\t\t\t}'\
         '\n\t\t\t\t\t return element;\n\t\t\t\t},\n\t\t\t\t\n\t\t\t}\n\t\t}\n\t);'\
         '\n\t')
         return html_style
 
-    def imagePNG(self,style):
+    def imagePNG(self, style):
         name = str(style.pointSymbolName())
         typ = name.split(':')
         # DA CORREGGERE PER FAR FUNZIONARE SOTTO WIN
@@ -540,20 +552,20 @@ class OGR2LayersClassStyle:
         if typ[0] == 'svg':
             if actualSize <= 50:
                 style.setPointSize(50)
-                image=style.getPointSymbolAsImage()
+                image = style.getPointSymbolAsImage()
                 style.setPointSize(actualSize)
             else:
-                image=style.getPointSymbolAsImage()
-            self.nameSvg = os.path.abspath(os.path.join(str(self.path), nameImage +
-            '.png'))
-            if image.save(self.nameSvg,'png'):
+                image = style.getPointSymbolAsImage()
+            self.nameSvg = os.path.abspath(os.path.join(str(self.path),
+                                                        nameImage + '.png'))
+            if image.save(self.nameSvg, 'png'):
                 #set svg variable tu true
                 self.svg = True
             else:
                 raise Exception, "There are some problem in the conversion of symbol in png image\n"
         return 0
 
-    def checkSymbol2(self,symbol):
+    def checkSymbol2(self, symbol):
         """Check if a symbol has some problem for OpenLayers style"""
         #check how many symbols there are in a symbolset
         if symbol.symbolLayerCount() != 1:
@@ -561,7 +573,7 @@ class OGR2LayersClassStyle:
             self.log += "         On vector <b>%s</b>, style type %s, first symbol is used <br />" % (
                         self.name, self.typeRend)
 
-    def checkProprierties2(self,prop):
+    def checkProprierties2(self, prop):
         """Check if the style of rendering it is supported by OpenLayers style"""
         if self.typeGeom == 0:
             if 'color' not in prop.keys() or 'color_border' not in prop.keys():
