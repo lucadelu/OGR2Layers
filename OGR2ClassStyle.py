@@ -42,7 +42,7 @@ class OGR2LayersClassStyle:
         # path to save image from svg
         self.path = directory
         # layer renderer
-        if self.layer.renderer() != None:
+        try:
             self.version = 1
             self.renderer = self.layer.renderer()
             #type of rendering
@@ -50,7 +50,7 @@ class OGR2LayersClassStyle:
             if self.typeRend != 'Single Symbol':
                 self.numFieldClass = self.renderer.classificationAttributes()[0]
                 self.nameField = nameAttrField(self.layer,self.numFieldClass)
-        elif self.layer.rendererV2() != None:
+        except:
             #raise Exception, "New symbology is not yet implement, it'll be soon ready\n"
             self.version = 2
             self.renderer = self.layer.rendererV2()
