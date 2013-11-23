@@ -75,12 +75,12 @@ class OGR2LayersClassQuery:
         """
         #add javascript table for popup
         html=['\n\t\ttable'+self.name+'="<html><meta http-equiv=\'Content-Type\' '\
-        'content=\'text/html; charset=UTF-8\'><body><table>']
+        'content=\'text/html; charset=UTF-8\'><body><table>"']
         #for each field add a column for the feature
         for field in self.fieldsNameLayer:
-            html.append('<tr><td><b>' + field + ':</b></td><td>"+urlCheck(feature.'\
-            'attributes.' + field + ')+"</td></tr>')
-        html.append('</table></body></html>"; ')
+            html.append('\n\t\ttable'+self.name+'+="<tr><td><b>' + field + ':</b></td><td>"+urlCheck(feature.'\
+            'attributes.' + field + ')+"</td></tr>"')
+        html.append('\n\t\ttable'+self.name+'+="</table></body></html>"; ')
         #return javascript code
         return html
 
