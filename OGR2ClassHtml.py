@@ -156,7 +156,8 @@ class OGR2LayersClassHtml:
             self.projection = "EPSG:4326"
         #Save chose Map Base Layer
         if (self.mapBaseLayer) == 0:  # OpenStreetMap (Mapnik)
-            html.append('olmapnik = new OpenLayers.Layer.OSM("OpenStreetMap Mapnik", "http://tile.openstreetmap.org/${z}/${x}/${y}.png");\n\t')
+            html.append('var attribution = {attribution:"&copy; <a href=\'http://www.openstreetmap.org/copyright\'>OpenStreetMap</a> contributors"};')
+            html.append('olmapnik = new OpenLayers.Layer.OSM("OpenStreetMap Mapnik", "http://tile.openstreetmap.org/${z}/${x}/${y}.png", attribution);\n\t')
             html.append('map.addLayer(olmapnik);\n\t')
             html.append('map.setBaseLayer(olmapnik);\n\t')
         elif (self.mapBaseLayer) == 1:  # OpenStreetMap (Osmarender)
