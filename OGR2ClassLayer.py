@@ -124,12 +124,14 @@ class OGR2LayersClassLayer:
         str(self.name) + '_temp.shp'))
         QgsVectorFileWriter.deleteShapeFile(nameFile)
         inputQgsReference = QgsCoordinateReferenceSystem()
-        inputQgsReference.createFromEpsg(self.inEpsg)
-        writeShape = QgsVectorFileWriter.writeAsShapefile(self.layer,
-        str(nameFile), "UTF8", inputQgsReference)
+        inputQgsReference.createFromString(self.inEpsg)
+        writeShape = QgsVectorFileWriter.writeAsVectorFormat(self.layer,
+                                                             str(nameFile),
+                                                             "UTF8",
+                                                             inputQgsReference)
         if writeShape == QgsVectorFileWriter.NoError:
             OGR2ogr.Ogr2Ogr(nameFile, str(self.destPathName), self.outputEpsg,
-            self.inEpsg, self.outputFormat)
+                            self.inEpsg, self.outputFormat)
             self.OpenLayersFormat = "GML"
             QgsVectorFileWriter.deleteShapeFile(nameFile)
             return True
