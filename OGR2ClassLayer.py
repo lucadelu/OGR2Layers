@@ -24,7 +24,6 @@ from qgis.gui import *
 import os
 import string
 
-import OGR2ogr
 from OGR2ClassQuery import *
 from OGR2ClassStyle import *
 
@@ -59,10 +58,7 @@ class OGR2LayersClassLayer:
         #input epsg
         self.inEpsg = self.layer.crs().authid()
         #set the output epsg code
-        if outProj == "EPSG:900913":
-            self.outputEpsg = 900913
-        elif outProj == "EPSG:4326":
-            self.outputEpsg = 4326
+        self.outputEpsg = outProj
         #type of rendering
         self.rendering = rendering
         #type of query
@@ -93,48 +89,29 @@ class OGR2LayersClassLayer:
                 if self.writeShape():
                     return 0
                 else:
-                    raise Exception, "Some problem with convertion from WFS"
+                    err = "A problem occurs during convertion of layer {l}".format(l=self.name)
+                    raise Exception, err
         #add other vector type
         else:
-            #spatialite
-            if (self.providerName == "spatialite" or self.providerName == "postgres"):
-                if self.writeShape():
-                    return 0
-                else:
-                    raise Exception, "Some problem with convertion from database"
-                #raise Exception, "There is a bug with OGR and Spatialite and " \
-                #+ "now it isn't possible support Spatialite\n" # WORK
-                #mysource_temp = self.source.split(' ')[0]
-                #mysource_temp = str(mysource_temp.split('=')[1])
-                #self.source = mysource_temp.replace("'","")
-            #grass
-            elif (self.providerName == "grass"):  # grass
-                mysource_temp = str(self.source).split('/')[0:-1]
-                mysource_temp.insert(-1, "vector")
-                mysource_temp.append("head")
-                self.source = string.join(mysource_temp, '/')
-            #other type of vector like Esri shapefile, GML, KML, GeoJson
-            OGR2ogr.Ogr2Ogr(str(self.source), str(self.destPathName),
-                            self.outputEpsg, self.inEpsg, self.outputFormat)
-            self.OpenLayersFormat = "GML"
-            return 0
+            self.writeShape()
 
     def writeShape(self):
         nameFile = os.path.abspath(os.path.join(str(self.pathSave),
         str(self.name) + '_temp.shp'))
         QgsVectorFileWriter.deleteShapeFile(nameFile)
         inputQgsReference = QgsCoordinateReferenceSystem()
-        inputQgsReference.createFromString(self.inEpsg)
+        inputQgsReference.createFromOgcWmsCrs(self.outputEpsg)
         writeShape = QgsVectorFileWriter.writeAsVectorFormat(self.layer,
-                                                             str(nameFile),
+                                                             str(self.destPathName),
                                                              "UTF8",
-                                                             inputQgsReference)
+                                                             inputQgsReference,
+                                                             self.outputFormat)
         if writeShape == QgsVectorFileWriter.NoError:
-            OGR2ogr.Ogr2Ogr(nameFile, str(self.destPathName), self.outputEpsg,
-                            self.inEpsg, self.outputFormat)
             self.OpenLayersFormat = "GML"
-            QgsVectorFileWriter.deleteShapeFile(nameFile)
             return True
+        else:
+            err = "A problem occurs during convertion of layer {l}".format(l=self.name)
+            raise Exception, err
 
     def htmlStyle(self):
         """Create javascript code for style"""
