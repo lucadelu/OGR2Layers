@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_OGR2Layers.ui.layout'
+# Form implementation generated from reading ui file 'ui_OGR2Layers.ui'
 #
-# Created: Sat Sep  1 15:30:32 2012
+# Created: Tue Dec 10 10:42:13 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_OGR2Layers(object):
     def setupUi(self, OGR2Layers):
         OGR2Layers.setObjectName(_fromUtf8("OGR2Layers"))
-        OGR2Layers.resize(525, 420)
+        OGR2Layers.resize(643, 472)
         self.verticalLayout_3 = QtGui.QVBoxLayout(OGR2Layers)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.horizontalLayout = QtGui.QHBoxLayout()
@@ -78,7 +78,7 @@ class Ui_OGR2Layers(object):
         self.horizontalLayout_11 = QtGui.QHBoxLayout()
         self.horizontalLayout_11.setObjectName(_fromUtf8("horizontalLayout_11"))
         self.label_15 = QtGui.QLabel(self.tab)
-        self.label_15.setEnabled(False)
+        self.label_15.setEnabled(True)
         self.label_15.setObjectName(_fromUtf8("label_15"))
         self.horizontalLayout_11.addWidget(self.label_15)
         self.label_30 = QtGui.QLabel(self.tab)
@@ -89,7 +89,6 @@ class Ui_OGR2Layers(object):
         self.outputRasterCombo = QtGui.QComboBox(self.tab)
         self.outputRasterCombo.setEnabled(False)
         self.outputRasterCombo.setObjectName(_fromUtf8("outputRasterCombo"))
-        self.outputRasterCombo.addItem(_fromUtf8(""))
         self.outputRasterCombo.addItem(_fromUtf8(""))
         self.horizontalLayout_11.addWidget(self.outputRasterCombo)
         self.gridLayout.addLayout(self.horizontalLayout_11, 2, 0, 1, 1)
@@ -109,7 +108,7 @@ class Ui_OGR2Layers(object):
         self.horizontalLayout_3.addWidget(self.browseButton)
         self.gridLayout.addLayout(self.horizontalLayout_3, 5, 0, 1, 1)
         self.RasterList = QtGui.QListWidget(self.tab)
-        self.RasterList.setEnabled(False)
+        self.RasterList.setEnabled(True)
         self.RasterList.setObjectName(_fromUtf8("RasterList"))
         self.gridLayout.addWidget(self.RasterList, 3, 0, 1, 1)
         self.verticalLayout_13.addLayout(self.gridLayout)
@@ -257,22 +256,21 @@ class Ui_OGR2Layers(object):
         self.verticalLayout_4.addWidget(self.groupBox)
         self.groupBox_2 = QtGui.QGroupBox(self.tab_3)
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
-        self.layoutWidget = QtGui.QWidget(self.groupBox_2)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 20, 362, 31))
-        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
-        self.horizontalLayout_15 = QtGui.QHBoxLayout(self.layoutWidget)
-        self.horizontalLayout_15.setMargin(0)
+        self.verticalLayout_17 = QtGui.QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_17.setObjectName(_fromUtf8("verticalLayout_17"))
+        self.horizontalLayout_15 = QtGui.QHBoxLayout()
         self.horizontalLayout_15.setObjectName(_fromUtf8("horizontalLayout_15"))
-        self.query = QtGui.QRadioButton(self.layoutWidget)
+        self.query = QtGui.QRadioButton(self.groupBox_2)
         self.query.setObjectName(_fromUtf8("query"))
         self.horizontalLayout_15.addWidget(self.query)
-        self.query_2 = QtGui.QRadioButton(self.layoutWidget)
+        self.query_2 = QtGui.QRadioButton(self.groupBox_2)
         self.query_2.setEnabled(True)
         self.query_2.setObjectName(_fromUtf8("query_2"))
         self.horizontalLayout_15.addWidget(self.query_2)
-        self.query_3 = QtGui.QRadioButton(self.layoutWidget)
+        self.query_3 = QtGui.QRadioButton(self.groupBox_2)
         self.query_3.setObjectName(_fromUtf8("query_3"))
         self.horizontalLayout_15.addWidget(self.query_3)
+        self.verticalLayout_17.addLayout(self.horizontalLayout_15)
         self.verticalLayout_4.addWidget(self.groupBox_2)
         self.verticalLayout_15.addLayout(self.verticalLayout_4)
         self.tabWidget.addTab(self.tab_3, _fromUtf8(""))
@@ -335,8 +333,7 @@ class Ui_OGR2Layers(object):
         self.outputFormCombo.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "GML", None, QtGui.QApplication.UnicodeUTF8))
         self.label_15.setText(QtGui.QApplication.translate("OGR2Layers", "GDAL active layers :", None, QtGui.QApplication.UnicodeUTF8))
         self.label_30.setText(QtGui.QApplication.translate("OGR2Layers", "GDAL output format", None, QtGui.QApplication.UnicodeUTF8))
-        self.outputRasterCombo.setItemText(0, QtGui.QApplication.translate("OGR2Layers", "PNG", None, QtGui.QApplication.UnicodeUTF8))
-        self.outputRasterCombo.setItemText(1, QtGui.QApplication.translate("OGR2Layers", "JPEG", None, QtGui.QApplication.UnicodeUTF8))
+        self.outputRasterCombo.setItemText(0, QtGui.QApplication.translate("OGR2Layers", "WMS", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("OGR2Layers", "Output directory", None, QtGui.QApplication.UnicodeUTF8))
         self.browseButton.setText(QtGui.QApplication.translate("OGR2Layers", "Browse", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("OGR2Layers", "QGIS", None, QtGui.QApplication.UnicodeUTF8))

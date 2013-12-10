@@ -135,7 +135,7 @@
           <item>
            <widget class="QLabel" name="label_15">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>GDAL active layers :</string>
@@ -162,12 +162,7 @@
             </property>
             <item>
              <property name="text">
-              <string>PNG</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>JPEG</string>
+              <string>WMS</string>
              </property>
             </item>
            </widget>
@@ -202,14 +197,12 @@
         <item row="3" column="0">
          <widget class="QListWidget" name="RasterList">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
-      <zorder>layoutWidget</zorder>
-      <zorder></zorder>
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">

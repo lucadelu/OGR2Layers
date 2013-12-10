@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_About.ui'
 #
-# Created: Sat Sep  1 16:24:46 2012
+# Created: Tue Dec 10 10:38:57 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_AboutDialog(object):
     def setupUi(self, AboutDialog):
         AboutDialog.setObjectName(_fromUtf8("AboutDialog"))
-        AboutDialog.resize(529, 336)
+        AboutDialog.resize(629, 418)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -197,6 +197,8 @@ class Ui_AboutDialog(object):
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-weight:600;\">Warning</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">: The svg icons are not supported yet</span></p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Sans Serif\'; font-size:10pt;\"><br /></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">In the &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">Query Options</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; the option &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; use OpenLayers Strategy Cluster, this solution allow to cluster more point features and query the group, it\'s useful when points are very neighbouring.</span></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-weight:600;\">Important</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">: remember &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; doesn\'t work with &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; symbology</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-weight:600;\">Important</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">: remember &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">query more features</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; doesn\'t work with &quot;</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">Unique Value</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">&quot; symbology</span></p>\n"
+"<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Sans Serif\'; font-size:10pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">From </span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-weight:600;\">version 0.9.0</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\"> there is </span><span style=\" font-family:\'Sans Serif\'; font-size:10pt; font-style:italic;\">support for WMS</span><span style=\" font-family:\'Sans Serif\'; font-size:10pt;\">, they must be in the same coordinate system of base layer. For example if OpenStreetMap is the base layer your WMS should accept EPSG code 3857 or 900913.</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import resources_rc

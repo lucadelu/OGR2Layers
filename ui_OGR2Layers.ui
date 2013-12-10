@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>420</height>
+    <width>643</width>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,7 +125,7 @@
            <item>
             <widget class="QLabel" name="label_15">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="text">
               <string>GDAL active layers :</string>
@@ -152,12 +152,7 @@
              </property>
              <item>
               <property name="text">
-               <string>PNG</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>JPEG</string>
+               <string>WMS</string>
               </property>
              </item>
             </widget>
@@ -192,7 +187,7 @@
          <item row="3" column="0">
           <widget class="QListWidget" name="RasterList">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -522,42 +517,36 @@
            <property name="title">
             <string>Query option</string>
            </property>
-           <widget class="QWidget" name="layoutWidget">
-            <property name="geometry">
-             <rect>
-              <x>10</x>
-              <y>20</y>
-              <width>362</width>
-              <height>31</height>
-             </rect>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_15">
-             <item>
-              <widget class="QRadioButton" name="query">
-               <property name="text">
-                <string>query one feature</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="query_2">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="text">
-                <string>query more features </string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QRadioButton" name="query_3">
-               <property name="text">
-                <string>none</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_17">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <item>
+               <widget class="QRadioButton" name="query">
+                <property name="text">
+                 <string>query one feature</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="query_2">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>query more features </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QRadioButton" name="query_3">
+                <property name="text">
+                 <string>none</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
