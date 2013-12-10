@@ -1,26 +1,28 @@
 #############################################
-#       OGR2Layers Plugin (c)  for Quantum GIS                                  #
-#       (c) Copyright Nicolas BOZON - 2008                                      #
-#       Authors: Nicolas BOZON, Rene-Luc D'HONT, Michael DOUCHIN, Luca DELUCCHI #
-#       Email: lucadeluge at gmail dot com                                      #
-#                                                                               #
+#       OGR2Layers Plugin (c)  for Quantum GIS                                #
+#       (c) Copyright Nicolas BOZON - 2008                                    #
+#       Authors: Nicolas BOZON, Rene-Luc D'HONT, Michael DOUCHIN,             #
+#       Luca DELUCCHI                                                         #
+#       Email: lucadeluge at gmail dot com                                    #
+#                                                                             #
 #############################################
-#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2              #
-#       This program is free software; you can redistribute it and/or modify    #
-#       it under the terms of the GNU General Public License as published by    #
-#       the Free Software Foundation; either version 2 of the License, or       #
-#       (at your option) any later version.                                     #
-#       This program is distributed in the hope that it will be useful,         #
-#       but WITHOUT ANY WARRANTY; without even implied warranty of              #
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                    # 
-#       See the GNU General Public License for more details.                    #
+#       OGR2Layers Plugin is licensed under the terms of GNU GPL 2            #
+#       This program is free software; you can redistribute it and/or modify  #
+#       it under the terms of the GNU General Public License as published by  #
+#       the Free Software Foundation; either version 2 of the License, or     #
+#       (at your option) any later version.                                   #
+#       This program is distributed in the hope that it will be useful,       #
+#       but WITHOUT ANY WARRANTY; without even implied warranty of            #
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.                  #
+#       See the GNU General Public License for more details.                  #
 #############################################
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-from OGR2ClassLayer import *
+from OGR2ClassLayer import OGR2LayersClassLayer
 from OGR2ClassQuery import OGR2LayersClassControlSel
-#from GDAL2ClassLayer import *
+from GDAL2ClassLayer import GDAL2LayersClassLayer
+
 
 class OGR2LayersClassHtml:
     """The class to create html and javascript code"""
@@ -62,7 +64,7 @@ class OGR2LayersClassHtml:
         #add style for map
         html.extend(self.olMapSize())
         #Call for OpenLayers 2.10 API on Metacarta servers
-        html.append('<script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>\n')
+        html.append('<script src="http://www.openlayers.org/api/2.13/OpenLayers.js"></script>\n')
         if self.mapBaseLayer in [4, 5, 6, 7]:
             html.append('<script src="http://maps.google.com/maps/api/js?v=3.5&amp;sensor=false"></script> ')
         #start javascript code
@@ -87,9 +89,9 @@ class OGR2LayersClassHtml:
             if self.layers:
                 #vector layer
                 html.extend(self.htmlLayer())
-            #if self.rasters:
-                ##raster layer
-                #html.extend(self.htmlRaster())
+            if self.rasters:
+                #raster layer
+                html.extend(self.htmlRaster())
         #return errors
         except Exception, e:
             raise e
@@ -156,7 +158,7 @@ class OGR2LayersClassHtml:
             self.projection = "EPSG:4326"
         #Save chose Map Base Layer
         if (self.mapBaseLayer) == 0:  # OpenStreetMap (Mapnik)
-            html.append('var attribution = {attribution:"&copy; <a href=\'http://www.openstreetmap.org/copyright\'>OpenStreetMap</a> contributors"};')
+            html.append('var attribution = {attribution:"&copy; <a href=\'http://www.openstreetmap.org/copyright\'>OpenStreetMap</a> contributors"};\n\t')
             html.append('olmapnik = new OpenLayers.Layer.OSM("OpenStreetMap Mapnik", "http://tile.openstreetmap.org/${z}/${x}/${y}.png", attribution);\n\t')
             html.append('map.addLayer(olmapnik);\n\t')
             html.append('map.setBaseLayer(olmapnik);\n\t')
@@ -205,7 +207,8 @@ class OGR2LayersClassHtml:
         layerSwitcherActive = self.dlg.ui.layerSwitcherActive.currentIndex()
         #it's active
         if layerSwitcherActive == 0:
-            html = ['var ls= new OpenLayers.Control.LayerSwitcher(); \n\tmap.addControl(ls); \n\tls.maximizeControl(); \n\t']
+            html = ['var ls= new OpenLayers.Control.LayerSwitcher(); ' \
+                    '\n\tmap.addControl(ls); \n\tls.maximizeControl(); \n\t']
         #is not active
         elif layerSwitcherActive == 1:
             html = ['map.addControl(new OpenLayers.Control.LayerSwitcher());\n\t']
@@ -270,8 +273,8 @@ class OGR2LayersClassHtml:
                 #check if geometry type is point
                 if layer.geometryType() == 0:
                     rendererName = False
-                    #try used because two different function of old and new symbology
-                    #check if symbology is single or not
+                    #try used because two different function of old and new
+                    #symbology check if symbology is single or not
                     try:
                         if layer.renderer().name() == 'Single Symbol':
                             rendererName = True
@@ -279,11 +282,12 @@ class OGR2LayersClassHtml:
                         if layer.rendererV2().type() == 'singleSymbol':
                             rendererName = True
                     if myRendering == 'qgis' and rendererName:
-                        stringLayer = stringLayer + ' with cluster strategy query'
+                        stringLayer += ' with cluster strategy query'
                     elif myRendering == 'default':
-                        stringLayer = stringLayer + ' with cluster strategy query'
+                        stringLayer += ' with cluster strategy query'
                     elif myRendering == 'qgis' and not rendererName:
-                        #return an error if the symbology is different from Single Symbol
+                        #return an error if the symbology is different from
+                        #Single Symbol
                         raise Exception, "Classification doesn't work with Cluster Strategy\n"
                         break
                 #geometry it isn't point
@@ -299,7 +303,7 @@ class OGR2LayersClassHtml:
                 try:
                     html.extend(OGR2LayersLayer.htmlStyle())
                     #OGR2LayersLayer.logStyle()
-                    stringLayer = stringLayer + '<br />' + OGR2LayersLayer.logStyle()
+                    stringLayer += '<br />' + OGR2LayersLayer.logStyle()
                 except Exception, e:
                     raise e
             if self.myQuery != 'none':
@@ -343,21 +347,25 @@ class OGR2LayersClassHtml:
         # variable to the string in the output tab
         layerString = ""
         # set the output format
-        outputFormat = self.outFormatRaster()
+        # outputFormat = self.outFormatRaster()
         # cycle for each layer
         for raster in self.rasters:
-            # start the string for the layer to add in the output panel
-            stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
-            ' is converted correctly'
-            #GDAL2LayersLayer = GDAL2LayersClassLayer(layer,outputFormat,
-            #                   self.projection, self.myDirectory)
-            #add the string to textBrowser
+            # TODO now it works only with WMS with the same epsg code of
+            # the choosen basemap
+            if raster.crs().authid() == self.projection:
+                # start the string for the layer to add in the output panel
+                stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
+                ' is converted correctly'
+                GDAL2LayersLayer = GDAL2LayersClassLayer(raster)
+                html.extend(GDAL2LayersLayer.htmlLayer())
+                #add the string to textBrowser
+            else:
+                stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
+                ' is not converted correctly because the coordinate system'\
+                ' ({inp}) is different from the choosen basemap ({out}))'.format(
+                inp=raster.crs().authid(), out=self.projection)
             layerString = layerString + stringLayer
             self.compteur = self.compteur + 1
             self.dlg.ui.progressBar.setValue(self.compteur)
-            #GDAL2LayersLayer = GDAL2LayersClassLayer(layer, outputFormat, self.projection, self.myDirectory)
-            #GDAL2LayersLayer.convert()
-            #html.extend(GDAL2LayersLayer.htmlLayer())
-
         self.dlg.ui.textBrowserRaster.setHtml(layerString)
         return html
