@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_OGR2Layers_mac.ui'
 #
-# Created: Tue Dec 10 10:39:16 2013
+# Created: Tue Dec 10 10:53:59 2013
 #      by: PyQt4 UI code generator 4.9.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -294,11 +294,11 @@ class Ui_OGR2Layers(object):
         self.textBrowserLayer.setObjectName(_fromUtf8("textBrowserLayer"))
         self.verticalLayout_11.addWidget(self.textBrowserLayer)
         self.label_14 = QtGui.QLabel(self.layoutWidget4)
-        self.label_14.setEnabled(False)
+        self.label_14.setEnabled(True)
         self.label_14.setObjectName(_fromUtf8("label_14"))
         self.verticalLayout_11.addWidget(self.label_14)
         self.textBrowserRaster = QtGui.QTextBrowser(self.layoutWidget4)
-        self.textBrowserRaster.setEnabled(False)
+        self.textBrowserRaster.setEnabled(True)
         self.textBrowserRaster.setObjectName(_fromUtf8("textBrowserRaster"))
         self.verticalLayout_11.addWidget(self.textBrowserRaster)
         self.tabWidget.addTab(self.tab_4, _fromUtf8(""))

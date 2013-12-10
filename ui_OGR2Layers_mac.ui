@@ -607,7 +607,7 @@
         <item>
          <widget class="QLabel" name="label_14">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="text">
            <string>Raster proiection trasformation information</string>
@@ -617,7 +617,7 @@
         <item>
          <widget class="QTextBrowser" name="textBrowserRaster">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
