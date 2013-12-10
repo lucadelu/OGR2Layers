@@ -42,6 +42,8 @@ def authorName():
 def icon():
     return "icongui.png"
 
+def category():
+    return "Web"
 
 def classFactory(iface):
     from ogr2Layers import OGR2Layers
