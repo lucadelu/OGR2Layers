@@ -75,25 +75,25 @@ class OGR2LayersClassLayer:
 
     def convertOGR(self):
         """Convert vector layer and set the variable for html file"""
-        #add WFS
-        if (self.providerName == "WFS"):
-            #if the input and output epsg have the same projection add WFS
-            #like OpenLayers.Layer.WFS
-            if self.inEpsg == self.outputEpsg:
-                self.OpenLayersFormat = "WFS"
-                self.outputFormat = "WFS"
-                self.outputName = self.source
-            #else write shapefile from WFS and reproject it with the right
-            #projection and load it like OpenLayers.Layer.GML
-            else:
-                if self.writeShape():
-                    return 0
-                else:
-                    err = "A problem occurs during convertion of layer {l}".format(l=self.name)
-                    raise Exception, err
-        #add other vector type
-        else:
-            self.writeShape()
+        #TODO fix when WFS url will be correct
+#        #add WFS
+#        if (self.providerName == "WFS"):
+#            #if the input and output epsg have the same projection add WFS
+#            #like OpenLayers.Layer.WFS
+#            if self.inEpsg == self.outputEpsg:
+#                self.outputFormat = "WFS"
+#                self.outputName = self.source
+#            #else write shapefile from WFS and reproject it with the right
+#            #projection and load it like OpenLayers.Layer.GML
+#            else:
+#                if self.writeShape():
+#                    return 0
+#                else:
+#                    err = "A problem occurs during convertion of layer {l}".format(l=self.name)
+#                    raise Exception, err
+#        #add other vector type
+#        else:
+        self.writeShape()
 
     def writeShape(self):
         nameFile = os.path.abspath(os.path.join(str(self.pathSave),
@@ -107,7 +107,6 @@ class OGR2LayersClassLayer:
                                                              inputQgsReference,
                                                              self.outputFormat)
         if writeShape == QgsVectorFileWriter.NoError:
-            self.OpenLayersFormat = "GML"
             return True
         else:
             err = "A problem occurs during convertion of layer {l}".format(l=self.name)
@@ -140,24 +139,41 @@ class OGR2LayersClassLayer:
 
     def htmlLayer(self):
         """Create the Javascript code for vector layer"""
-        htmlLayer = ['var ' + self.name + ' = new OpenLayers.Layer.' \
-        + self.OpenLayersFormat + '("' + self.name + ' ' + self.outputFormat \
-        + '", "' + self.outputName + '", {']
-        #if outputFormat is GeoJson
-        if self.outputFormat == 'GeoJSON':
-            #add the format
-            htmlLayer.append('format: OpenLayers.Format.GeoJSON')
-        #add cluster strategy
+        #TODO fix when WFS url will work
+        if self.outputFormat == 'WFS':
+            htmlLayer = ['var ' + self.name + ' = new OpenLayers.Layer.Vector'\
+            + '("' + self.name + ' ' + self.outputFormat \
+            + '", {\n\t\tprotocol: new OpenLayers.Protocol.WFS({\n\t\t\t' \
+            + 'url: "' + self.outputName + '",\n\t\t\t' \
+            + 'featureType: "' + self.outputName + '",']
+            #add cluster strategy
+            htmlLayer.append('\n\t\t})')
+            htmlLayer.append(',\n\t\tstrategies: [\n\t\t\tnew OpenLayers.Strategy.BBOX()')
+        else:
+            htmlLayer = ['var ' + self.name + ' = new OpenLayers.Layer.Vector'\
+            + '("' + self.name + ' ' + self.outputFormat \
+            + '", {\n\t\tprotocol: new OpenLayers.Protocol.HTTP({\n\t\t\t' \
+            + 'url: "' + self.outputName + '",\n\t\t\t']
+            #if outputFormat is GeoJson
+            if self.outputFormat == 'GeoJSON':
+                #add the format
+                htmlLayer.append('format: new OpenLayers.Format.GeoJSON()')
+            elif self.outputFormat == 'GML':
+                #add the format
+                htmlLayer.append('format: new OpenLayers.Format.GML()')
+            elif self.outputFormat == 'KML':
+                #add the format
+                htmlLayer.append('format: new OpenLayers.Format.KML()')
+            #add cluster strategy
+            htmlLayer.append('\n\t\t})')
+            htmlLayer.append(',\n\t\tstrategies: [\n\t\t\tnew OpenLayers.Strategy.Fixed()')
         if self.query == 'cluster':
-            htmlLayer.append(', strategies: [new OpenLayers.Strategy.Cluster()]')
-            #if qgis style it's choosen add it, I use this indentation for {
-            #because it is already open with strategy cluster
-            if self.rendering == 'qgis':
-                htmlLayer.append(', styleMap: ' + self.name + '_style')
+            htmlLayer.append(',\n\t\t\tnew OpenLayers.Strategy.Cluster()')
+        htmlLayer.append('\n\t\t]')
         #if only qgis style it's choosen I must open {
-        if self.query != 'cluster' and self.rendering == 'qgis':
-            htmlLayer.append(', styleMap: ' + self.name + '_style')
+        if self.rendering == 'qgis':
+            htmlLayer.append(',\n\t\tstyleMap: ' + self.name + '_style')
         #for all it closes the layer ) and add it to the map
-        htmlLayer.append('});\n\tmap.addLayer(' + self.name + ');\n\t')
+        htmlLayer.append('\n\t});\n\tmap.addLayer(' + self.name + ');\n\t')
 
         return htmlLayer
