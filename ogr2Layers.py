@@ -120,11 +120,16 @@ class OGR2Layers:
             #check if is a vector
             if layer.type() == layer.VectorLayer:
                 self.layers.append(layer)
-                source = layer.source()
+                source = '{name} ({type})'.format(name=layer.name(),
+                                                  type=layer.dataProvider().name())
                 self.dlg.ui.LayerList.addItem(source)
-            if layer.type() == layer.RasterLayer:
+            # TODO now it works only with WMS with the same epsg code of
+            # the choosen basemap
+            if layer.type() == layer.RasterLayer and \
+               layer.dataProvider().name() == 'wms':
                 self.rasters.append(layer)
-                source = layer.source()
+                source = '{name} ({type})'.format(name=layer.name(),
+                                                  type=layer.dataProvider().name())
                 self.dlg.ui.RasterList.addItem(source)
         #check if there is some vectors layer, else return an error
         #if len(self.layers) == 0:
