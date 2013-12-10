@@ -54,6 +54,8 @@ class OGR2LayersClassHtml:
         self.mapBaseLayer = self.dlg.ui.mapBaseLayer.currentIndex()
         # used for number of vector
         self.compteur = 0
+        #set the alias if reprojection is needed
+        self.alias = False
 
     def createHtml(self):
         """Create the html code"""
@@ -86,15 +88,17 @@ class OGR2LayersClassHtml:
         html.extend(self.olControl())
         #try to add the code for layers
         try:
-            if self.layers:
-                #vector layer
-                html.extend(self.htmlLayer())
             if self.rasters:
                 #raster layer
                 html.extend(self.htmlRaster())
+            if self.layers:
+                #vector layer
+                html.extend(self.htmlLayer())
         #return errors
         except Exception, e:
             raise e
+        if self.alias:
+            html.extend(self.htmlAlias())
         #add the query
         if self.myQuery != 'none':
             html.extend(self.controlSel())
@@ -142,6 +146,18 @@ class OGR2LayersClassHtml:
         if self.dlg.ui.maxExtent.isChecked():
             html.append('\tmap.maxExtent(extent);\n')
             #AGGIUNGERE IL CODICE PER IL MAX EXTEND
+        return html
+
+    def htmlAlias(self):
+        """Create alias to use 3857 and 900913 together"""
+        html = ['\n\tvar aliasproj = new OpenLayers.Projection("EPSG:3857");\n\t']
+        layeralias = ''
+        for layer in self.layers:
+            layeralias += '{na}.projection = '.format(na=layer.name())
+        for raster in self.rasters:
+            layeralias += '{na}.projection = '.format(na=raster.name())
+        layeralias += 'aliasproj;\n\t'
+        html.append(layeralias)
         return html
 
     def olBaseLayer(self):
@@ -349,23 +365,29 @@ class OGR2LayersClassHtml:
         # set the output format
         # outputFormat = self.outFormatRaster()
         # cycle for each layer
+        if self.projection == "EPSG:900913":
+            accepted_projs = ["EPSG:900913", "EPSG:3857"]
+        else:
+            accepted_projs = [self.projection]
         for raster in self.rasters:
             # TODO now it works only with WMS with the same epsg code of
             # the choosen basemap
-            if raster.crs().authid() == self.projection:
+            if raster.crs().authid() in accepted_projs:
                 # start the string for the layer to add in the output panel
                 stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
                 ' is converted correctly'
                 GDAL2LayersLayer = GDAL2LayersClassLayer(raster)
                 html.extend(GDAL2LayersLayer.htmlLayer())
-                #add the string to textBrowser
+                if raster.crs().authid() == "EPSG:3857":
+                    self.alias = True
             else:
                 stringLayer = 'The raster <b>' + str(raster.name()) + '</b>'\
                 ' is not converted correctly because the coordinate system'\
                 ' ({inp}) is different from the choosen basemap ({out}))'.format(
                 inp=raster.crs().authid(), out=self.projection)
-            layerString = layerString + stringLayer
+            layerString += stringLayer
             self.compteur = self.compteur + 1
             self.dlg.ui.progressBar.setValue(self.compteur)
+        #add the string to textBrowser
         self.dlg.ui.textBrowserRaster.setHtml(layerString)
         return html
