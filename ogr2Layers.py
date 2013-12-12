@@ -145,20 +145,14 @@ class OGR2Layers:
                         self.dlg.close)
         #Set up the default map extent
         Extent = self.mapCanvas.extent()
-        if len(self.layers) != 0:
-            mylayer = self.layers[0]
-            myprovider = mylayer.dataProvider()
-        elif len(self.rasters) != 0:
-            mylayer = self.rasters[0]
-            myprovider = mylayer.dataProvider()
-        else:
+        if len(self.layers) == 0 and len(self.rasters) == 0:
             QMessageBox.warning(self.iface.mainWindow(), self.MSG_BOX_TITLE,
             ("No active layer found\n" "Please make one or more OGR layer " \
             "active\n" "Beware of layers sizes for export"), QMessageBox.Ok,
             QMessageBox.Ok)
             return
         #set coordinate system of my first vector
-        SrsSrc = myprovider.crs()
+        SrsSrc = self.mapCanvas.mapRenderer().destinationCrs()
         #set wgs84 coordinate system
         SrsDest = QgsCoordinateReferenceSystem(4326)
         #set qgis transformation
