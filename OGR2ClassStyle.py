@@ -154,6 +154,8 @@ class OGR2LayersClassStyle:
         """Return the javascript code for single symbology"""
         symbol = self.renderer.symbol()
         self.checkSymbol2(symbol)
+#        pyqtRemoveInputHook()
+#        pdb.set_trace()
         style = dictV2(symbol.symbolLayer(0).properties())
         self.checkProprierties2(style)
         #set fill color
@@ -194,9 +196,12 @@ class OGR2LayersClassStyle:
             html_style.append('strokeColor: "' + str(strokeColor) + '",\n\t\t'\
               'strokeOpacity: ' + str(alpha) + ',\n\t\t'\
               'strokeWidth: ' + str(lineWidth) + ',\n\t\t'\
-              'fillColor: "' + str(fillColor) + '",\n\t\t'\
-              'fillOpacity: ' + str(alpha) + '\n\t'
+              'fillColor: "' + str(fillColor) + '",\n\t\t'
             )
+            if style['style'] == 'no':
+                html_style.append('fillOpacity: 0.0\n\t')
+            else:
+                html_style.append('fillOpacity: ' + str(alpha) + '\n\t')
         html_style.append(
           '}\n\t'\
           'var ' + self.name + '_style = new OpenLayers.Style(' + self.name +
@@ -586,13 +591,13 @@ class OGR2LayersClassStyle:
         if self.typeGeom == 1:
             if prop['penstyle'] != 'solid':
                 self.log += "WARNING: OGR2Layers support only solid style. "
-                self.log += "         On vector <b>%s</b>, symbol style %s, moved to solid" % (
+                self.log += "         On vector <b>%s</b>, symbol style %s, moved to solid <br />" % (
                             self.name, prop['penstyle'])
         elif self.typeGeom == 2:
-            if prop['style'] != 'solid':
+            if prop['style'] != 'solid' and prop['style'] != 'no':
                 self.log += "WARNING: OGR2Layers support only solid style. "
-                self.log += "         On vector <b>%s</b>, symbol style %s, moved to solid" % (
-                            self.name, prop['penstyle'])
+                self.log += "         On vector <b>%s</b>, symbol style %s, moved to solid <br />" % (
+                            self.name, prop['style'])
 
     def retLog(self):
         """Return the log of vector style"""
